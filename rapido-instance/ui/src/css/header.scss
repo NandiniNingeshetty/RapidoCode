@@ -1,75 +1,78 @@
 .app-title {
-  font-family: 'Cabin Sketch', cursive;
-  cursor: pointer;
-  padding-left: 15px;
-  a,a:hover {
-    text-decoration: none;
-    color: black;
-  }
+    font-family: 'Cabin Sketch', cursive;
+    cursor: pointer;
+    padding-left: 15px;
+    a,
+    a:hover {
+        text-decoration: none;
+        color: black;
+    }
 }
 .rapido-header-wrapper {
-  padding: 10px 15px 10px 15px;
-  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1) !important;
-  background: #ffffff;
-  .sketch-nav-options {
-    padding-top:10px;
-    .topnav {
-      border-radius: 50% !important;
-      width:50px;
-      height: 50px;
+    /* padding: 10px 15px 10px 15px;*/
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3) !important;
+    background: #ffffff;
+    height: 60px;
+    .sketch-nav-options {
+        padding-top: 10px;
+        .topnav {
+            border-radius: 50% !important;
+            width: 50px;
+            height: 50px;
+        }
+        .topnav.selected {
+            background-color: black;
+            color: white;
+        }
+        .path-active,
+        .path-active:focus {
+            background: black;
+            color: white;
+        }
     }
-    .topnav.selected {
-      background-color: black;
-      color: white;
-    }
-    .path-active, .path-active:focus {
-      background: black;
-      color: white;
-    }
-  }
-  .user-dropdown-options-arrow {
-    margin-top: 9px;
-    margin-left: -5px;
-    color: #09AEEF;
-    cursor: pointer;
-  }
-  .user-dropdown-options {
-    padding-top: 10px;
-    .dropdown{
-      right: 15px;
-      position: absolute;
-      z-index: 100;
-    }
-    .user-options {
-      list-style-type: none;
-      padding: 0;
-      text-align: left;
-      background: white;
-      width: 100px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      li {
-        padding: 10px 0;
+    .user-dropdown-options-arrow {
+        margin-top: 9px;
+        margin-left: -5px;
+        color: #09AEEF;
         cursor: pointer;
-        text-align: center;
-        border-bottom: 1px solid #ccc;
-        a {
-          padding: 10px;
-        }
-        a:hover {
-          text-decoration: none;
-        }
-      }
-      li:last-child {
-        border-bottom: 0;
-      }
     }
-  }
-  .user-name {
-    font-size: 14px; 
-    padding: 20px 10px;  
-    color: #09AEEF;
-  }
+    .user-dropdown-options {
+        padding-top: 10px;
+        .dropdown {
+            right: 15px;
+            position: absolute;
+            z-index: 100;
+        }
+        .user-options {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+            background: white;
+            width: 100px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            li {
+                padding: 10px 0;
+                cursor: pointer;
+                text-align: center;
+                border-bottom: 1px solid #ccc;
+                a {
+                    padding: 10px;
+                }
+                a:hover {
+                    text-decoration: none;
+                }
+            }
+            li:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+    .user-name {
+        font-size: 14px;
+        padding: 20px 10px;
+        color: #09AEEF;
+    }
 }
 .nav-description {
   height: 40px;
@@ -304,4 +307,61 @@ a.header-logo-section {
     font-weight: bold;
     margin-bottom: 10px;
   }
+}
+
+.header-text {
+    width: 125px;
+    height: 22px;
+    font-family: Helvetica;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #eaae4b;
+}
+
+.top-header-tabs {
+    list-style-type: none;
+    margin-left: -10%;
+    float: left;
+}
+
+.top-header-tabs li {
+    float: left;
+    border-left: 1px solid #9b9b9b;
+    height: 60px;
+    width: 100px;
+    padding-top: 21px;
+}
+
+.active-tab {
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #4a90e2;
+}
+
+.inactive-tab {
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #4a4a4a;
+    cursor: pointer;
+}
+
+.border-right {
+    border-right: 1px solid #9b9b9b;
 }

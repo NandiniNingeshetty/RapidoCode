@@ -1,7 +1,8 @@
 .container-fluid {
-  height: 100%;
-  padding-left: 0px;
-  padding-right: 0px;
+    height: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    overflow-x: hidden;
 }
 .main-content {
   overflow: auto;

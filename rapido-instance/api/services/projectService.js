@@ -483,7 +483,7 @@ var projectService = {
                         response.status(200).json(resultData);
                     }
                 })
-                .catch((err) => {
+                .catch(err => {
                     logger.error(err);
                     response.status(500).json({
                         "code": err.code,

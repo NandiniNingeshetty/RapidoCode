@@ -6,19 +6,19 @@
 
 "use strict";
 
-var assert = require('chai').assert,
-    path = require('path'),
-    promises = require('bluebird'),
-    httpRequest = promises.promisifyAll(require('../../utils/httpRequest.js')),
-    promises = require('bluebird'),
-    httpServer = require('../config.js').server.local;
+var assert = require("chai").assert,
+    path = require("path"),
+    promises = require("bluebird"),
+    httpRequest = promises.promisifyAll(require("../../utils/httpRequest.js")),
+    promises = require("bluebird"),
+    httpServer = require("../config.js").server.local;
 
 var registerUser = function(user, done) {
     var options = {
-        'host': httpServer.host,
-        'port': httpServer.port,
-        'path': '/api/user',
-        'method': 'POST'
+        "host": httpServer.host,
+        "port": httpServer.port,
+        "path": "/api/user",
+        "method": "POST"
     };
     options.data = JSON.stringify(user);
     httpRequest.postAsync(options)
@@ -34,15 +34,15 @@ var registerUser = function(user, done) {
 
 var loginUser = function(user, done) {
     var options = {
-        'host': httpServer.host,
-        'port': httpServer.port,
-        'path': '/api/login',
-        'method': 'POST'
+        "host": httpServer.host,
+        "port": httpServer.port,
+        "path": "/api/login",
+        "method": "POST"
     };
 
     options.data = JSON.stringify({
-        'email': user.email,
-        'password': user.password
+        "email": user.email,
+        "password": user.password
     });
 
     httpRequest.postAsync(options)
@@ -58,14 +58,14 @@ var loginUser = function(user, done) {
 
 var getProfile = function(user, done) {
     var options = {
-        'host': httpServer.host,
-        'port': httpServer.port,
-        'path': '/api/me',
-        'method': 'GET',
-        'headers': {}
+        "host": httpServer.host,
+        "port": httpServer.port,
+        "path": "/api/me",
+        "method": "GET",
+        "headers": {}
     };
 
-    options.headers['Authorization'] = 'Bearer ' + user.token;
+    options.headers["Authorization"] = "Bearer " + user.token;
 
     httpRequest.getAsync(options)
         .then(function(response) {
@@ -80,13 +80,13 @@ var getProfile = function(user, done) {
 
 var updateProfile = function(user, done) {
     var options = {
-        'host': httpServer.host,
-        'port': httpServer.port,
-        'path': '/api/me',
-        'method': 'PUT',
-        'headers': {}
+        "host": httpServer.host,
+        "port": httpServer.port,
+        "path": "/api/me",
+        "method": "PUT",
+        "headers": {}
     };
-    options.headers['Authorization'] = 'Bearer ' + user.token;
+    options.headers["Authorization"] = "Bearer " + user.token;
     options.data = JSON.stringify(user);
 
     httpRequest.putAsync(options)
@@ -106,17 +106,17 @@ var updateProfile = function(user, done) {
 
 var updateSecurity = function(user, password, done) {
     var options = {
-        'host': httpServer.host,
-        'port': httpServer.port,
-        'path': '/api/me/security',
-        'method': 'PUT',
-        'headers': {}
+        "host": httpServer.host,
+        "port": httpServer.port,
+        "path": "/api/me/security",
+        "method": "PUT",
+        "headers": {}
     };
 
-    options.headers['Authorization'] = 'Bearer ' + user.token;
+    options.headers["Authorization"] = "Bearer " + user.token;
     options.data = JSON.stringify({
-        'old-password': user.password,
-        'new-password': password
+        "old-password": user.password,
+        "new-password": password
     });
 
     httpRequest.putAsync(options)
@@ -132,14 +132,14 @@ var updateSecurity = function(user, password, done) {
 
 var logoutUser = function(user, done) {
     var options = {
-        'host': httpServer.host,
-        'port': httpServer.port,
-        'path': '/api/me/logout',
-        'method': 'GET',
-        'headers': {}
+        "host": httpServer.host,
+        "port": httpServer.port,
+        "path": "/api/me/logout",
+        "method": "GET",
+        "headers": {}
     };
 
-    options.headers['Authorization'] = 'Bearer ' + user.token
+    options.headers["Authorization"] = "Bearer " + user.token;
 
     httpRequest.getAsync(options)
         .then(function(response) {
@@ -153,10 +153,10 @@ var logoutUser = function(user, done) {
 };
 
 module.exports = {
-    'registerUser': registerUser,
-    'loginUser': loginUser,
-    'getProfile': getProfile,
-    'updateProfile': updateProfile,
-    'updateSecurity': updateSecurity,
-    'logoutUser': logoutUser
+    "registerUser": registerUser,
+    "loginUser": loginUser,
+    "getProfile": getProfile,
+    "updateProfile": updateProfile,
+    "updateSecurity": updateSecurity,
+    "logoutUser": logoutUser
 };

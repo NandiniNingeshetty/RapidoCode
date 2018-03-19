@@ -8,14 +8,14 @@
 
 "use strict";
 
-var winston = require('winston'),
+var winston = require("winston"),
     logger = null;
 
 var _getLogger = function() {
     if (!logger) {
         logger = new(winston.Logger)({
             transports: [
-                new(winston.transports.Console)(configurations['logger'])
+                new(winston.transports.Console)(configurations["logger"])
             ]
         });
     }

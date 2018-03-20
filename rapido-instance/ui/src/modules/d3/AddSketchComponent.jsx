@@ -238,7 +238,6 @@ export default class extends React.Component{
                 <label className="Sketch-Name" htmlFor="InputprojectName" id="projectNameLabel">Sketch Name</label>
                 <input
                   type="text"
-                  size="medium"
                   value={this.state.projectInfo.projectName}
                   className="Rectangle-5"
                   id="InputprojectName"

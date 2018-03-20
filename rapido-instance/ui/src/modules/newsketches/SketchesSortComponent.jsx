@@ -7,6 +7,8 @@ import Button from 'mineral-ui/Button';
 import { ThemeProvider } from 'mineral-ui/themes';
 import Select from 'react-select';
 import TextInput from 'mineral-ui/TextInput';
+import Icon from 'mineral-ui/Icon';
+import {IconSearch} from 'mineral-ui-icons';
 
 export class SketchesSortComponent extends React.Component {
 
@@ -29,14 +31,14 @@ export class SketchesSortComponent extends React.Component {
   }
 
   render() {
-
+    const icon = <IconSearch />;
     return (
       <div className="col-md-12">
 
         <div className="col-md-6 pull-left">
           <ul className="button-inline">
           <li  onClick={this.addNewSketch.bind(this)}><Button className="new-sketch-text"  variant="regular" primary>New Sketch</Button></li>
-            <li className="xs-pl-10"><TextInput type="text" className=" visible search-textbox" onChange={this.props.onChange} size="small"
+            <li className="xs-pl-10"><TextInput iconEnd={icon} type="text" className=" visible search-textbox" onChange={this.props.onChange} size="small"
              placeholder="Search Sketches..." /></li>
           </ul>
         </div>

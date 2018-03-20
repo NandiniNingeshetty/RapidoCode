@@ -254,7 +254,7 @@ export default class extends React.Component{
      
     return (
       <div>
-        <div className="titleContainer sketchPage">
+        {/* <div className="titleContainer sketchPage">
           {projectHeader}
         </div>
         <div className="tabsContainer">
@@ -266,7 +266,9 @@ export default class extends React.Component{
         </div>
         <div className="col-md-12 sketch-list-wrapper">
           {loadedComponent}
-        </div>
+        </div> */}
+        <br/><br/><br/>
+        &nbsp; &nbsp; &nbsp; This page is in Development Mode!!!
       </div>
     );
   }

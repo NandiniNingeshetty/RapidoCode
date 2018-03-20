@@ -246,20 +246,22 @@
             }
         }
     }
-      .title-section{
-        @media(min-width:992px){
-          padding-right: 0;
+    
+    .title-section {
+        @media(min-width: 992px) {
+            padding-right: 0;
         }
-        input{
-          padding: 6px 12px;
-          font-family: Helvetica, sans-serif;
-          font-weight: 300;
-          font-size: 16px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          width:100%;
+        input {
+            padding: 6px 12px;
+            font-family: Helvetica, sans-serif;
+            font-weight: 300;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
         }
-      }
+    }
+    
     .sketch-card {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         background: white;
@@ -471,7 +473,7 @@
     }
     
     .search-textbox {
-        width: 150px;
+        width: 250px;
         height: 30px;
         border-radius: 5px;
         /* background-color: #ffffff; */
@@ -825,4 +827,146 @@
     
     .xs-pr-15 {
         padding-right: 15px;
+    }
+    
+    .Sketch-Name {
+        width: 73px;
+        height: 14px;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4a4a4a;
+    }
+    
+    .Rectangle-5 {
+        width: 506px;
+        height: 30px;
+        border-radius: 5px;
+        background-color: #ffffff;
+        border: solid 1px #cfcfcf;
+    }
+    
+    .Description {
+        width: 61px;
+        height: 14px;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4a4a4a;
+    }
+    
+    .Rectangle-5-Copy {
+        width: 506px;
+        height: 140px;
+        border-radius: 5px;
+        background-color: #ffffff;
+        border: solid 1px #cfcfcf;
+    }
+    
+    .Rectangle-4-Copy-6 {
+        width: 82px;
+        height: 30px;
+        border: none;
+        margin-left: 55%;
+        background-color: transparent;
+    }
+    
+    .Cancel {
+        width: 44px;
+        height: 17px;
+        font-family: Helvetica;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4a4a4a;
+    }
+    
+    .Rectangle-4-Copy-7 {
+        width: 82px;
+        height: 30px;
+        border-radius: 3px;
+        background-color: #4a90e2;
+    }
+    
+    .Rectangle-4-Copy-7:hover {
+        width: 82px;
+        height: 30px;
+        border-radius: 3px;
+        background-color: #4a90e2;
+    }
+    
+    .Proceed {
+        width: 57px;
+        height: 17px;
+        font-family: Helvetica;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        top: 3px;
+        color: #ffffff;
+    }
+    
+    .Rectangle-5-Copy-3 {
+        width: 86px;
+        height: 23px;
+        border-radius: 18px;
+        background-color: #4a90e2;
+    }
+    
+    .Personal {
+        width: 48px;
+        height: 14px;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #ffffff;
+    }
+    
+    .Rectangle-5-Copy-2 {
+        width: 166px;
+        height: 23px;
+        border-radius: 18px;
+        background-color: #ffffff;
+        border: solid 1px #cfcfcf;
+    }
+    
+    .Shared {
+        width: 39px;
+        height: 14px;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4a4a4a;
+    }
+    
+    shared-section {
+        display: none;
     }

@@ -4,6 +4,7 @@ import { addEmptySketch, createSketch, exportDesign } from '../utils/TreeActions
 import ProjectService from '../d3/ProjectServices'
 import AlertContainer from 'react-alert'
 import {showAlert, AlertOptions} from '../utils/AlertActions'
+import Button from 'mineral-ui/Button';
 
 var component;
 
@@ -16,12 +17,15 @@ export default class extends React.Component{
     this.state = {
       projectInfo: {
         projectName: '',
-        projectDesc: ''
-      }
+        projectDesc: ''        
+      },
+      sketchType: true
     };
     this.alertOptions = AlertOptions;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.selectSketchTypePersonal = this.selectSketchTypePersonal.bind(this);
+    this.selectSketchTypeShared = this.selectSketchTypeShared.bind(this);
   }
 
   componentDidMount() {
@@ -42,6 +46,42 @@ export default class extends React.Component{
     }
     sessionStorage.setItem('updateMode', false)
   }
+
+  /* Method to select sketch type personal*/
+  selectSketchTypePersonal() {
+    //changeSketchTypeStatus();    
+    this.setState({
+      sketchType: true
+    })
+    console.log(this.state.sketchType);
+    var personal = document.getElementById("personalDIV");
+    var shared = document.getElementById("sharedDIV");
+    if (this.state.sketchType) {
+        personal.style.display = "none";
+        shared.style.display = "block";
+    } else {
+      personal.style.display = "block";
+      shared.style.display = "none";
+    }
+}
+
+  /* Method to select sketch type shared*/
+  selectSketchTypeShared() {
+    //changeSketchTypeStatus();    
+    this.setState({
+      sketchType: false
+    })
+    console.log(this.state.sketchType);
+    var personal = document.getElementById("personalDIV");
+    var shared = document.getElementById("sharedDIV");
+    if (this.state.sketchType) {
+        personal.style.display = "none";
+        shared.style.display = "block";
+    } else {
+      personal.style.display = "block";
+      shared.style.display = "none";
+    }
+}
 
   /* Method to fetch child upon tree selection */
   fetchChild(parent, fetch, childrenFn) {
@@ -174,35 +214,77 @@ export default class extends React.Component{
       <div>
       <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
       <div className="col-md-8 create-project-section" id="projectDetailsNode">
-        <form className="col-md-6" noValidate onSubmit={this.handleSubmit}>
+        <form className="col-md-8" noValidate onSubmit={this.handleSubmit}>
           <div className="col-md-12">
-            <div className="form-group">
-              <label htmlFor="InputprojectName" id="projectNameLabel">Project Name</label>
-              <input
-                type="text"
-                value={this.state.projectInfo.projectName}
-                className="form-control"
-                id="InputprojectName"
-                name="projectName"
-                ref="projectName"
-                onChange={this.handleChange.bind(this, 'projectName')}
-                placeholder="Project Name" required/>
-                <div className="error" id="projectNameError" ></div>
+          <label className="Sketch-Name" htmlFor="InputprojectName" id="projectNameLabel">Sketch Type</label>
+                <div>
+                  <button className="btn btn-default Rectangle-5-Copy-3" onClick={this.selectSketchTypePersonal}>
+                    <label className="Personal">Personal</label>
+                  </button>
+                  <button className="btn btn-default Rectangle-5-Copy-2" onClick={this.selectSketchTypeShared}>
+                    <label className="Shared">Shared</label>
+                  </button>
+              </div> 
             </div>
-            <div className="form-group">
-              <label htmlFor="InputProjectDesc" id="projectDescLabel">Description</label>
-              <input
-                type="text"
-                value={this.state.projectInfo.projectDesc}
-                className="form-control"
-                id="InputProjectDesc"
-                name="projectDesc"
-                onChange={this.handleChange.bind(this, 'projectDesc')}
-                placeholder="project description" />
-            </div>
+            <div id="personalDIV" className="col-md-12 next-section">
+              <div className="form-group">                        
+                <label className="Sketch-Name" htmlFor="InputprojectName" id="projectNameLabel">Sketch Name</label>
+                <input
+                  type="text"
+                  value={this.state.projectInfo.projectName}
+                  className="Rectangle-5"
+                  id="InputprojectName"
+                  name="projectName"
+                  ref="projectName"
+                  onChange={this.handleChange.bind(this, 'projectName')}
+                  required/>
+                  <div className="error" id="projectNameError" ></div>
+              </div>
+              <div className="form-group">
+                <label className="Description" htmlFor="InputProjectDesc" id="projectDescLabel">Description</label>
+                <input
+                  type="text"
+                  value={this.state.projectInfo.projectDesc}
+                  className="Rectangle-5-Copy"
+                  id="InputProjectDesc"
+                  name="projectDesc"
+                  onChange={this.handleChange.bind(this, 'projectDesc')}
+                  />
+              </div>
           </div>
-          <div className="col-md-12 next-section">
-            <button type="submit" className="btn btn-default pull-right">Next</button>
+          <div id="sharedDIV" className="col-md-12 shared-section">
+              {/* <div className="form-group">                        
+                <label className="Sketch-Name" htmlFor="InputprojectName" id="projectNameLabel">Sketch Name</label>
+                <input
+                  type="text"
+                  value={this.state.projectInfo.projectName}
+                  className="Rectangle-5"
+                  id="InputprojectName"
+                  name="projectName"
+                  ref="projectName"
+                  onChange={this.handleChange.bind(this, 'projectName')}
+                  required/>
+                  <div className="error" id="projectNameError" ></div>
+              </div>
+              <div className="form-group">
+                <label className="Description" htmlFor="InputProjectDesc" id="projectDescLabel">Description</label>
+                <input
+                  type="text"
+                  value={this.state.projectInfo.projectDesc}
+                  className="Rectangle-5-Copy"
+                  id="InputProjectDesc"
+                  name="projectDesc"
+                  onChange={this.handleChange.bind(this, 'projectDesc')}
+                  />
+              </div> */}
+          </div>
+          <div className="col-md-12 pull-right next-section">
+            <button className="col-md-6 btn btn-default Rectangle-4-Copy-6">
+              <label className="Cancel">Cancel</label>
+            </button>
+            <button type="submit" className="col-md-6 btn btn-default pull-right Rectangle-4-Copy-7">
+              <label className="Proceed">Proceed</label>
+            </button>
           </div>
         </form>
       </div>

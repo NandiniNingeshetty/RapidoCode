@@ -238,11 +238,12 @@
     
     .create-project-section {
         padding-top: 50px;
-        height: 400px;
+        /* height: 400px;*/
         .next-section {
             margin-top: 20px;
+            margin-right: 15px;
             button {
-                width: 100px;
+                width: 80px;
             }
         }
     }
@@ -645,7 +646,8 @@
     }
     
     .card-layout {
-        cursor: pointer
+        cursor: pointer;
+        padding-top: 10px;
     }
     
     .card-layout div:hover {
@@ -849,13 +851,22 @@
         border-radius: 5px;
         background-color: #ffffff;
         border: solid 1px #cfcfcf;
+        font-family: Helvetica;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4a4a4a;
     }
     
     .Description {
         width: 61px;
         height: 14px;
         font-family: Helvetica;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: normal;
         font-style: normal;
         font-stretch: normal;
@@ -867,18 +878,36 @@
     
     .Rectangle-5-Copy {
         width: 506px;
-        height: 140px;
+        /*height: 150px;*/
         border-radius: 5px;
         background-color: #ffffff;
         border: solid 1px #cfcfcf;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4a4a4a
     }
     
     .Rectangle-4-Copy-6 {
         width: 82px;
         height: 30px;
         border: none;
-        margin-left: 55%;
+        /* margin-left: 55%; */
         background-color: transparent;
+        font-family: Helvetica;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4a4a4a;
     }
     
     .Cancel {
@@ -898,15 +927,17 @@
     .Rectangle-4-Copy-7 {
         width: 82px;
         height: 30px;
-        border-radius: 3px;
+        border-radius: 5px;
         background-color: #4a90e2;
+        margin-right: 14px;
     }
     
     .Rectangle-4-Copy-7:hover {
         width: 82px;
         height: 30px;
-        border-radius: 3px;
+        border-radius: 5px;
         background-color: #4a90e2;
+        margin-right: 14px;
     }
     
     .Proceed {

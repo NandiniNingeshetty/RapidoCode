@@ -50,7 +50,8 @@ export class SketchesComponent extends React.Component {
         sessionStorage.setItem('selectedSketch', JSON.stringify(row.row));
         sessionStorage.setItem('sketchName', row.row.name);
         sessionStorage.removeItem('vocabularyInfo');
-        browserHistory.push('/vocabulary');
+        sessionStorage.setItem('updateMode',true)
+        browserHistory.push('/nodes/add');
     }
     /* Method to toggle modal */
     toggleModal(row) {

@@ -26,6 +26,7 @@ export class SketchesSortComponent extends React.Component {
   addNewSketch() {
     sessionStorage.setItem('sketchId', 'null');
     sessionStorage.setItem('sketchName', 'null');
+    sessionStorage.setItem('updateMode',false)
     sessionStorage.removeItem('vocabularyInfo');
     browserHistory.push('/nodes/add');
   }

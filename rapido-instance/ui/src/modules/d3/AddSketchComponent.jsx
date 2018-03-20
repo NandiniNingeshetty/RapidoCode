@@ -5,6 +5,9 @@ import ProjectService from '../d3/ProjectServices'
 import AlertContainer from 'react-alert'
 import {showAlert, AlertOptions} from '../utils/AlertActions'
 import Button from 'mineral-ui/Button';
+import {Link} from "react-router";
+import TextInput from 'mineral-ui/TextInput';
+import TextArea from 'mineral-ui/TextArea';
 
 var component;
 
@@ -29,22 +32,26 @@ export default class extends React.Component{
   }
 
   componentDidMount() {
-   let projectInfo = JSON.parse(sessionStorage.getItem('projectInfo'));
+   let projectInfo = JSON.parse(sessionStorage.getItem('selectedSketch'));
    let teamId = JSON.parse(sessionStorage.getItem('teamId'));
+   let updateMode = sessionStorage.getItem("updateMode")
     if(teamId) {
       this.setState({
           teamId: teamId
       })
     }
-    if(projectInfo) {
+    if(updateMode == "true") {
+      if(projectInfo){
       this.setState({
         projectInfo: {
-          projectName: projectInfo.projectName,
-          projectDesc: projectInfo.projectDesc
+          projectName: projectInfo.name,
+          projectDesc: projectInfo.description
         }
+      
       })
     }
-    sessionStorage.setItem('updateMode', false)
+    }
+   // sessionStorage.setItem('updateMode', false)
   }
 
   /* Method to select sketch type personal*/
@@ -218,10 +225,10 @@ export default class extends React.Component{
           <div className="col-md-12">
           <label className="Sketch-Name" htmlFor="InputprojectName" id="projectNameLabel">Sketch Type</label>
                 <div>
-                  <button className="btn btn-default Rectangle-5-Copy-3" onClick={this.selectSketchTypePersonal}>
+                  <button className="btn btn-default Rectangle-5-Copy-3">
                     <label className="Personal">Personal</label>
                   </button>
-                  <button className="btn btn-default Rectangle-5-Copy-2" onClick={this.selectSketchTypeShared}>
+                  <button className="btn btn-default Rectangle-5-Copy-2">
                     <label className="Shared">Shared</label>
                   </button>
               </div> 
@@ -231,6 +238,7 @@ export default class extends React.Component{
                 <label className="Sketch-Name" htmlFor="InputprojectName" id="projectNameLabel">Sketch Name</label>
                 <input
                   type="text"
+                  size="medium"
                   value={this.state.projectInfo.projectName}
                   className="Rectangle-5"
                   id="InputprojectName"
@@ -242,8 +250,8 @@ export default class extends React.Component{
               </div>
               <div className="form-group">
                 <label className="Description" htmlFor="InputProjectDesc" id="projectDescLabel">Description</label>
-                <input
-                  type="text"
+                <TextArea
+                  size="medium"
                   value={this.state.projectInfo.projectDesc}
                   className="Rectangle-5-Copy"
                   id="InputProjectDesc"
@@ -252,39 +260,18 @@ export default class extends React.Component{
                   />
               </div>
           </div>
-          <div id="sharedDIV" className="col-md-12 shared-section">
-              {/* <div className="form-group">                        
-                <label className="Sketch-Name" htmlFor="InputprojectName" id="projectNameLabel">Sketch Name</label>
-                <input
-                  type="text"
-                  value={this.state.projectInfo.projectName}
-                  className="Rectangle-5"
-                  id="InputprojectName"
-                  name="projectName"
-                  ref="projectName"
-                  onChange={this.handleChange.bind(this, 'projectName')}
-                  required/>
-                  <div className="error" id="projectNameError" ></div>
-              </div>
-              <div className="form-group">
-                <label className="Description" htmlFor="InputProjectDesc" id="projectDescLabel">Description</label>
-                <input
-                  type="text"
-                  value={this.state.projectInfo.projectDesc}
-                  className="Rectangle-5-Copy"
-                  id="InputProjectDesc"
-                  name="projectDesc"
-                  onChange={this.handleChange.bind(this, 'projectDesc')}
-                  />
-              </div> */}
-          </div>
-          <div className="col-md-12 pull-right next-section">
-            <button className="col-md-6 btn btn-default Rectangle-4-Copy-6">
-              <label className="Cancel">Cancel</label>
-            </button>
-            <button type="submit" className="col-md-6 btn btn-default pull-right Rectangle-4-Copy-7">
+         
+          <div className="col-md-8 pull-right next-section">
+
+          <Button className="new-sketch-text pull-right"  variant="regular"  onClick={this.handleSubmit} primary>Proceed</Button>
+          <Link to="/sketches"><Button className="pull-right Rectangle-4-Copy-6">Cancel</Button></Link>
+
+           {/* <button type="submit" className="btn btn-default pull-right Rectangle-4-Copy-7">
               <label className="Proceed">Proceed</label>
             </button>
+            <button className="btn btn-default pull-right Rectangle-4-Copy-6">
+              <label className="Cancel">Cancel</label>
+            </button> */} 
           </div>
         </form>
       </div>

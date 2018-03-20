@@ -169,7 +169,7 @@ export default class extends React.Component{
         </div>
         <div className="col-md-3">
         <ul className="top-header-tabs">
-          <li className="active-tab">Sketches</li>
+          <Link to="/sketches"><li className="active-tab">Sketches</li></Link>
             <li className="border-right inactive-tab">Team</li>
           </ul>
           </div>

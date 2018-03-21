@@ -236,7 +236,7 @@ export default class extends React.Component{
             <div id="personalDIV" className="col-md-12 next-section">
               <div className="form-group">                        
                 <label className="Sketch-Name" htmlFor="InputprojectName" id="projectNameLabel">Sketch Name</label>
-                <input
+              <input
                   type="text"
                   value={this.state.projectInfo.projectName}
                   className="Rectangle-5"
@@ -255,6 +255,7 @@ export default class extends React.Component{
                   className="Rectangle-5-Copy"
                   id="InputProjectDesc"
                   name="projectDesc"
+                 
                   onChange={this.handleChange.bind(this, 'projectDesc')}
                   />
               </div>

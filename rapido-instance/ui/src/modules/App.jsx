@@ -42,7 +42,7 @@ export default class extends React.Component {
 
       <div className ="container-fluid">
         {header}
-        <div className="col-sm-12 main-content">
+        <div className="col-sm-12 main-content noscroll">
           {React.cloneElement(this.props.children, { designDetails: this.state.designDetails })}
         </div>
       </div>

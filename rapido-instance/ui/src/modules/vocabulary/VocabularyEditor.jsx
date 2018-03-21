@@ -7,7 +7,13 @@ import { cloneDeep, findIndex, orderBy } from 'lodash';
 import ProjectDetails from '../d3/ProjectDetailsComponent'
 import ProjectService from '../d3/ProjectServices'
 import { loadProjectDetails } from '../utils/TreeActions';
-
+import Button from 'mineral-ui/Button';
+import {showAlert, AlertOptions} from '../utils/AlertActions'
+import AlertContainer from 'react-alert'
+import { ThemeProvider } from 'mineral-ui/themes';
+import Dropdown from 'mineral-ui/Dropdown';
+import  Popover from 'mineral-ui/Popover';
+import  AddVocabulary from './AddVocabulary';
 
 export default class extends React.Component{
   
@@ -163,6 +169,23 @@ export default class extends React.Component{
   render() {
     let addOption, loadedComponent;
 
+    const data = [
+      {
+        items: [
+          {
+            text: 'Swagger 2.0',
+          },
+          
+          {
+            text: 'Swagger 3.0',
+          },
+          {
+            text: 'Postman',
+          }
+        ]
+      }
+    ]
+
     if(this.state && this.state.selectedSketch) {
 
       const { searchColumn, columns, vocabularyData, query } = this.state;
@@ -253,22 +276,58 @@ export default class extends React.Component{
     }
      
     return (
-      <div>
-        {/* <div className="titleContainer sketchPage">
-          {projectHeader}
+      <div className="vocabulary-main-content">
+           <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
+           <div className="vocabulary-header">
+      <div className="row">
+      <div className="col-md-12">
+  
+        <div className=" col-md-6 pull-left ">
+        <span className="vocabulary-header-title">Pets</span>
+        <span className="vocabulary-header-shared xs-pl-15">Shared with</span>
+         <span className="xs-pl-10"><span className="green-status">Apps Team</span>
+         &nbsp;&nbsp;<span className="red-status">Dev Team</span>
+         </span>
         </div>
-        <div className="tabsContainer">
-          <ul className="tabs">
-            <li className={this.props.location.pathname === '/vocabulary' ? 'tab active-tab': 'tab'}><Link to="/vocabulary">VOCABULARY</Link></li>
-            <li className={this.props.location.pathname === '/nodes/edit' ? 'tab active-tab': 'tab'}><Link to="/nodes/edit">SKETCH</Link></li>
-            <li className={this.props.location.pathname === '/export' ? 'tab active-tab': 'tab'}><Link to="/export">EXPORT</Link></li>
-          </ul>
+        <div className="col-md-offset-3 pull-right xs-pr-15">
+        <Button className="vocabulary-button-version"  variant="regular" primary>Versions</Button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <ThemeProvider theme={{ direction: 'rtl' }}>
+         <Dropdown data={data}   placement="bottom-start">
+      <Button className="vocabulary-button-preview"  variant="regular" primary>Preview</Button>
+    </Dropdown>
+    </ThemeProvider>  
         </div>
-        <div className="col-md-12 sketch-list-wrapper">
-          {loadedComponent}
-        </div> */}
-        <br/><br/><br/>
-        &nbsp; &nbsp; &nbsp; This page is in Development Mode!!!
+        </div>
+        </div>
+   
+      <div className="row">
+      <div className="col-md-12">
+     <div className="col-md-6 pull-left view-text">
+      This is API Mangement tool
+     </div>
+     </div>
+      </div>
+      </div>
+<div className="row">
+<div className="col-md-12">
+
+<div className="col-md-2">
+<AddVocabulary/>
+</div>
+
+<div className="col-md-6">
+Sketch
+</div>
+
+<div className="col-md-4">
+Node
+</div>
+</div>
+</div>
+
+
+      
       </div>
     );
   }

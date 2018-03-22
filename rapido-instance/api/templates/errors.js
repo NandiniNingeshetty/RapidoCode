@@ -1,5 +1,5 @@
 exports.english = {
-    "401": "unauthorized access",
-    "400": "",
-    "500": "",
+    '401': 'unauthorized access',
+    '400': '',
+    '500': '',
 };

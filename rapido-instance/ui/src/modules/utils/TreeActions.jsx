@@ -280,8 +280,6 @@ export function updateSketch(component, savedVocabulary, ProjectService, browser
       return response.json();
     })
     .then((responseData) => {
-      console.log(responseData);
-
       if(prjSrvUpdPrj.ok) {
         component.setState({
           projectSaved: true,

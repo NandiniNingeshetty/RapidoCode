@@ -6,23 +6,23 @@
 
 "use strict";
 
-var assert = require("chai").assert,
-    path = require("path"),
-    promises = require("bluebird"),
-    httpRequest = promises.promisifyAll(require("../../utils/httpRequest.js")),
-    promises = require("bluebird"),
-    httpServer = require("../config.js").server.local;
+var assert = require('chai').assert,
+    path = require('path'),
+    promises = require('bluebird'),
+    httpRequest = promises.promisifyAll(require('../../utils/httpRequest.js')),
+    promises = require('bluebird'),
+    httpServer = require('../config.js').server.local;
 
 var createTeam = function(user, team, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/team",
-        "method": "POST",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/team',
+        'method': 'POST',
+        'headers': {}
     };
 
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
     options.data = JSON.stringify(team);
 
     httpRequest.postAsync(options)
@@ -38,14 +38,14 @@ var createTeam = function(user, team, done) {
 
 var getUserTeams = function(user, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/team",
-        "method": "GET",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/team',
+        'method': 'GET',
+        'headers': {}
     };
 
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
 
     httpRequest.getAsync(options)
         .then(function(response) {
@@ -60,14 +60,14 @@ var getUserTeams = function(user, done) {
 
 var getOneTeam = function(user, team, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/team/" + team.id,
-        "method": "GET",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/team/' + team.id,
+        'method': 'GET',
+        'headers': {}
     };
 
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
 
     httpRequest.getAsync(options)
         .then(function(response) {
@@ -82,14 +82,14 @@ var getOneTeam = function(user, team, done) {
 
 var updateTeam = function(user, team, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/team/" + team.id,
-        "method": "PUT",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/team/' + team.id,
+        'method': 'PUT',
+        'headers': {}
     };
 
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
     options.data = JSON.stringify(team);
 
     httpRequest.putAsync(options)
@@ -105,14 +105,14 @@ var updateTeam = function(user, team, done) {
 
 var addMemberToTeam = function(user, team, member, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/team/"+ team.id + "/member",
-        "method": "POST",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/team/'+ team.id + '/member',
+        'method': 'POST',
+        'headers': {}
     };
 
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
     options.data = JSON.stringify(member);
 
     httpRequest.postAsync(options)
@@ -128,14 +128,14 @@ var addMemberToTeam = function(user, team, member, done) {
 
 var updateMemberOfTeam = function(user, team, member, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/team/"+ team.id + "/member/" + member.id,
-        "method": "PUT",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/team/'+ team.id + '/member/' + member.id,
+        'method': 'PUT',
+        'headers': {}
     };
 
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
     options.data = JSON.stringify(member);
 
     httpRequest.putAsync(options)
@@ -151,14 +151,14 @@ var updateMemberOfTeam = function(user, team, member, done) {
 
 var removeMemberFromTeam = function(user, team, member, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/team/"+ team.id + "/member/" + member.id,
-        "method": "DELETE",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/team/'+ team.id + '/member/' + member.id,
+        'method': 'DELETE',
+        'headers': {}
     };
 
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
 
     httpRequest.deleteAsync(options)
         .then(function(response) {
@@ -173,14 +173,14 @@ var removeMemberFromTeam = function(user, team, member, done) {
 
 var deleteTeam = function(user, team, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/team/"+ team.id,
-        "method": "DELETE",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/team/'+ team.id,
+        'method': 'DELETE',
+        'headers': {}
     };
 
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
 
     httpRequest.deleteAsync(options)
         .then(function(response) {
@@ -194,12 +194,12 @@ var deleteTeam = function(user, team, done) {
 };
 
 module.exports = {
-    "createTeam" : createTeam,
-    "getUserTeams" : getUserTeams,
-    "getOneTeam" : getOneTeam,
-    "updateTeam" : updateTeam,
-    "deleteTeam" : deleteTeam,
-    "addMemberToTeam" : addMemberToTeam,
-    "updateMemberOfTeam": updateMemberOfTeam,
-    "removeMemberFromTeam": removeMemberFromTeam
+    'createTeam' : createTeam,
+    'getUserTeams' : getUserTeams,
+    'getOneTeam' : getOneTeam,
+    'updateTeam' : updateTeam,
+    'deleteTeam' : deleteTeam,
+    'addMemberToTeam' : addMemberToTeam,
+    'updateMemberOfTeam': updateMemberOfTeam,
+    'removeMemberFromTeam': removeMemberFromTeam
 };

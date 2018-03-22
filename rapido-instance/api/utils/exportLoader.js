@@ -42,7 +42,6 @@ exportJson.prototype.createSwagger = function(obj, reqProtocol, reqHost) {
             responses=innerData.responses;
             methods[method.toLowerCase()] = {
                 "tags" : ["api"],
-                "title" : innerData.title,
                 "summary" : innerData.summary,
                 "description" :"",
                 "consumes": [

@@ -6,14 +6,15 @@
 
 "use strict";
 
-var authenticator = import_services("authenticator.js"),
-    express = require("express"),
+var logger = import_utils('logger.js').getLoggerObject(),
+    authenticator = import_services('authenticator.js'),
+    express = require('express'),
     router = express.Router();
 
 router.use(authenticator.initialize());
-router.post("/", authenticator.login);
+router.post('/', authenticator.login);
 
-router.get("/github", authenticator.authenticateViaGithub);
-router.get("/github/callback", authenticator.authenticateViaGithub, authenticator.loginWithoutPassword);
+router.get('/github', authenticator.authenticateViaGithub);
+router.get('/github/callback', authenticator.authenticateViaGithub, authenticator.loginWithoutPassword);
 
 module.exports = router;

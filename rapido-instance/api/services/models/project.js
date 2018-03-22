@@ -7,22 +7,22 @@
  */
 
 "use strict";
-var logger = import_utils("logger.js").getLoggerObject(),
-    promises = require("bluebird"),
-    db = promises.promisifyAll(import_utils("db.js")()),
-    queries = import_templates("sql.js")["project"];
+var logger = import_utils('logger.js').getLoggerObject(),
+    promises = require('bluebird'),
+    db = promises.promisifyAll(import_utils('db.js')()),
+    queries = import_templates("sql.js")['project'];
 
 
 var model = {
-    "create": (project, callback) => {
+    'create': (project, callback) => {
         db.executeAsync(queries.insert, [
-            project.name,
-            project.description,
-            project.createdby,
-            project.vocabulary,
-            project.treedata,
-            project.apidetails
-        ])
+                project.name,
+                project.description,
+                project.createdby,
+                project.vocabulary,
+                project.treedata,
+                project.apidetails
+            ])
             .then(function(data) {
                 if (data.rows && data.rows.length > 0) {
                     project.id = data.rows[0].id;
@@ -38,10 +38,9 @@ var model = {
                 callback(err);
             });
     },
-    "read": (id, callback) => {
+    'read': (id, callback) => {
         db.executeAsync(queries.select, [id])
             .then(function(data) {
-                console.log(data);
                 logger.debug("Project with id", id, "retrived.");
                 return callback(null, data.rows[0]);
             })
@@ -50,14 +49,14 @@ var model = {
                 callback(err);
             });
     },
-    "update": (project, callback) => {
+    'update': (project, callback) => {
         var projectId = project.id;
         delete project.id;
 
-        db.connection()("projects")
-            .where("id", "=", projectId)
+        db.connection()('projects')
+            .where('id', '=', projectId)
             .update(project)
-            .returning("id")
+            .returning('id')
             .then(function(data) {
                 if (data) {
                     logger.debug("project update with Id", projectId);
@@ -73,7 +72,7 @@ var model = {
                 callback(err);
             });
     },
-    "delete": (id, callback) => {
+    'delete': (id, callback) => {
         db.executeAsync(queries.delete, [id])
             .then(function(data) {
                 logger.debug("Projects with id", id, "deleted.");
@@ -88,8 +87,8 @@ var model = {
                 callback(err);
             });
     },
-    "addTeam": function(projectid, team, callback) {
-        db.executeAsync(queries.addTeam, [team.id, projectid, team.access || "WRITE"])
+    'addTeam': function(projectid, team, callback) {
+        db.executeAsync(queries.addTeam, [team.id, projectid, team.access || 'WRITE'])
             .then(function(data) {
                 logger.debug("Team", team.id, "added to project", projectid);
                 return callback(null, true);
@@ -99,8 +98,8 @@ var model = {
                 callback(err);
             });
     },
-    "updateTeam": function(projectid, team, callback) {
-        db.executeAsync(queries.updateTeam, [team.access  || "WRITE" , projectid, team.id])
+    'updateTeam': function(projectid, team, callback) {
+        db.executeAsync(queries.updateTeam, [team.access  || 'WRITE' , projectid, team.id])
             .then(function(data) {
                 logger.debug("Team details for project", projectid, "updated");
                 return callback(null, true);
@@ -110,7 +109,7 @@ var model = {
                 callback(err);
             });
     },
-    "getAllTeams": function(projectid, callback) {
+    'getAllTeams': function(projectid, callback) {
         db.executeAsync(queries.getAllTeams, [projectid])
             .then(function(data) {
                 logger.debug("All teams for project id", projectid, "retrived");
@@ -121,7 +120,7 @@ var model = {
                 callback(err);
             });
     },
-    "removeTeam": function(projectid, teamid, callback) {
+    'removeTeam': function(projectid, teamid, callback) {
         db.executeAsync(queries.removeTeam, [projectid, teamid])
             .then(function(data) {
                 logger.debug("team ", teamid, "removed from project", projectid);
@@ -132,7 +131,7 @@ var model = {
                 callback(err);
             });
     },
-    "addVocabulary": function(projectid, vocabulary, callback) {
+    'addVocabulary': function(projectid, vocabulary, callback) {
         db.executeAsync(queries.addVocabulary, [vocabulary, projectid])
             .then(function(data) {
                 logger.debug("vocabulary", vocabulary, "added to project", projectid);
@@ -143,7 +142,7 @@ var model = {
                 callback(err);
             });
     },
-    "removeVocabulary": function(projectid, vocabulary, callback) {
+    'removeVocabulary': function(projectid, vocabulary, callback) {
         db.executeAsync(queries.removeVocabulary, [vocabulary, projectid])
             .then(function(data) {
                 logger.debug("vocabulary", vocabulary, "removed from project", projectid);

@@ -33,7 +33,6 @@ export default class extends React.Component{
       requestValue: '',
       responseValue: '',
       summaryInfo: '',
-      titleInfo: '',
       currentNodeId: '',
       defaultValue: JSON.stringify({"200/500":{}}, null, 2)
     };
@@ -57,7 +56,6 @@ export default class extends React.Component{
           oType.request = this.state.apiData[oType.id][oType.apiType].request;
           oType.response = this.state.apiData[oType.id][oType.apiType].responses;
           oType.summary = this.state.apiData[oType.id][oType.apiType].summary;
-          oType.title = this.state.apiData[oType.id][oType.apiType].title;
         }
       }, this)    
     }, this)
@@ -146,9 +144,6 @@ export default class extends React.Component{
           if(!this.state.summaryInfo && todo.summary) {
             this.state.summaryInfo = todo.summary;
           }
-          if(!this.state.titleInfo && todo.title) {
-            this.state.titleInfo = todo.title;
-          }
           if(todo.id) {
             this.state.currentNodeId = todo.id;
           }
@@ -158,12 +153,6 @@ export default class extends React.Component{
             requestLabel = <h6 className="col-md-12 param-label">Request : Application/JSON</h6>
           }
           apiPayloadSection = <div className="col-md-12 payload-type-section">
-          <div className="row">
-              <div className="col-md-12"><h6>Title:</h6></div>
-              <div className="col-md-6 summary-section">
-              <textarea rows="1" value={this.state.titleInfo} onChange={(evt) => this.handleAPIChange("title",evt)}></textarea>
-              </div>
-            </div>
             <div className="row">
               <div className="col-md-12"><h6>Summary:</h6></div>
               <div className="col-md-6 summary-section">

@@ -6,21 +6,21 @@
 
 "use strict";
 
-var logger = import_utils("logger.js").getLoggerObject(),
-    schema = require("async-validator"),
+var logger = import_utils('logger.js').getLoggerObject(),
+    schema = require('async-validator'),
     _ = require("lodash"),
-    bcrypt = require("bcrypt"),
+    bcrypt = require('bcrypt'),
     model = require(__dirname + "/models/team.js"),
     usermodel = require(__dirname + "/models/user.js"),
     auth = require(__dirname + "/models/authorize.js"),
-    promises = require("bluebird"),
-    exportJson = import_utils("exportLoader.js");
+    promises = require('bluebird'),
+    exportJson = import_utils('exportLoader.js');
 
 var teamService = {
-    "create": function(request, response, next) {
+    'create': function(request, response, next) {
         var team = {};
         team.name = request.body.name;
-        team.description = request.body.description || "";
+        team.description = request.body.description || '';
         team.capacity = request.body.capacity || configurations.team.size;
         team.createdby = request.user.id;
 
@@ -39,8 +39,8 @@ var teamService = {
         var validator = promises.promisifyAll(new schema(descriptor));
 
         validator.validateAsync({
-            "team": team
-        })
+                "team": team
+            })
             .then(function() {
                 return auth.myTeamsAsync(request.user.id);
             })
@@ -65,13 +65,13 @@ var teamService = {
                     err = {
                         "code": err.code,
                         "message": "Can not create team"
-                    };
+                    }
                 }
                 response.status(httpCode).json(err);
             });
 
     },
-    "fetch": function(request, response, next) {
+    'fetch': function(request, response, next) {
 
         var allTeams = [],
             promiseResolutions = [];
@@ -83,15 +83,15 @@ var teamService = {
         promises.all(promiseResolutions)
             .then(function(results) {
                 _.each(results[0], function(team, index) {
-                    team.ownership = "OWN";
+                    team.ownership = 'OWN';
                     allTeams.push(team);
                 });
                 _.each(results[1], function(team, index) {
-                    team.ownership = "ADMIN";
+                    team.ownership = 'ADMIN';
                     allTeams.push(team);
                 });
                 _.each(results[2], function(team, index) {
-                    team.ownership = "MEMBER";
+                    team.ownership = 'MEMBER';
                     allTeams.push(team);
                 });
                 response.status(200).json(allTeams);
@@ -105,13 +105,13 @@ var teamService = {
             });
     },
 
-    "get": function(request, response, next) {
+    'get': function(request, response, next) {
 
         var allMyTeams = [],
             allTeamsIamAdmin = [],
             allTeamsIamMember = [],
             promiseResolutions = [],
-            access = "NONE",
+            access = 'NONE',
             team = {};
 
         promiseResolutions.push(auth.myTeamsAsync(request.user.id));
@@ -131,11 +131,11 @@ var teamService = {
                 });
 
                 if(_.indexOf(allMyTeams, request.params.id) >=0 ) {
-                    access = "OWN";
+                    access = 'OWN';
                 } else if(_.indexOf(allTeamsIamAdmin, request.params.id) >= 0 ) {
-                    access = "ADMIN";
+                    access = 'ADMIN';
                 } else if(_.indexOf(allTeamsIamMember, request.params.id) >= 0 ) {
-                    access = "MEMBER";
+                    access = 'MEMBER';
                 } else {
                     throw new Error("User " + request.user.id + " does not have access to team " + request.params.id);
                 }
@@ -159,12 +159,12 @@ var teamService = {
                 });
 
                 team.memebers.push({
-                    "id": results[1].id,
-                    "email": results[1].email,
-                    "access": "OWNER"
+                    'id': results[1].id,
+                    'email': results[1].email,
+                    'access': 'OWNER'
                 });
                 delete team.createdby;
-                return model.getAllProjectsAsync(team.id);
+                return model.getAllProjectsAsync(team.id)
             })
             .then(function(projects){
                 team.projects = [];
@@ -182,7 +182,7 @@ var teamService = {
             });
     },
 
-    "update": function(request, response, next) {
+    'update': function(request, response, next) {
 
         var allTeams = [],
             promiseResolutions = [],
@@ -237,12 +237,12 @@ var teamService = {
                     err = {
                         "code": err.code,
                         "message": "Can not update team with id " + team.id
-                    };
+                    }
                 }
                 response.status(httpCode).json(err);
             });
     },
-    "delete": function(request, response, next) {
+    'delete': function(request, response, next) {
 
         var allTeams = [],
             promiseResolutions = [];
@@ -276,7 +276,7 @@ var teamService = {
                 });
             });
     },
-    "addMember": function(request, response, next) {
+    'addMember': function(request, response, next) {
 
         var allTeams = [],
             promiseResolutions = [],
@@ -317,7 +317,7 @@ var teamService = {
                 });
             });
     },
-    "updateMember": function(request, response, next) {
+    'updateMember': function(request, response, next) {
 
         var allTeams = [],
             promiseResolutions = [],
@@ -361,7 +361,7 @@ var teamService = {
                 });
             });
     },
-    "removeMember": function(request, response, next) {
+    'removeMember': function(request, response, next) {
 
         var allTeams = [],
             promiseResolutions = [],

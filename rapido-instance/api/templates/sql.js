@@ -15,7 +15,7 @@ exports.user = {
 
 exports.project = {
     "insert": "INSERT INTO projects(name, description, createdby, vocabulary, treedata, apidetails) VALUES(?, ?, ?, ?, ?, ?) returning id",
-    "select": "SELECT id, name, description, treedata, vocabulary, apidetails, modifiedat FROM projects WHERE id=?",
+    "select": "SELECT id, name, description, treedata, vocabulary, apidetails FROM projects WHERE id=?",
     "delete": "DELETE from projects WHERE id=?",
     "addTeam": "INSERT INTO team_project (teamid, projectid, access) values (?,?,?)",
     "updateTeam": "UPDATE team_project set access = ? where projectid = ? and teamid = ?",
@@ -43,7 +43,7 @@ exports.auth = {
     "myteams": "select id, name, description from teams where createdby=?",
     "teamsImoderate": "select id, name, description from teams where id in (select teamid from user_team where access = 'ADMIN' and userid = ?)",
     "teamsIbelong": "select id, name, description from teams where id in (select teamid from user_team where access = 'MEMBER' and userid = ?)",
-    "myProjects": "select id as projectid, name, description, modifiedat from projects where createdby=?",
+    "myProjects": "select id as projectid, name, description from projects where createdby=?",
     "projectsIcanEdit": "select P.id as projectid, P.name, P.description, T.teamid from projects P join (select projectid, teamid from team_project where access = 'WRITE' and teamid in ((select teamid from user_team where userid = ?) UNION (select id from teams where createdby= ?))) T on P.id = T.projectid",
     "projectsIcanView": "select P.id as projectid, P.name, P.description, T.teamid from projects P join (select projectid, teamid from team_project where access = 'READ' and teamid in ((select teamid from user_team where userid = ?) UNION (select id from teams where createdby= ?))) T on P.id = T.projectid"
 };

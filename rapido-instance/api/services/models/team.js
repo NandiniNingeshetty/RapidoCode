@@ -6,21 +6,21 @@
 
 "use strict";
 
-var logger = import_utils("logger.js").getLoggerObject(),
-    promises = require("bluebird"),
-    db = promises.promisifyAll(import_utils("db.js")()),
-    _ = require("lodash"),
-    queries = import_templates("sql.js")["team"];
+var logger = import_utils('logger.js').getLoggerObject(),
+    promises = require('bluebird'),
+    db = promises.promisifyAll(import_utils('db.js')()),
+    _ = require('lodash'),
+    queries = import_templates("sql.js")['team'];
 
 
 var model = {
-    "create": function(team, callback) {
+    'create': function(team, callback) {
         db.executeAsync(queries.insert, [
-            team.name,
-            team.description,
-            team.createdby,
-            team.capacity
-        ])
+                team.name,
+                team.description,
+                team.createdby,
+                team.capacity
+            ])
             .then(function(data) {
                 if (data.rows && data.rows.length > 0) {
                     team.id = data.rows[0].id;
@@ -36,7 +36,7 @@ var model = {
                 callback(err);
             });
     },
-    "read": (teamid, callback) => {
+    'read': (teamid, callback) => {
         db.executeAsync(queries.select, [teamid])
             .then(function(data) {
                 logger.debug("Team with id", teamid, "retrived.");
@@ -48,7 +48,7 @@ var model = {
             });
     },
 
-    "getAdmins" : function(teamid, callback) {
+    'getAdmins' : function(teamid, callback) {
         db.executeAsync(queries.getOnlyAdmins, [teamid])
             .then(function(data) {
                 logger.debug("Admins for", teamid, "retrived.");
@@ -60,7 +60,7 @@ var model = {
             });
     },
 
-    "getMembers" : function(teamid, callback) {
+    'getMembers' : function(teamid, callback) {
         db.executeAsync(queries.getOnlyMembers, [teamid])
             .then(function(data) {
                 logger.debug("Members for", teamid, "retrived.");
@@ -72,7 +72,7 @@ var model = {
             });
     },
 
-    "getAllMembers" : function(teamid, callback) {
+    'getAllMembers' : function(teamid, callback) {
         db.executeAsync(queries.getAllMembers, [teamid])
             .then(function(data) {
                 logger.debug("All Members for", teamid, "retrived.");
@@ -84,7 +84,7 @@ var model = {
             });
     },
 
-    "getAllProjects" : function(teamid, callback) {
+    'getAllProjects' : function(teamid, callback) {
         db.executeAsync(queries.getAllProjects, [teamid])
             .then(function(data) {
                 logger.debug("All Projects for", teamid, "retrived.");
@@ -96,15 +96,15 @@ var model = {
             });
     },
 
-    "addMember": function(team, user, callback) {
+    'addMember': function(team, user, callback) {
         db.executeAsync(queries.getAllMembers, [team.id])
             .then(function(data) {
                 _.each(data.rows, function(memeber, index) {
                     if(memeber.id == user.id) {
-                        throw {"code": 201};
+                        throw {'code': 201};
                     }
-                });
-                return db.executeAsync(queries.addMember, [user.id, team.id, user.access || "MEMBER"]);
+                })
+                return db.executeAsync(queries.addMember, [user.id, team.id, user.access || 'MEMBER']);
             })
             .then(function(data) {
                 logger.debug("User", user.id, "added to team", team.id);
@@ -119,8 +119,8 @@ var model = {
                 callback(err);
             });
     },
-    "updateMember": function(team, user, callback) {
-        db.executeAsync(queries.updateMember, [user.access  || "MEMBER" , team.id, user.id])
+    'updateMember': function(team, user, callback) {
+        db.executeAsync(queries.updateMember, [user.access  || 'MEMBER' , team.id, user.id])
             .then(function(data) {
                 logger.debug("User role for", user.id, "updated to team", team.id);
                 return callback(null, true);
@@ -130,7 +130,7 @@ var model = {
                 callback(err);
             });
     },
-    "removeMember": function(teamid, userid, callback) {
+    'removeMember': function(teamid, userid, callback) {
         db.executeAsync(queries.removeMember, [teamid, userid])
             .then(function(data) {
                 logger.debug("User ", userid, "removed from team", teamid);
@@ -141,14 +141,14 @@ var model = {
                 callback(err);
             });
     },
-    "update": function(team, callback) {
+    'update': function(team, callback) {
         var teamid = team.id;
         delete team.id;
 
-        db.connection()("teams")
-            .where("id", "=", teamid)
+        db.connection()('teams')
+            .where('id', '=', teamid)
             .update(team)
-            .returning("id")
+            .returning('id')
             .then(function(data) {
                 if (data) {
                     logger.debug("team updated with id", teamid);
@@ -164,11 +164,11 @@ var model = {
                 callback(err);
             });
     },
-    "delete": function(teamid, callback) {
+    'delete': function(teamid, callback) {
         db.executeAsync(queries.delete, [teamid])
             .then(function(data) {
                 logger.debug("team", teamid, "deleted");
-                return db.executeAsync(queries.removeAllProjects, [teamid]);
+                return db.executeAsync(queries.removeAllProjects, [teamid])
             })
             .then(function(data) {
                 logger.debug("All project for team", teamid, "are removed");

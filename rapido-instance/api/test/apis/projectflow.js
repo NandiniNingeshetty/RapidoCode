@@ -6,23 +6,23 @@
 
 "use strict";
 
-var assert = require("chai").assert,
-    path = require("path"),
-    promises = require("bluebird"),
-    httpRequest = promises.promisifyAll(require("../../utils/httpRequest.js")),
-    promises = require("bluebird"),
-    httpServer = require("../config.js").server.local;
+var assert = require('chai').assert,
+    path = require('path'),
+    promises = require('bluebird'),
+    httpRequest = promises.promisifyAll(require('../../utils/httpRequest.js')),
+    promises = require('bluebird'),
+    httpServer = require('../config.js').server.local;
 
 var createProject = function(user, project,done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/project",
-        "method": "POST",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/project',
+        'method': 'POST',
+        'headers': {}
     };
 
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
     options.data = JSON.stringify(project);
 
     httpRequest.postAsync(options)
@@ -38,14 +38,14 @@ var createProject = function(user, project,done) {
 
 var getUserProjects = function(user, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/project",
-        "method": "GET",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/project',
+        'method': 'GET',
+        'headers': {}
     };
 
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
 
     httpRequest.getAsync(options)
         .then(function(response) {
@@ -60,14 +60,14 @@ var getUserProjects = function(user, done) {
 
 var getOneProject = function(user, project, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/project/" + project.id,
-        "method": "GET",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/project/' + project.id,
+        'method': 'GET',
+        'headers': {}
     };
 
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
 
     httpRequest.getAsync(options)
         .then(function(response) {
@@ -82,14 +82,14 @@ var getOneProject = function(user, project, done) {
 
 var updateProject = function(user, project, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/project/" + project.id,
-        "method": "PUT",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/project/' + project.id,
+        'method': 'PUT',
+        'headers': {}
     };
 
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
     options.data = JSON.stringify(project);
 
     httpRequest.putAsync(options)
@@ -105,13 +105,13 @@ var updateProject = function(user, project, done) {
 
 var deleteProject = function(user, project, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/project/" + project.id,
-        "method": "DELETE",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/project/' + project.id,
+        'method': 'DELETE',
+        'headers': {}
     };
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
 
     httpRequest.deleteAsync(options)
         .then(function(response) {
@@ -126,13 +126,13 @@ var deleteProject = function(user, project, done) {
 
 var addTeam = function(user, project, team, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/project/" + project.id + "/team",
-        "method": "POST",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/project/' + project.id + '/team',
+        'method': 'POST',
+        'headers': {}
     };
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
 
     options.data = JSON.stringify(team);
 
@@ -149,13 +149,13 @@ var addTeam = function(user, project, team, done) {
 
 var updateTeam = function(user, project, team, done) {
     var options = {
-        "host": httpServer.host,
-        "port": httpServer.port,
-        "path": "/api/project/" + project.id + "/team/" + team.id,
-        "method": "PUT",
-        "headers": {}
+        'host': httpServer.host,
+        'port': httpServer.port,
+        'path': '/api/project/' + project.id + '/team/' + team.id,
+        'method': 'PUT',
+        'headers': {}
     };
-    options.headers["Authorization"] = "Bearer " + user.token;
+    options.headers['Authorization'] = 'Bearer ' + user.token;
 
     options.data = JSON.stringify(team);
 
@@ -171,11 +171,11 @@ var updateTeam = function(user, project, team, done) {
 };
 
 module.exports = {
-    "createProject" : createProject,
-    "getUserProjects" : getUserProjects,
-    "getOneProject" : getOneProject,
-    "updateProject" : updateProject,
-    "deleteProject" : deleteProject,
-    "addTeam": addTeam,
-    "updateTeam": updateTeam
+    'createProject' : createProject,
+    'getUserProjects' : getUserProjects,
+    'getOneProject' : getOneProject,
+    'updateProject' : updateProject,
+    'deleteProject' : deleteProject,
+    'addTeam': addTeam,
+    'updateTeam': updateTeam
 };

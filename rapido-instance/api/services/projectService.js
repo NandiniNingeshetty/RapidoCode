@@ -6,22 +6,21 @@
 
 "use strict";
 
-var logger = import_utils("logger.js").getLoggerObject(),
-    schema = require("async-validator"),
+var logger = import_utils('logger.js').getLoggerObject(),
+    schema = require('async-validator'),
     _ = require("lodash"),
-    bcrypt = require("bcrypt"),
+    bcrypt = require('bcrypt'),
     model = require(__dirname + "/models/project.js"),
     auth = require(__dirname + "/models/authorize.js"),
-    promises = require("bluebird"),
-    exportJson = import_utils("exportLoader.js"),
-    GitHub = require("github-api");
+    promises = require('bluebird'),
+    exportJson = import_utils('exportLoader.js'),
+    GitHub = require('github-api');
 
 var projectService = {
-    "create": function(request, response, next) {
+    'create': function(request, response, next) {
         var project = {};
-        project.title = request.body.title;
         project.name = request.body.name;
-        project.description = request.body.description || "";
+        project.description = request.body.description || '';
         project.createdby = request.user.id;
         project.treedata = request.body.treedata || {};
         project.vocabulary = request.body.vocabulary || [];
@@ -54,8 +53,8 @@ var projectService = {
         var validator = promises.promisifyAll(new schema(descriptor));
 
         validator.validateAsync({
-            "project": project
-        })
+                "project": project
+            })
             .then(function() {
                 return auth.myProjectsAsync(project.createdby);
             })
@@ -75,7 +74,7 @@ var projectService = {
             .then(function(data) {
                 project.id = data.id;
                 if(request.body.teamid) {
-                    return model.addTeamAsync(project.id, {"id": request.body.teamid });
+                    return model.addTeamAsync(project.id, {'id': request.body.teamid });
                 } else {
                     return ;
                 }
@@ -93,19 +92,19 @@ var projectService = {
                     err = {
                         "code": err.code,
                         "message": "Can not create project"
-                    };
+                    }
                 }
                 response.status(httpCode).json(err);
             });
 
     },
-    "fetch": function(request, response, next) {
+    'fetch': function(request, response, next) {
         var allProjects = {"personal": [], "team": {}},
             allProjectIds = [],
             promiseResolutions = [];
 
 
-        logger.info("+++++ from fetch +++++", request.user, "++++++++");
+        logger.info('+++++ from fetch +++++', request.user, '++++++++');
 
         promiseResolutions.push(auth.myProjectsAsync(request.user.id));
         promiseResolutions.push(auth.projectsIcanEditAsync(request.user.id));
@@ -115,7 +114,7 @@ var projectService = {
             .then(function(results) {
                 _.each(results[0], function(project, index) {
                     allProjectIds.push(project.projectid);
-                    project.ownership = "OWN";
+                    project.ownership = 'OWN';
                     allProjects.personal.push(project);
                 });
                 _.each(results[1], function(project, index) {
@@ -125,7 +124,7 @@ var projectService = {
                         // Duplicate
                     }
                     allProjectIds.push(project.projectid);
-                    project.ownership = "WRITE";
+                    project.ownership = 'WRITE';
                     if(!allProjects.team[project.teamid]) {
                         allProjects.team[project.teamid] = [];
                     }
@@ -138,11 +137,11 @@ var projectService = {
                         // Duplicate
                     }
                     allProjectIds.push(project.projectid);
-                    project.ownership = "READ";
+                    project.ownership = 'READ';
                     if(!allProjects.team[project.teamid]) {
                         allProjects.team[project.teamid] = [];
                     }
-                    allProjects.team[project.teamid].push(project);
+                    allProjects.team[project.teamid].push(project)
                 });
                 response.status(200).json(allProjects);
             })
@@ -154,10 +153,10 @@ var projectService = {
                 });
             });
     },
-    "get": function(request, response, next) {
+    'get': function(request, response, next) {
 
         var proj = {},
-            access = "NONE",
+            access = 'NONE',
             allProjectsIownIds = [],
             allProjectsIcanEditIds = [],
             allProjectsIcanViewIds = [],
@@ -179,11 +178,11 @@ var projectService = {
                     allProjectsIcanViewIds.push(project.projectid.toString());
                 });
                 if(_.indexOf(allProjectsIownIds, request.params.id) >=0 ) {
-                    access = "OWN";
+                    access = 'OWN';
                 } else if(_.indexOf(allProjectsIcanEditIds, request.params.id) >= 0 ) {
-                    access = "WRITE";
+                    access = 'WRITE';
                 } else if(_.indexOf(allProjectsIcanViewIds, request.params.id) >= 0 ) {
-                    access = "READ";
+                    access = 'READ';
                 } else {
                     throw new Error("User " + request.user.id + " does not have access to project " + request.params.id);
                 }
@@ -213,7 +212,7 @@ var projectService = {
             });
 
     },
-    "update": function(request, response, next) {
+    'update': function(request, response, next) {
         var project = {};
         project.id = request.params.id;
 
@@ -251,8 +250,8 @@ var projectService = {
             promiseResolutions = [];
 
         validator.validateAsync({
-            "project": project
-        })
+                "project": project
+            })
             .then(function() {
 
                 promiseResolutions.push(auth.myProjectsAsync(request.user.id));
@@ -295,12 +294,12 @@ var projectService = {
                     err = {
                         "code": err.code,
                         "message": "Can not update project with id " + project.id
-                    };
+                    }
                 }
                 response.status(httpCode).json(err);
             });
     },
-    "delete": function(request, response, next) {
+    'delete': function(request, response, next) {
 
         var allProjectIds = [],
             promiseResolutions = [];
@@ -309,36 +308,36 @@ var projectService = {
         promiseResolutions.push(auth.projectsIcanEditAsync(request.user.id));
 
         promises.all(promiseResolutions)
-            .then(function(results) {
+        .then(function(results) {
 
-                _.each(results[0], function(result, index) {
-                    allProjectIds.push(result.projectid.toString());
-                });
-                _.each(results[1], function(result, index) {
-                    allProjectIds.push(result.projectid.toString());
-                });
-
-                if(_.indexOf(allProjectIds, request.params.id) < 0 ) {
-                    throw new Error("user " + request.user.id + " does not have permission to delete " + request.params.id);
-                } else {
-                    return model.deleteAsync(request.params.id);
-                }
-            })
-            .then(function(data) {
-                response.status(200).json({
-                    "id": request.params.id
-                });
-            })
-            .catch(function(err) {
-                logger.error(err);
-                response.status(500).json({
-                    "code": err.code,
-                    "message": "Can not delete project with id " + request.params.id
-                });
+            _.each(results[0], function(result, index) {
+                allProjectIds.push(result.projectid.toString());
+            });
+            _.each(results[1], function(result, index) {
+                allProjectIds.push(result.projectid.toString());
             });
 
+            if(_.indexOf(allProjectIds, request.params.id) < 0 ) {
+                throw new Error("user " + request.user.id + " does not have permission to delete " + request.params.id);
+            } else {
+                return model.deleteAsync(request.params.id);
+            }
+        })
+        .then(function(data) {
+            response.status(200).json({
+                'id': request.params.id
+            });
+        })
+        .catch(function(err) {
+            logger.error(err);
+            response.status(500).json({
+                "code": err.code,
+                "message": "Can not delete project with id " + request.params.id
+            });
+        });
+
     },
-    "addTeam": function(request, response, next) {
+    'addTeam': function(request, response, next) {
 
         var allProjectIds = [],
             promiseResolutions = [];
@@ -347,39 +346,39 @@ var projectService = {
         promiseResolutions.push(auth.projectsIcanEditAsync(request.user.id));
 
         promises.all(promiseResolutions)
-            .then(function(results) {
+        .then(function(results) {
 
-                _.each(results[0], function(result, index) {
-                    allProjectIds.push(result.projectid.toString());
-                });
-                _.each(results[1], function(result, index) {
-                    allProjectIds.push(result.projectid.toString());
-                });
-
-                if(_.indexOf(allProjectIds, request.params.id) < 0 ) {
-                    throw new Error("user " + request.user.id + " does not have permission to share " + request.params.id);
-                } else {
-
-                    var team = {
-                        "id": request.body.id,
-                        "access": request.body.access
-                    };
-                    return model.addTeamAsync(request.params.id, team);
-                }
-            })
-            .then(function(data) {
-                response.status(200).json({"id": request.params.id});
-            })
-            .catch(function(err) {
-                logger.error(err);
-                response.status(500).json({
-                    "code": err.code,
-                    "message": "Can not share project " + request.params.id
-                });
+            _.each(results[0], function(result, index) {
+                allProjectIds.push(result.projectid.toString());
             });
+            _.each(results[1], function(result, index) {
+                allProjectIds.push(result.projectid.toString());
+            });
+
+            if(_.indexOf(allProjectIds, request.params.id) < 0 ) {
+                throw new Error("user " + request.user.id + " does not have permission to share " + request.params.id);
+            } else {
+
+                var team = {
+                    "id": request.body.id,
+                    "access": request.body.access
+                };
+                return model.addTeamAsync(request.params.id, team);
+            }
+        })
+        .then(function(data) {
+            response.status(200).json({"id": request.params.id});
+        })
+        .catch(function(err) {
+            logger.error(err);
+            response.status(500).json({
+                "code": err.code,
+                "message": "Can not share project " + request.params.id
+            });
+        });
     },
 
-    "updateTeam": function(request, response, next) {
+    'updateTeam': function(request, response, next) {
 
         var allProjectIds = [],
             promiseResolutions = [];
@@ -388,39 +387,39 @@ var projectService = {
         promiseResolutions.push(auth.projectsIcanEditAsync(request.user.id));
 
         promises.all(promiseResolutions)
-            .then(function(results) {
+        .then(function(results) {
 
-                _.each(results[0], function(result, index) {
-                    allProjectIds.push(result.projectid.toString());
-                });
-                _.each(results[1], function(result, index) {
-                    allProjectIds.push(result.projectid.toString());
-                });
-
-                if(_.indexOf(allProjectIds, request.params.projectid) < 0 ) {
-                    throw new Error("user " + request.user.id + " does not have permission to share project " + request.params.projectid);
-                } else {
-
-                    var team = {
-                        "id": request.params.teamid,
-                        "access": request.body.access
-                    };
-                    return model.updateTeamAsync(request.params.projectid, team);
-                }
-            })
-            .then(function(data) {
-                response.status(200).json({"id": request.params.projectid});
-            })
-            .catch(function(err) {
-                logger.error(err);
-                response.status(500).json({
-                    "code": err.code,
-                    "message": "Can not update the project share details"
-                });
+            _.each(results[0], function(result, index) {
+                allProjectIds.push(result.projectid.toString());
+            });
+            _.each(results[1], function(result, index) {
+                allProjectIds.push(result.projectid.toString());
             });
 
+            if(_.indexOf(allProjectIds, request.params.projectid) < 0 ) {
+                throw new Error("user " + request.user.id + " does not have permission to share project " + request.params.projectid);
+            } else {
+
+                var team = {
+                    "id": request.params.teamid,
+                    "access": request.body.access
+                };
+                return model.updateTeamAsync(request.params.projectid, team);
+            }
+        })
+        .then(function(data) {
+            response.status(200).json({"id": request.params.projectid});
+        })
+        .catch(function(err) {
+            logger.error(err);
+            response.status(500).json({
+                "code": err.code,
+                "message": "Can not update the project share details"
+            });
+        });
+
     },
-    "removeTeam": function(request, response, next) {
+    'removeTeam': function(request, response, next) {
 
         var allProjectIds = [],
             promiseResolutions = [];
@@ -429,37 +428,37 @@ var projectService = {
         promiseResolutions.push(auth.projectsIcanEditAsync(request.user.id));
 
         promises.all(promiseResolutions)
-            .then(function(results) {
+        .then(function(results) {
 
-                _.each(results[0], function(result, index) {
-                    allProjectIds.push(result.projectid.toString());
-                });
-                _.each(results[1], function(result, index) {
-                    allProjectIds.push(result.projectid.toString());
-                });
-
-                if(_.indexOf(allProjectIds, request.params.projectid) < 0 ) {
-                    throw new Error("user " + request.user.id + " does not have permission to share " + request.params.projectid);
-                } else {
-                    return model.removeTeamAsync(request.params.projectid, request.params.teamid);
-                }
-            })
-            .then(function(data) {
-                response.status(200).json({"id": request.params.teamid});
-            })
-            .catch(function(err) {
-                logger.error(err);
-                response.status(500).json({
-                    "code": err.code,
-                    "message": "Can not remove team " + request.params.teamid + " from the project " + request.params.projectid
-                });
+            _.each(results[0], function(result, index) {
+                allProjectIds.push(result.projectid.toString());
             });
+            _.each(results[1], function(result, index) {
+                allProjectIds.push(result.projectid.toString());
+            });
+
+            if(_.indexOf(allProjectIds, request.params.projectid) < 0 ) {
+                throw new Error("user " + request.user.id + " does not have permission to share " + request.params.projectid);
+            } else {
+                return model.removeTeamAsync(request.params.projectid, request.params.teamid);
+            }
+        })
+        .then(function(data) {
+            response.status(200).json({"id": request.params.teamid});
+        })
+        .catch(function(err) {
+            logger.error(err);
+            response.status(500).json({
+                "code": err.code,
+                "message": "Can not remove team " + request.params.teamid + " from the project " + request.params.projectid
+            });
+        });
 
     },
 
-    "export": function(request, response, next) {
+    'export': function(request, response, next) {
 
-        if (request.query.type && request.query.type == "swagger") {
+        if (request.query.type && request.query.type == 'swagger') {
             var project = {};
             var resObj = [];
             project.id = request.params.id;
@@ -468,14 +467,14 @@ var projectService = {
                 .then(function(project){
                     var apiData = project.apidetails;
                     var swaggerObj = new exportJson();
-                    var resultData = swaggerObj.createSwagger(apiData, request.protocol, request.get("host"));
+                    var resultData = swaggerObj.createSwagger(apiData, request.protocol, request.get('host'));
                     resultData.info.title = project.name;
                     resultData.info.description = project.description;
 
-                    if (request.query.download == "true") {
+                    if (request.query.download == 'true') {
                         var fileName = project.name + "-swagger.json";
-                        response.setHeader("Content-disposition", "attachment; filename=" + fileName);
-                        response.setHeader("Content-type", "application/json");
+                        response.setHeader('Content-disposition', 'attachment; filename=' + fileName);
+                        response.setHeader('Content-type', 'application/json');
                         response.write(JSON.stringify(resultData), function(err) {
                             response.status(200).end();
                         });
@@ -483,7 +482,7 @@ var projectService = {
                         response.status(200).json(resultData);
                     }
                 })
-                .catch(err => {
+                .catch((err) => {
                     logger.error(err);
                     response.status(500).json({
                         "code": err.code,
@@ -491,7 +490,7 @@ var projectService = {
                     });
                 });
 
-        } else if (request.query.type && request.query.type == "postman") {
+        } else if (request.query.type && request.query.type == 'postman') {
 
             var project = {};
         	project.id = request.params.id;
@@ -500,13 +499,13 @@ var projectService = {
                 .then(function(project){
                     var apiData = project.apidetails;
             		var swaggerObj=new exportJson();
-            		var baseUrl = request.protocol + "://" + request.get("host");
+            		var baseUrl = request.protocol + '://' + request.get('host');
             		var postmanSpec = swaggerObj.createPostmanCollection(apiData, baseUrl);
 
-            		if (request.query.download == "true") {
+            		if (request.query.download == 'true') {
             			var fileName=project.name+"-postman.json";
-            			response.setHeader("Content-disposition", "attachment; filename="+fileName);
-            			response.setHeader("Content-type", "application/json");
+            			response.setHeader('Content-disposition', 'attachment; filename='+fileName);
+            			response.setHeader('Content-type', 'application/json');
             			response.write(JSON.stringify(postmanSpec), function (err) {
             				response.status(200).end();
             			});
@@ -528,7 +527,7 @@ var projectService = {
         }
     },
 
-    "addVocabulary": function(request, response, next) {
+    'addVocabulary': function(request, response, next) {
         var allProjectIds = [],
             promiseResolutions = [],
             vocab = JSON.stringify(request.body);
@@ -562,12 +561,12 @@ var projectService = {
                 err = {
                     "code": err.code,
                     "message": "Can not add vocabulary to project " + project.id
-                };
+                }
                 response.status(httpCode).json(err);
             });
     },
 
-    "removeVocabulary": function(request, response, next) {
+    'removeVocabulary': function(request, response, next) {
         var allProjectIds = [],
             promiseResolutions = [];
 
@@ -600,19 +599,19 @@ var projectService = {
                 err = {
                     "code": err.code,
                     "message": "Can not remove vocabulary from project " + request.params.id
-                };
+                }
                 response.status(httpCode).json(err);
             });
     },
 
-    "publishToGithub" : function(request, response, next) {
+    'publishToGithub' : function(request, response, next) {
 
         if(!request.user.githubToken) {
-            logger.error("User is not github user");
+            logger.error('User is not github user');
             var err = {
                 "code": 500,
                 "message": "User is not logged into github"
-            };
+            }
             response.status(httpCode).json(err);
             return;
         }
@@ -641,18 +640,18 @@ var projectService = {
             .then(function(project) {
                 var apiData = project.apidetails;
                 var swaggerObj = new exportJson();
-                var resultData = swaggerObj.createSwagger(apiData, request.protocol, request.get("host"));
+                var resultData = swaggerObj.createSwagger(apiData, request.protocol, request.get('host'));
                 resultData.info.title = project.name;
                 resultData.info.description = project.description;
 
                 var githubObj = new GitHub({
-                    token: request.user.githubToken
+                  token: request.user.githubToken
                 });
 
                 var githubRepo = githubObj.getRepo(request.user.githubUser, request.body.repository);
                 var githubRepoAsync = promises.promisifyAll(githubRepo);
 
-                return githubRepoAsync.writeFileAsync("master", project.name + "-swagger.json", JSON.stringify(resultData), request.body.message || "publish from rapido", {"encode":true});
+                return githubRepoAsync.writeFileAsync('master', project.name + '-swagger.json', JSON.stringify(resultData), request.body.message || 'publish from rapido', {'encode':true});
 
             })
             .then(function(data) {
@@ -666,7 +665,7 @@ var projectService = {
                 err = {
                     "code": err.code,
                     "message": "Can not push to github for project" + request.params.id
-                };
+                }
                 response.status(httpCode).json(err);
             });
 

@@ -57,8 +57,7 @@ export default class extends React.Component{
       return response.json();
     })
     .then((responseData) => {
-      console.log(responseData);
-         if(prjSrvGetPrjDetRes.ok) {
+      if(prjSrvGetPrjDetRes.ok) {
         this.setState({
           projectDetailsData: responseData
         });
@@ -85,7 +84,6 @@ export default class extends React.Component{
         return response.json();
       })
       .then((responseData) => {
-       
         if(expSrvgetSwaggerRes.ok) {
           if(!download) {
             this.setState({

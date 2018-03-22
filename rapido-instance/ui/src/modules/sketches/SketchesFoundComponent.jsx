@@ -22,25 +22,21 @@ export default class extends React.Component{
     this.handleChange = this.handleChange.bind(this);
     this.sortSketchCardBy = this.sortSketchCardBy.bind(this);
   }
-  
 
-    /* Method to handle search */
+  /* Method to handle search */
   handleChange(event) {   
     var queryResult=[];   
     this.props.sketches.forEach(function(sketch){   
-      if(sketch.name.indexOf(event.target.value)!=-1)   
+      if(sketch.name.toLowerCase().indexOf(event.target.value)!=-1)   
         queryResult.push(sketch);   
-      if(sketch.description.indexOf(event.target.value)!=-1)    
+      if(sketch.description.toLowerCase().indexOf(event.target.value)!=-1)    
         queryResult.push(sketch);   
-
     });   
     queryResult = queryResult.filter((sketch, index, self) =>   
       index === self.findIndex((s) => (   
         s.id === sketch.id && s.name === sketch.name    
       ))    
     )   
-    console.log(queryResult)
-
     this.setState({   
       query: event.target.value,    
       filteredData: queryResult   

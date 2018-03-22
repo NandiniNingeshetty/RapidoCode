@@ -145,11 +145,10 @@ export default class extends React.Component{
             text: 'Profile',
             onClick: event => { this.handleProfileClick(); }
           },
-          // TODO - Removing Team Changes
-          //{
-          //  text: 'Teams',
-          //  onClick: event => { this.handleTeamsClick(); }
-          //},
+          {
+            text: 'Teams',
+            onClick: event => { this.handleTeamsClick(); }
+          },
           {
             text: 'Logout',
             onClick: event => { this.handleLogout(); }

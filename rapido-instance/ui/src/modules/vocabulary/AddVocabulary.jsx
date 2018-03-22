@@ -16,7 +16,7 @@ export default class extends React.Component{
   render() {  
     return (
         <div className="vocabulary-panel">
-        <div className="view-text vocabulary-text"><i className="fa fa-audio-description"></i>&nbsp;&nbsp;VOCABULARY&nbsp;&nbsp;
+        <div className="view-text vocabulary-text"><img src="/ui/src/images/bitmap.png" />&nbsp;&nbsp;VOCABULARY&nbsp;&nbsp;
         {/*<Popover
             content="This is vocabulary tab"
             placement="right"
@@ -28,10 +28,11 @@ export default class extends React.Component{
        
 
         </div>
-        <br/>
-        <span className="xs-pl-10"><TextInput size="medium" placeholder="Add New" className="vocabulary-textbox" />
-        <i className="fa fa-plus"></i>
-        </span>
+        
+        <div className="xs-pt-10">
+        <div className="col-md-10"><TextInput size="medium" placeholder="Add New" className="vocabulary-textbox" /></div>
+        <i className="fa fa-plus vocabulary-plus-icon"></i>
+        </div>
         
           </div>
     );

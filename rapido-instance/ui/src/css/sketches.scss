@@ -1105,7 +1105,7 @@
     
     .vocabulary-textbox {
         background-color: #ffffff;
-        width: 150px;
+        width: 135px;
         z-index: 10;
         font-family: Helvetica;
         font-size: 12px;
@@ -1119,4 +1119,10 @@
         height: 30px;
         border-color: 1px solid #cfcfcf;
         border-radius: 5px;
+    }
+    
+    .vocabulary-plus-icon {
+        color: #4a90e2;
+        font-size: 16px;
+        padding-top: 6px;
     }

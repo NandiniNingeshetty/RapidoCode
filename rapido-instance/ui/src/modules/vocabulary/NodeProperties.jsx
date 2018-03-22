@@ -21,7 +21,7 @@ export default class extends React.Component {
     render() {
         return (
             <div>
-                <div className="col-md-8 pull-right Rectangle-8-Copy">                    
+                {/* <div className="col-md-8 pull-right Rectangle-8-Copy">                    
                     <div className="form-group">
                         <label className="Node-Properties">Node Properties</label>
                     </div>
@@ -43,9 +43,11 @@ export default class extends React.Component {
                     </div>
                     <Button className="UPDATE pull-right"  variant="regular" primary>UPDATE</Button>
                     <Button className="Cancel pull-right">Cancel</Button>
-                </div> 
-                <div>
-                    
+                </div>  */}                
+                <div className="col-md-8 pull-right Rectangle-8-Copy-screen-2">                    
+                    <div className="form-group">
+                        <label className="Node-Properties">Node Properties</label>
+                    </div>
                 </div>               
             </div>
 

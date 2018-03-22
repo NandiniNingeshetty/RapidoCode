@@ -21,6 +21,7 @@ import TeamDetails from './modules/team/teamDetails'
 import AuthComponent from './modules/login/AuthComponent'
 import RouteNotFoundComponent from './modules/404Component'
 import { Router, Route, browserHistory,IndexRoute, Redirect } from 'react-router'
+import NodeProperties from './modules/vocabulary/NodeProperties';
 
 const checkSession = (nextState, replace) => {
   let userObject = JSON.parse(sessionStorage.getItem('user'));
@@ -51,6 +52,7 @@ render(<Router history={browserHistory}>
     <Route path="/team" component={TeamDetails} onEnter={checkSession}/>
     <Route path="/share" component={ShareProject} onEnter={checkSession}></Route>
     <Route path="/vocabulary" component={VocabEditor} onEnter={checkSession}></Route>
+    <Route path="/Node" component={NodeProperties} onEnter={checkSession}></Route>
     <Route path="/export" component={Export} onEnter={checkSession}></Route>
     <Route path="/404" component={RouteNotFoundComponent}></Route>
   </Route>

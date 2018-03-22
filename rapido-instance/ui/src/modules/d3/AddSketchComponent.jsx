@@ -50,6 +50,13 @@ export default class extends React.Component{
       
       })
     }
+    }else{
+      this.setState({
+        projectInfo: {
+          projectName: "",
+          projectDesc: ""
+        }
+      })
     }
    // sessionStorage.setItem('updateMode', false)
   }

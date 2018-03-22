@@ -9,20 +9,18 @@ export default class extends React.Component{
   constructor(props) {
     super(props);
   }
-
   
-
   /* Render method */
   render() {  
     return (
         <div className="vocabulary-panel">
         <div className="view-text vocabulary-text"><img src="/ui/src/images/bitmap.png" />&nbsp;&nbsp;VOCABULARY&nbsp;&nbsp;
-        {/*<Popover
+        <Popover
             content="This is vocabulary tab"
             placement="right"
-            isOpen></Popover> */
-        }
-        <i className="fa  fa-question-circle vocabulary-icon"></i>
+            >
+        
+        <i className="fa fa-question-circle vocabulary-icon"></i></Popover>
             
 
        
@@ -31,7 +29,7 @@ export default class extends React.Component{
         
         <div className="xs-pt-10">
         <div className="col-md-10"><TextInput size="medium" placeholder="Add New" className="vocabulary-textbox" /></div>
-        <i className="fa fa-plus vocabulary-plus-icon"></i>
+        <i className="fa fa-plus vocabulary-plus-icon" onClick={this.togglePopover}></i>
         </div>
         
           </div>

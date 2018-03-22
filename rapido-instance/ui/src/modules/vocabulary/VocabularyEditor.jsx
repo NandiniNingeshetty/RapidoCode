@@ -14,6 +14,7 @@ import { ThemeProvider } from 'mineral-ui/themes';
 import Dropdown from 'mineral-ui/Dropdown';
 import  Popover from 'mineral-ui/Popover';
 import  AddVocabulary from './AddVocabulary';
+import NodeProperties from './NodeProperties';
 
 export default class extends React.Component{
   
@@ -321,7 +322,7 @@ Sketch
 </div>
 
 <div className="col-md-4">
-Node
+<NodeProperties/>
 </div>
 </div>
 </div>

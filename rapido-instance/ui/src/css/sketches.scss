@@ -846,8 +846,8 @@
     }
     
     .Rectangle-5 {
-        width: 506px;
-        height: 30px;
+        width: 506px !important;
+        height: 30px !important;
         border-radius: 5px;
         background-color: #ffffff;
         border: solid 1px #cfcfcf;
@@ -1009,6 +1009,13 @@
         letter-spacing: normal;
         text-align: left;
         color: #4a4a4a;
+    }
+    
+    .Rectangle-8-Copy {
+        width: 282px;
+        height: 896px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
     }
     
     shared-section {

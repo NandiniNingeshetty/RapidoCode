@@ -231,6 +231,15 @@ export default class extends React.Component{
                   <button className="btn btn-default Rectangle-5-Copy-2">
                     <label className="Shared">Shared</label>
                   </button>
+                  {/* <label>
+                  <input type="checkbox">
+                    <span>
+                    <span>Off</span>
+                    <span>On</span>
+                    <a></a>
+                    </span>
+                  </input>
+                  </label> */}
               </div> 
             </div>
             <div id="personalDIV" className="col-md-12 next-section">
@@ -239,12 +248,13 @@ export default class extends React.Component{
               <input
                   type="text"
                   value={this.state.projectInfo.projectName}
-                  className="Rectangle-5"
+                  className="Rectangle-5 form-control"
                   id="InputprojectName"
                   name="projectName"
                   ref="projectName"
                   onChange={this.handleChange.bind(this, 'projectName')}
-                  required/>
+                  required/>                 
+
                   <div className="error" id="projectNameError" ></div>
               </div>
               <div className="form-group">

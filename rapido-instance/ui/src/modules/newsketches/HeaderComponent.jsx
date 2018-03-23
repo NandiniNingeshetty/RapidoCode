@@ -17,8 +17,8 @@ export class HeaderComponent extends React.Component {
 
     return (
     
-      <div className="row border-bottom">
-    <div className="col-md-12">
+      <div className="row xs-pl-35">
+    <div className="col-md-12 border-bottom">
     <div className="col-md-2 sketches-text">
      Sketches
     </div>

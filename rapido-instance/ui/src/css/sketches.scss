@@ -241,7 +241,7 @@
         /* height: 400px;*/
         .next-section {
             margin-top: 20px;
-            margin-right: 15px;
+            margin-right: 10px;
             button {
                 width: 80px;
             }
@@ -629,15 +629,15 @@
     .wrapper-icon {
         position: absolute;
         top: -7px;
-        left: 112px;
+        left: 80px;
         display: none;
         z-index: 10;
     }
     
     .wrapper-oval {
         background-color: #fff;
-        border-radius: 100%;
-        width: 3px;
+        border-radius: 50%;
+        width: 40px;
         padding: 12px;
         margin-right: 10px;
         z-index: 10;
@@ -817,14 +817,15 @@
         text-align: left;
         color: #4a4a4a;
         padding-left: 0px;
+        margin-left: -12px;
     }
     
     .border-bottom {
         border-bottom: 1px solid #d4d4d4;
         padding-top: 30px;
         padding-bottom: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
+        /*margin-left: 10px;
+        margin-right: 10px;*/
     }
     
     .xs-pr-15 {
@@ -860,6 +861,7 @@
         letter-spacing: normal;
         text-align: left;
         color: #4a4a4a;
+        padding-left: 10px;
     }
     
     .Description {
@@ -883,7 +885,19 @@
         background-color: #ffffff;
         border: solid 1px #cfcfcf;
         font-family: Helvetica;
-        font-size: 12px;
+        font-size: 14px !important;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4a4a4a
+    }
+    
+    .Rectangle-5-Copy textarea {
+        font-family: Helvetica;
+        font-size: 14px !important;
         font-weight: normal;
         font-style: normal;
         font-stretch: normal;
@@ -997,13 +1011,131 @@
         text-align: left;
         color: #4a4a4a;
     }
-   
+    
     .Rectangle-8-Copy {
         width: 282px;
         height: 896px;
         background-color: #ffffff;
         border: 1px solid #000000;
-      }
+    }
+    
+    shared-section {
+        display: none;
+    }
+    
+    .vocabulary-header-title {
+        font-family: Helvetica;
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4a4a4a;
+    }
+    
+    .vocabulary-header-shared {
+        font-family: Helvetica;
+        font-size: 10px;
+        font-weight: normal;
+        font-style: oblique;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #9b9b9b;
+    }
+    
+    .vocabulary-main-content {
+        min-height: 500px
+    }
+    
+    .vocabulary-button-preview {
+        cursor: pointer;
+        height: 24px;
+        border-radius: 5px;
+        background-color: #4a90e2;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 2;
+        letter-spacing: normal;
+        text-align: left;
+        color: #ffffff;
+    }
+    
+    .vocabulary-button-version {
+        cursor: pointer;
+        height: 24px;
+        border-radius: 5px;
+        background-color: #fff;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 2;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4a4a4a;
+        border-color: #cfcfcf;
+    }
+    
+    .vocabulary-header {
+        height: 48px;
+        border-bottom: 1px solid #cfcfcf;
+    }
+    
+    .vocabulary-panel {
+        background-color: #ffffff;
+        min-height: 500px;
+    }
+    
+    .vocabulary-text {
+        height: 30px;
+        padding: 6px;
+        padding-left: 10px;
+        border-bottom: 1px solid #cfcfcf;
+        padding-top: 7px
+    }
+    
+    .xs-pt-10 {
+        padding-top: 10px;
+    }
+    
+    .vocabulary-icon {
+        font-size: 15px;
+        color: #4a90e2;
+        cursor: pointer;
+    }
+    
+    .vocabulary-textbox {
+        background-color: #ffffff;
+        width: 135px;
+        z-index: 10;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 2;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4a4a4a;
+        height: 30px;
+        border-color: 1px solid #cfcfcf;
+        border-radius: 5px;
+    }
+    
+    .vocabulary-plus-icon {
+        color: #4a90e2;
+        font-size: 16px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
     
     .Node-Properties {
         margin-top: 5px;
@@ -1018,9 +1150,9 @@
         letter-spacing: normal;
         text-align: left;
         color: #4a4a4a;
-      }
-
-      .ROOT-NAME {
+    }
+    
+    .ROOT-NAME {
         width: 73px;
         height: 14px;
         font-family: Helvetica;
@@ -1032,17 +1164,17 @@
         letter-spacing: normal;
         text-align: left;
         color: #9b9b9b;
-      }
-
-      .Rectangle-5-copy-4 {
+    }
+    
+    .Rectangle-5-copy-4 {
         width: 246px;
         height: 30px;
         border-radius: 5px;
         background-color: #ffffff;
         border: solid 1px #cfcfcf;
-      }
-
-      .ROOT-PATH {
+    }
+    
+    .ROOT-PATH {
         width: 69px;
         height: 14px;
         font-family: Helvetica;
@@ -1054,17 +1186,17 @@
         letter-spacing: normal;
         text-align: left;
         color: #9b9b9b;
-      }
-
-      .Rectangle-5-Copy-2 {
+    }
+    
+    .Rectangle-5-Copy-2 {
         width: 246px;
         height: 30px;
         border-radius: 5px;
         background-color: #ffffff;
         border: solid 1px #cfcfcf;
-      }
-
-      .Cancel {
+    }
+    
+    .Cancel {
         width: 72px;
         height: 30px;
         font-family: Helvetica;
@@ -1079,9 +1211,9 @@
         background-color: transparent;
         border: none;
         margin-right: 2px;
-      }
-
-      .UPDATE {
+    }
+    
+    .UPDATE {
         width: 72px;
         height: 30px;
         font-family: Helvetica;
@@ -1095,28 +1227,26 @@
         color: #ffffff;
         border-radius: 5px;
         background-color: #4a90e2;
-      }
-
-      .Rectangle-5-Copy-3 {
+    }
+    
+    .Rectangle-5-Copy-3 {
         width: 72px;
         height: 30px;
         border-radius: 5px;
         background-color: #4a90e2;
-        
-      }
-
-      .Rectangle-4 {
-        width: 7px;
-        height: 896px;
-        background-color: #d8d8d8;
-      }
-
-      .Rectangle-8-Copy-screen-2 {
+    }
+    
+    .Rectangle-8-Copy-screen-2 {
         width: 402px;
         height: 896px;
         background-color: #ffffff;
-        border: 1px solid #000000;
-      }
-
-
-      
+    }
+    
+    .main-content-padding {
+        padding-left: 40px;
+        padding-right: 40px
+    }
+    
+    .xs-pl-35 {
+        padding-left: 35px;
+    }

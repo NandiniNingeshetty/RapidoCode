@@ -150,7 +150,7 @@ export class SketchesComponent extends React.Component {
                     {headerComponent}
                 
                 <br />
-                <div className="row xs-pl-15">
+                <div className="row">
                     {sortComponent}
                 </div>
                 <br />

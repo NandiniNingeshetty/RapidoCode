@@ -157,6 +157,14 @@ export default class extends React.Component{
   /* Method to handle Form Input change */
   handleChange(field, event) {
     event.target.classList.add('active');
+    if(this.state.projectInfo == undefined){
+      this.state = {
+        projectInfo: {
+          projectName: '',
+          projectDesc: ''        
+        }
+      }
+    }
     if(event.target.name === 'projectName') {
       this.setState({
         projectInfo: {

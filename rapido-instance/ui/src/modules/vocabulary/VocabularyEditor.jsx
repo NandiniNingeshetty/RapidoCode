@@ -14,12 +14,14 @@ import { ThemeProvider } from 'mineral-ui/themes';
 import Dropdown from 'mineral-ui/Dropdown';
 import  Popover from 'mineral-ui/Popover';
 import  AddVocabulary from './AddVocabulary';
-import NodeProperties from './NodeProperties';
-
+import NodeProperties from '../d3/NodeDetailsComponent';
+import CRUDSketch from '../CRUDSketch';
+var thisComponent;
 export default class extends React.Component{
   
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    thisComponent = this;
     this.state = {
       searchColumn: 'all',
       selectedSketch: {},
@@ -42,7 +44,7 @@ export default class extends React.Component{
               (value, { rowData }) => (
                 <span
                   className="remove fa fa-times"
-                  onClick={() => this.onRemove(rowData.name)} style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer' }}
                 >
                   
                 </span>
@@ -52,120 +54,29 @@ export default class extends React.Component{
           visible: true
         }
       ],
-      vocabularyData: []
+      vocabularyData: [],
+      currentTreeDetails:{},
+      treedata:{},
+      crudComponent:{}
     };
 
-    this.onRow = this.onRow.bind(this);
-    this.onSearch = this.onSearch.bind(this);
-    this.onRemove = this.onRemove.bind(this);
-    this.addVocabulary = this.addVocabulary.bind(this);
   }
 
   /* Component Initialisation */
-  componentDidMount() {
+  componentWillMount() {
     this.setState({
         selectedSketch: JSON.parse(sessionStorage.getItem('selectedSketch'))
     });
-    let prjSrvGetPrjDetRes = null;
-    ProjectService.getProjectDetails(sessionStorage.getItem('sketchId'))
-    .then((response) => {
-      prjSrvGetPrjDetRes = response.clone();
-      return response.json();
-    })
-    .then((responseData) => {
-      if(prjSrvGetPrjDetRes.ok) {
-        let tempVocabData = [];
-        responseData.vocabulary.map(function (vocab) {
-          tempVocabData.push({"name":vocab});
-        }, this);
-        this.setState({
-          vocabularyData: tempVocabData
-        });
-      } else {
-        showAlert(this, (responseData.message) ? responseData.message : "Error occured");
-        if(prjSrvGetPrjDetRes.status == 401) {
-          sessionStorage.removeItem('user')
-          sessionStorage.removeItem('token')
-        }
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
   }
-
-  /* Method to remove vocabulary */
-  onRemove(name) {
-    const vocabularyData = cloneDeep(this.state.vocabularyData);
-    const idx = findIndex(vocabularyData, { name });
-    let prjSrvDelVocabRes = null;
-    ProjectService.deleteVocabularyFromProject(name, this.state.selectedSketch["projectid"])
-    .then((response) => {
-      prjSrvDelVocabRes = response.clone();
-      return response.json();
+  getNodeDetails(component){
+    thisComponent.setState({
+      currentTreeDetails:component.state.treeEditDetails,
+      treedata:component.state.treedata,
+      crudComponent:component,
     })
-    .then((responseData) => {
-      if(prjSrvDelVocabRes.ok) {
-        vocabularyData.splice(idx, 1);
-        this.setState({ vocabularyData });
-      } else {
-        showAlert(this, (responseData.message) ? responseData.message : "Error occured");
-        if(prjSrvDelVocabRes.status == 401) {
-          sessionStorage.removeItem('user')
-          sessionStorage.removeItem('token')
-        }
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-  }
-
-  onRow(row, { rowIndex, rowKey }) {
-    return {
-      className: rowIndex % 2 ? 'list-odd-row' : 'list-even-row'
-    };
-  }
-
-  /* Method to search vocabulary */
-  onSearch(query) {
-    this.setState({
-      query: query
-    });
-  }
-
-  /* Method to add vocabulary */
-  addVocabulary (e) {
-    e.preventDefault();
-    let prjSrvAddVocabRes = null;
-    let vocabArray = [];
-    vocabArray.push(this.state.query.all);
-    ProjectService.addVocabularyToProject(vocabArray, this.state.selectedSketch["projectid"])
-    .then((response) => {
-      prjSrvAddVocabRes = response.clone();
-      return response.json();
-    })
-    .then((responseData) => {
-      if(prjSrvAddVocabRes.ok) {
-        let tempVocabArr = this.state.vocabularyData;
-        tempVocabArr.push({"name":this.state.query.all});
-        this.setState({
-          query: {},
-          vocabularyData: tempVocabArr
-        })
-      } else {
-        showAlert(this, (responseData.message) ? responseData.message : "Error occured");
-        if(prjSrvAddVocabRes.status == 401) {
-          sessionStorage.removeItem('user')
-          sessionStorage.removeItem('token')
-        }
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-  }
-
+    }
+ 
+ 
   /* Render method */
   render() {
     let addOption, loadedComponent;
@@ -186,19 +97,23 @@ export default class extends React.Component{
         ]
       }
     ]
-
+   console.log(this.state.selectedSketch)
     if(this.state && this.state.selectedSketch) {
 
       const { searchColumn, columns, vocabularyData, query } = this.state;
       const resolvedColumns = resolve.columnChildren({ columns });
 
       /* Project Details Section */
-      var projectHeader = (this.state.selectedSketch) ? <div>
+     /* var projectHeader = (this.state.selectedSketch) ? <div>
         <h2>{this.state.selectedSketch["name"]}</h2>
         <h3>{this.state.selectedSketch["description"]}</h3>
-        </div> : null;
-
-      
+        </div> : null;*/
+        var sketchName = "";
+        var sketchDesc = "";
+        if(this.state.selectedSketch){
+          sketchName = this.state.selectedSketch["name"];
+          sketchDesc = this.state.selectedSketch["description"];
+        }      
       const resolvedRows = resolve.resolve({
         columns: resolvedColumns,
         method: resolve.nested
@@ -237,7 +152,7 @@ export default class extends React.Component{
         </div>
 
       if(query.all) {
-        addOption = <input className="btn btn-default" value="Add" type="submit" onClick={(e) => this.addVocabulary(e)}/>
+        addOption = <input className="btn btn-default" value="Add" type="submit"/>
       } else {
         addOption = <input className="btn btn-default disabled" value="Add" type="button" />
       }
@@ -284,7 +199,7 @@ export default class extends React.Component{
       <div className="col-md-12">
   
         <div className=" col-md-6 pull-left ">
-        <span className="vocabulary-header-title">Pets</span>
+        <span className="vocabulary-header-title">{sketchName}</span>
         <span className="vocabulary-header-shared xs-pl-15">Shared with</span>
          <span className="xs-pl-10"><span className="green-status">Apps Team</span>
          &nbsp;&nbsp;<span className="red-status">Dev Team</span>
@@ -305,24 +220,24 @@ export default class extends React.Component{
       <div className="row">
       <div className="col-md-12">
      <div className="col-md-6 pull-left view-text">
-      This is API Mangement tool
+      {sketchDesc}
      </div>
      </div>
       </div>
       </div>
-<div className="row">
-<div className="col-md-12">
+<div className="row white-bg">
+<div className="">
 
 <div className="col-md-2">
-<AddVocabulary/>
+<AddVocabulary selectedSketch={this.state.selectedSketch} />
 </div>
 
 <div className="col-md-6">
-Sketch
+<CRUDSketch getNodeDetails={this.getNodeDetails} />
 </div>
 
 <div className="col-md-4">
-<NodeProperties/>
+<NodeProperties nodeData={this.state.currentTreeDetails} treedata={this.state.treedata} component={this.state.crudComponent}/>
 </div>
 </div>
 </div>

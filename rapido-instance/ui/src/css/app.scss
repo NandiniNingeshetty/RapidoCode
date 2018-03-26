@@ -22,3 +22,72 @@
         margin-top: 5px;
     }
 }
+
+
+/* Skecthes CSS need to mpve to skecthes file */
+
+.main-content-padding {
+    padding-left: 40px;
+    padding-right: 40px
+}
+
+.xs-pl-35 {
+    padding-left: 35px;
+}
+
+.vocabulary-list {
+    list-style-type: none;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.vocabulary-list>li {
+    width: 170px;
+    height: 25px;
+    /*text-indent: -20px;*/
+    font-family: Helvetica;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #4a4a4a;
+    cursor: pointer;
+    margin-left: -6px;
+}
+
+.white-bg {
+    background-color: white;
+}
+
+
+/*.vocabulary-list>li:before {
+    content: " -  ";
+    text-indent: -5px;
+}*/
+
+.vocabulary-list>li:hover {
+    background-color: #4a90e2;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.vocabulary-div {
+    width: 165px;
+}
+
+.vocabulary-text-div {
+    width: 150px;
+    display: inline-block;
+}
+
+.vocabulary-hidden {
+    visibility: hidden;
+}
+
+.vocabulary-list>li:hover .vocabulary-hidden {
+    visibility: visible;
+}

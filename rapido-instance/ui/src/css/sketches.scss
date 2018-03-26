@@ -1092,12 +1092,13 @@
     .vocabulary-panel {
         background-color: #ffffff;
         min-height: 500px;
+        border-right: 1px solid #cfcfcf;
     }
     
     .vocabulary-text {
         height: 30px;
         padding: 6px;
-        padding-left: 10px;
+        padding-left: 14px;
         border-bottom: 1px solid #cfcfcf;
         padding-top: 7px
     }
@@ -1114,7 +1115,7 @@
     
     .vocabulary-textbox {
         background-color: #ffffff;
-        width: 135px;
+        width: 140px;
         z-index: 10;
         font-family: Helvetica;
         font-size: 12px;
@@ -1240,13 +1241,4 @@
         width: 402px;
         height: 896px;
         background-color: #ffffff;
-    }
-    
-    .main-content-padding {
-        padding-left: 40px;
-        padding-right: 40px
-    }
-    
-    .xs-pl-35 {
-        padding-left: 35px;
     }

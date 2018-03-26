@@ -13,18 +13,19 @@ import TextInput from 'mineral-ui/TextInput';
 
 export default class extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
-
+    componentDidMount(){
+        console.log(this.props.nodeData)
+    }
+   
 
     render() {
         return (
             <div>
                 <div className="col-md-8 pull-right Rectangle-8-Copy">                    
-                    <div className="form-group">
-                        <label className="Node-Properties">Node Properties</label>
-                    </div>
+                    
                     <div className="form-group">
                         <label className="ROOT-NAME">ROOT NAME</label>
                         <TextInput className="Rectangle-5-copy-4"

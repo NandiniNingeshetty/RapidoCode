@@ -7,6 +7,7 @@ import { browserHistory, Link } from 'react-router'
 import AlertContainer from 'react-alert'
 import {AlertOptions, showAlert} from './utils/AlertActions'
 import {showDetails, addNode, deleteNode, updateTreeData, updateProjectHeaders, addEmptySketch, loadProjectDetails, createSketch, updateSketch, updatePath, exportDesign, importDesign} from './utils/TreeActions';
+
 var component;
 
 export default class extends React.Component{
@@ -74,7 +75,8 @@ export default class extends React.Component{
     });
   }
 
-  /* Method to show selected node details */
+  /* Method to show selected node
+   details */
   showDetailsSection(nodeData) {
     if(nodeData.rootNode) {
       component.setState({
@@ -83,6 +85,7 @@ export default class extends React.Component{
           vocabulary: component.state.vocabulary
         }
       })
+      this.props.getNodeDetails(component);
     } else {
       component.setState({
         treeEditDetails: {
@@ -121,20 +124,7 @@ export default class extends React.Component{
     createSketch(component, savedVocabulary, ProjectService, browserHistory)
   }
 
-  /* Method to Update Sketch Details */
-  updateSketchDetails() {
-    component.setActiveStatus(component.state.treedata);
-    let savedVocabulary;
-    let userDetails = JSON.parse(sessionStorage.getItem('userInfo'));
-    let VocabularyStored = sessionStorage.getItem('vocabularyInfo')
-    if(VocabularyStored) {
-      savedVocabulary = JSON.parse(VocabularyStored);
-    } else {
-      savedVocabulary = []
-    }
-
-    updateSketch(component, savedVocabulary, ProjectService, browserHistory)
-  }
+  
 
   /* Method to Export Sketch Data */
   exportSketchInfo() {
@@ -183,20 +173,20 @@ export default class extends React.Component{
     var projectNodeDetails, saveSketch, createProjectOption, loadedComponent
     if(this.state) {
       
-      projectNodeDetails = <div className="col-xs-12 node-details-section">
+      /*projectNodeDetails = <div className="col-xs-12 node-details-section">
           <NodeDetails nodeData={this.state.treeEditDetails} updatedData={(val,mode,data)=>updateTreeData(val, mode, this)}/>
-        </div>
+        </div>*/
 
       /* Create/Update Project Section */
-      if(this.state.inListDetails) {
+      /*if(this.state.inListDetails) {
         if( !this.state.isProjectEmpty && !this.state.isNodeEditMode) {
           createProjectOption = <div>
-              {/* TODO delete project */}
+            
               <button className="btn btn-default pull-right" onClick={this.updateSketchDetails}> Update Sketch </button>
             </div>
         } else {
           createProjectOption = <div>
-              {/* TODO delete project */}
+      
               <button className="btn btn-default pull-right disabled"> Update Sketch </button>
             </div>
         }
@@ -206,11 +196,11 @@ export default class extends React.Component{
         } else {
           createProjectOption = <button className="btn btn-default pull-right disabled" > Create Project </button> 
         }
-      }
+      }*/
       
-      saveSketch = <div className="col-md-12 col-sm-12 text-right save-sketch-section">
+     /* saveSketch = <div className="col-md-12 col-sm-12 text-right save-sketch-section">
         {createProjectOption}
-      </div>      
+      </div>   */   
 
       loadedComponent = 
         <div className={"row " + (this.state.projectDetails["access"] == "READ" ? 'sketchProjectDisabled' : '')}>
@@ -237,7 +227,6 @@ export default class extends React.Component{
                 } }
               }/>
           </div>
-          {projectNodeDetails}
           <div>
             {this.props.children}
           </div>
@@ -249,16 +238,6 @@ export default class extends React.Component{
 
     return (<div>
       <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
-      <div className="titleContainer sketchPage">
-        {projectHeader}
-      </div>
-      <div className="tabsContainer">
-        <ul className="tabs">
-          <li className={this.props.location.pathname === '/vocabulary' ? 'tab active-tab': 'tab'}><Link to="/vocabulary">VOCABULARY</Link></li>
-          <li className={this.props.location.pathname === '/nodes/edit' ? 'tab active-tab': 'tab'}><Link to="/nodes/edit">SKETCH</Link></li>
-          <li className={this.props.location.pathname === '/export' ? 'tab active-tab': 'tab'}><Link to="/export">EXPORT</Link></li>
-        </ul>
-      </div>
       <div className="col-md-12 sketch-list-wrapper">
         {loadedComponent}
       </div>

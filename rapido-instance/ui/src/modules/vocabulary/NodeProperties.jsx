@@ -15,10 +15,13 @@ import  Popover from 'mineral-ui/Popover'
 
 export default class extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
-
+    componentDidMount(){
+        console.log(this.props.nodeData)
+    }
+   
 
     render() {
         return (

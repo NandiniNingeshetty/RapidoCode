@@ -1,10 +1,12 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
 import ReactDOM from 'react-dom'
-import AutoSuggest from '../vocabulary/VocabularySuggest.jsx'
+import AutoSuggest from '../vocabulary/VocabularySuggest.jsx';
+import Button from 'mineral-ui/Button';
+import TextInput from 'mineral-ui/TextInput';
 
-export default class extends React.Component{
-  
+export default class extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -25,13 +27,13 @@ export default class extends React.Component{
 
   /* Component Mount after render */
   componentDidMount() {
-    let scrollViewRef = ReactDOM.findDOMNode(this.refs.rootNode)
-    scrollViewRef.scrollIntoView();
+   /* let scrollViewRef = ReactDOM.findDOMNode(this.refs.rootNode)
+    scrollViewRef.scrollIntoView();*/
   }
 
   /* Method to handle Form Input change */
   handleChange(info, field) {
-    if(info === 'name') {
+    if (info === 'name') {
       this.setState({
         rootData: {
           name: field.target.value,
@@ -39,24 +41,45 @@ export default class extends React.Component{
         }
       });
       this.state.rootUpdatedData.name = field.target.value;
-    } else if (field === 'rootPath') {
+    } else if (info === 'rootPath') {
       this.setState({
         rootData: {
           name: this.state.rootData.name,
-          rootPath: info
+          rootPath: field.target.value
         }
-        
+
       });
-      this.state.rootUpdatedData.rootPath = info;
+      this.state.rootUpdatedData.rootPath = field.target.value;
     }
-    
+
     this.props.setEditDetails(this.state.rootUpdatedData)
   }
 
   /* Render Method */
   render() {
-    return(
-      <div className="col-md-12 parent-node-edit-section" id="rootNodeSelection">
+    return (
+
+    <div>
+      
+      <div className="form-group">
+        <label className="ROOT-NAME">ROOT NAME</label>
+        <TextInput className="Rectangle-5-copy-4"
+          placeholder="ROOT"
+          required
+          onChange={(e) => this.handleChange('name', e)}
+        />
+      </div>
+      <div className="form-group">
+        <label className="ROOT-PATH">ROOT PATH</label>
+        <TextInput className="Rectangle-5-copy-4"
+          placeholder="/ROOT"
+          onChange={(e) => this.handleChange('rootPath',e)}
+          required
+        />
+      </div>
+     </div>
+      
+        /* <div className="col-md-12 parent-node-edit-section" id="rootNodeSelection">
         <form className="col-md-6" ref='rootNode'>
           <div className="col-md-9">
             <div className="form-group">
@@ -79,7 +102,8 @@ export default class extends React.Component{
           
         </form>
         
-      </div>
-    )
-  }
-}
+      </div>*/
+
+        )
+      }
+    }

@@ -32,13 +32,13 @@ export default class extends React.Component{
   /* Method to Update Child data */
   updateChildData(childData, jsonStatus) {
     if(childData.url && childData.apiList.length>0 && !jsonStatus) {
-      this.props.updatedData({
+      updateTreeData({
         childNodeData: childData
-      },false)
+      },false,this.props.component)
     } else {
-      this.props.updatedData({
+      updateTreeData({
         childNodeData: childData
-      },true)
+      },true,this.props.component)
     }
     
   }

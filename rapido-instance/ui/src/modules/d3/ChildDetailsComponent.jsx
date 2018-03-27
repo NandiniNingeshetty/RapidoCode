@@ -9,6 +9,10 @@ import {showAlert, AlertOptions} from '../utils/AlertActions'
 import 'brace/mode/json'
 import 'brace/theme/github'
 import {updateAPIChange, updateCheckedStatus, updateAPISelection} from '../utils/ChildNodeActions';
+import Button from 'mineral-ui/Button';
+import TextInput from 'mineral-ui/TextInput';
+import TextArea from 'mineral-ui/TextArea';
+import  Popover from 'mineral-ui/Popover'
 
 export default class extends React.Component{
 
@@ -20,7 +24,7 @@ export default class extends React.Component{
         url: ''
       },
       apiStatus: "GET",
-      checkedStatus: false,
+      checkedStatus: true,
       options : [
         { apiType: 'GET', label: 'GET' , id:'', completed: false, request: '', response: '', summary: '' },
         { apiType: 'POST', label: 'POST', id:'', completed: false, request: '', response: '', summary: '' },
@@ -43,8 +47,8 @@ export default class extends React.Component{
 
   /* Component Mount after render */
   componentDidMount() {
-    let scrollViewRef = ReactDOM.findDOMNode(this.refs.childNode)
-    scrollViewRef.scrollIntoView();
+   /* let scrollViewRef = ReactDOM.findDOMNode(this.refs.childNode)
+    scrollViewRef.scrollIntoView();*/
   }
 
   /* Component Initialisation */
@@ -76,6 +80,7 @@ export default class extends React.Component{
   /* Method to select API from dropdown */
   selectAPI(val) {
     updateAPISelection(val, this, event, showAlert)
+    updateCheckedStatus(val,this)
   }
 
   /* Method to check/uncheck node association */
@@ -127,10 +132,8 @@ export default class extends React.Component{
 
      this.state.options.map(function (todo, i) {
       if(todo.label === this.state.apiStatus) {
-        checkBoxSection = <div key={i}>
-          Associate <input type="checkbox" checked={todo.completed} onChange={this.bindAPI.bind(this,todo)}/>
-        </div>
-        if(todo.completed) {
+       
+        //if(todo.completed) {
           if(!this.state.requestValue && todo.request) {
             this.state.requestValue = todo.request;
           }
@@ -153,26 +156,21 @@ export default class extends React.Component{
             this.state.currentNodeId = todo.id;
           }
           if(this.state.apiStatus === 'GET') {
-            requestLabel = <h6 className="col-md-12 param-label">Request Params: </h6>
+            requestLabel = <label className="Request-Params">Request Params</label>
           } else {
-            requestLabel = <h6 className="col-md-12 param-label">Request : Application/JSON</h6>
+            requestLabel = <label className="Request-Params">Request : Application/JSON</label>
           }
-          apiPayloadSection = <div className="col-md-12 payload-type-section">
-          <div className="row">
-              <div className="col-md-12"><h6>Title:</h6></div>
-              <div className="col-md-6 summary-section">
-              <textarea rows="1" value={this.state.titleInfo} onChange={(evt) => this.handleAPIChange("title",evt)}></textarea>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12"><h6>Summary:</h6></div>
-              <div className="col-md-6 summary-section">
-                <textarea rows="3" value={this.state.summaryInfo} onChange={(evt) => this.handleAPIChange("summary",evt)}></textarea>
-              </div>
-              
-            </div>
+          apiPayloadSection = <div>
+          <div className="form-group">
+                        <label className="summary">Summary</label>
+                        <TextArea
+                            size="small"
+                            className="Rectangle-5-Copy-7" 
+                            value={this.state.summaryInfo} onChange={(evt) => this.handleAPIChange("summary",evt)}/>                       
+                    </div>
+                    <div className="form-group">
             {requestLabel}
-            <div className="col-md-6 ace-editor-wrapper">
+            <div className="ace-editor-box">
               <AceEditor
                 mode="json"
                 theme="github"
@@ -191,33 +189,14 @@ export default class extends React.Component{
                 }}
               />
             </div>
-            <div className="col-sm-12 visible-sm ace-sample-wrapper">
-              <span className="info-label">Sample Valid Response Format</span>
-              <AceEditor
-                mode="json"
-                theme="github"
-                className="col-md-12"
-                height="75px"
-                value={this.state.defaultValue}
-                name="defaults"
-                readOnly = {true}
-                editorProps={{$blockScrolling: true}}
-                setOptions={{
-                  tabSize: 2,
-                  fontSize: 14,
-                  showGutter: false,
-                  showPrintMargin: false,
-                  maxLines: 30
-                }}
-              />
             </div>
-            <h6 className="col-md-12 param-label">Response : Application/JSON</h6>
-              <div className="col-md-6 ace-editor-wrapper">
-                <AceEditor
+            <div className="form-group">
+                        <label className="Response-Applicati">Response: Application/JSON</label>
+                        <div  className="ace-editor-box">
+                        <AceEditor
                   mode="json"
                   theme="github"
-                  className="col-md-12"
-                  height="300px"
+                  height="200px"
                   width="100%"
                   value={this.state.responseValue}
                   onChange={(evt) => this.handleAPIChange("response",evt)}
@@ -231,58 +210,49 @@ export default class extends React.Component{
                     maxLines: 30
                   }}
                 />
-              </div>
-              <div className="col-md-5 hidden-sm ace-sample-wrapper">
-                <span className="info-label">Sample Valid Response Format</span>
-                <AceEditor
-                  mode="json"
-                  theme="github"
-                  className="col-md-12"
-                  height="100px"
-                  value={this.state.defaultValue}
-                  name="defaults"
-                  readOnly = {true}
-                  editorProps={{$blockScrolling: true}}
-                  setOptions={{
-                    tabSize: 2,
-                    fontSize: 14,
-                    showGutter: false,
-                    showPrintMargin: false,
-                    maxLines: 30
-                  }}
-                />
-              </div>
+                        </div>                    
+                    </div>
+             
           </div>
-        }
+        //}
       }
       
     }, this)
    
     return(
-      <div className="col-md-12 child-node-edit-section">
-        <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
-        <form className="col-md-12" noValidate>
-          <div className="col-md-6 path-section">
-            <AutoSuggest queryInput={this.state.childData.url} updateSuggestedDetails={(val, mode)=>this.handleURLChange(val, 'url')}/>
-          </div>
-          <div className="row col-md-12">
-            <div className="col-md-2 col-sm-6">
-              <Select
+      <div>
+ <div className="form-group">
+                        <label className="url">URL</label>
+                        <Popover
+                            content="Enter URL"
+                            placement="right">
+                            <i className="fa fa-question-circle vocabulary-icon"></i>
+                        </Popover>
+                        <div className="url-text-wrapper">
+                            <div className="url-text"><TextInput size="small" className="url-text"
+                                defaultValue="/"
+                                
+                                onChange={(evt) => this.handleURLChange(evt.target.value,'url')}
+                                required
+                            /></div>
+                            <div className="bitmap-img"><img src="/ui/src/images/bitmap.png" /> </div>
+                        </div>                 
+                    </div>
+                    <div className="form-group">
+                        <label className="Request-Type">Request Type</label>
+                        <Select
                 name="form-field-name"
                 ref='childNode'
                 value={this.state.apiStatus}
                 valueKey='apiType'
                 options={this.state.options}
                 onChange={(e) => this.selectAPI(e)}
-              />
-            </div>
-            <div className="col-md-2 col-sm-6 associate-section">
-              {checkBoxSection}
-            </div>
-          </div>
-          {apiPayloadSection}
-        </form>
-      </div>
+              />                      
+                    </div>
+                          {apiPayloadSection}
+
+        </div>
+
     )
     
   }

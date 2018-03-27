@@ -42,7 +42,7 @@ export default class extends React.Component{
     if(sketchId === 'null') {
       addEmptySketch(this)
     } else {
-      loadProjectDetails(ProjectService, this, sketchId)
+      loadProjectDetails(ProjectService, this, sketchId);
     }
   }
 
@@ -94,6 +94,7 @@ export default class extends React.Component{
           apiExportData: component.state.apidetails
         }
       })
+      this.props.getNodeDetails(component);
     }
   }
 
@@ -201,7 +202,9 @@ export default class extends React.Component{
      /* saveSketch = <div className="col-md-12 col-sm-12 text-right save-sketch-section">
         {createProjectOption}
       </div>   */   
-
+  console.log("In crud sketch");
+  console.log(this.state.treedata);
+ 
       loadedComponent = 
         <div className={"row " + (this.state.projectDetails["access"] == "READ" ? 'sketchProjectDisabled' : '')}>
           <div className="col-xs-12">

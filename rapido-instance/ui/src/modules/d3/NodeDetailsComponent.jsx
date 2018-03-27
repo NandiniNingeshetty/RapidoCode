@@ -60,6 +60,8 @@ export default class extends React.Component{
   /* Render Method */
   render() {
     var list;
+    console.log("In node properties")
+    console.log(this.props.nodeData)
     if (this.props.nodeData) {
       if(this.props.nodeData.rootNodeData && this.props.nodeData.rootNodeData.active) {
         list = <RootDetails rootInfo={this.props.nodeData.rootNodeData} setEditDetails={(val)=>this.updateRootData(val)}/>

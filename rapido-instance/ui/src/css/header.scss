@@ -97,7 +97,7 @@
 }
 
 .logo-text {
-    vertical-align: 24px;
+    vertical-align: 8px;
     margin-left: 15px;
 }
 
@@ -307,6 +307,15 @@ a.header-logo-section {
     font-weight: bold;
     margin-bottom: 10px;
   }
+}
+
+.header-image {
+  width: 110px;
+  height: 190px;
+  margin-top: -43px;
+  margin-left: -7px;
+  position: absolute;
+  transform: rotateX(25deg);
 }
 
 .header-text {

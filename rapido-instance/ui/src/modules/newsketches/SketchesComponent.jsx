@@ -157,7 +157,7 @@ export class SketchesComponent extends React.Component {
                 <div className="row main-content xs-pl-15">
                     <label className="bold-font">Personal</label>
                 </div>
-                <div className="row">
+                <div className="row sketch-content">
                     <div className="col-md-12">
                         {content}
                     </div>
@@ -172,7 +172,7 @@ export class SketchesComponent extends React.Component {
                 </div>
 
 
-                <div className="row">
+                <div className="row shared-list">
                     <div className="col-md-12">
                         <div className="col-md-3">
 

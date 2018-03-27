@@ -12,6 +12,7 @@
 .main-content {
     overflow: auto;
     margin: 0;
+    margin-left: 0.7%;
     padding: 0;
     input.active:invalid {
         box-shadow: 0 0 5px 1px red;
@@ -42,7 +43,7 @@
 }
 
 .vocabulary-list>li {
-    width: 170px;
+    width: 155px;
     height: 25px;
     /*text-indent: -20px;*/
     font-family: Helvetica;
@@ -80,7 +81,7 @@
 }
 
 .vocabulary-text-div {
-    width: 150px;
+    width: 130px;
     display: inline-block;
 }
 

@@ -6,6 +6,8 @@ import Button from 'mineral-ui/Button';
 import TextInput from 'mineral-ui/TextInput';
 import {showDetails, addNode, deleteNode, updateTreeData, updateProjectHeaders, addEmptySketch, loadProjectDetails, createSketch, updateSketch, updatePath, exportDesign, importDesign} from '../utils/TreeActions';
 import ProjectService from './ProjectServices'
+import AlertContainer from 'react-alert'
+import {showAlert, AlertOptions} from '../utils/AlertActions'
 
 export default class extends React.Component{
 
@@ -32,13 +34,13 @@ export default class extends React.Component{
   /* Method to Update Child data */
   updateChildData(childData, jsonStatus) {
     if(childData.url && childData.apiList.length>0 && !jsonStatus) {
-      this.props.updatedData({
+      updateTreeData({
         childNodeData: childData
-      },false)
+      },false,this.props.component)
     } else {
-      this.props.updatedData({
+      updateTreeData({
         childNodeData: childData
-      },true)
+      },true,this.props.component)
     }
     
   }
@@ -60,18 +62,22 @@ export default class extends React.Component{
   /* Render Method */
   render() {
     var list;
+    console.log("In node properties")
+    console.log(this.props.nodeData)
     if (this.props.nodeData) {
       if(this.props.nodeData.rootNodeData && this.props.nodeData.rootNodeData.active) {
         list = <RootDetails rootInfo={this.props.nodeData.rootNodeData} setEditDetails={(val)=>this.updateRootData(val)}/>
       } else if (this.props.nodeData.childNodeData && this.props.nodeData.childNodeData.name){
         list = <ChildDetails apiData={this.props.nodeData.apiExportData} childInfo={this.props.nodeData.childNodeData} setChildEditDetails={(val,status)=>this.updateChildData(val,status)}/>
-      }
-    }else{
-        list = <RootDetails />
+      }/*else{
+        alert("cmg")
+        list = <RootDetails  rootInfo={this.props.nodeData.rootNodeData} setEditDetails={(val)=>this.updateRootData(val)} />
+      }*/
     } 
     return(
       
       <div className="col-md-8 pull-right Rectangle-8-Copy"> 
+         <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
       <div className="form-group">
                         <label className="Node-Properties">Node Properties</label>
                     </div> 

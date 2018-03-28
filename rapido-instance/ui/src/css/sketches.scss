@@ -1014,9 +1014,11 @@
     
     .Rectangle-8-Copy {
         width: 282px;
-        min-height: 500px;
+        min-height: 800px;
         background-color: #ffffff;
         border-left: 3px solid #d8d8d8;
+        height: 100%;
+        overflow: hidden;
     }
     
     shared-section {
@@ -1093,6 +1095,7 @@
         background-color: #ffffff;
         min-height: 500px;
         border-right: 1px solid #cfcfcf;
+        height: 100%;
     }
     
     .vocabulary-text {
@@ -1252,17 +1255,16 @@
     .xs-pl-35 {
         padding-left: 35px;
     }
-
-        
+    
     .sketch-content {
         margin-left: 0px;
     }
-
+    
     .shared-list {
         padding-bottom: 20px;
         margin-left: 0px;
     }
-
+    
     .Request-Type {
         width: 200px;
         height: 14px;
@@ -1275,35 +1277,35 @@
         letter-spacing: normal;
         text-align: left;
         color: #9b9b9b;
-      }
-
-      .url-text-wrapper {
-          width: 260px;
-      }
-
-      .bitmap-img {
-          width: 10px;
-          display: inline-block;
-      }
-
-      .url-text {
+    }
+    
+    .url-text-wrapper {
+        width: 260px;
+    }
+    
+    .bitmap-img {
+        width: 10px;
+        display: inline-block;
+    }
+    
+    .url-text {
         width: 200px;
         height: 30px;
         border-radius: 5px;
         background-color: #ffffff;
         border: solid 1px #cfcfcf;
         display: inline-block;
-      }
-
-      .Rectangle-5-Copy-8 {
+    }
+    
+    .Rectangle-5-Copy-8 {
         width: 200px;
         height: 30px;
         border-radius: 5px;
         background-color: #ffffff;
         border: solid 1px #cfcfcf;
-      }
-
-      .summary {
+    }
+    
+    .summary {
         width: 52px;
         height: 14px;
         font-family: Helvetica;
@@ -1315,18 +1317,18 @@
         letter-spacing: normal;
         text-align: left;
         color: #9b9b9b;
-      }
-
-      .Rectangle-5-Copy-7 {
-        width: 270px;
+    }
+    
+    .Rectangle-5-Copy-7 {
+        /*width: 270px;*/
         height: 50px;
         border-radius: 5px;
         background-color: #ffffff;
         border: solid 1px #cfcfcf;
-      }
-
-      .Request-Params {
-        width: 90px;
+    }
+    
+    .Request-Params {
+        width: 156px;
         height: 14px;
         font-family: Helvetica;
         font-size: 12px;
@@ -1337,9 +1339,9 @@
         letter-spacing: normal;
         text-align: left;
         color: #9b9b9b;
-      }
-
-      .Response-Applicati {
+    }
+    
+    .Response-Applicati {
         width: 158px;
         height: 14px;
         font-family: Helvetica;
@@ -1351,22 +1353,22 @@
         letter-spacing: normal;
         text-align: left;
         color: #9b9b9b;
-      }
-
-      .Rectangle-5-Copy-9 {
+    }
+    
+    .Rectangle-5-Copy-9 {
         width: 270px;
         height: 195px;
         border-radius: 5px;
         background-color: #ffffff;
         border: solid 1px #cfcfcf;
         border-left: 10px solid #e6e6e6;
-      }
-
-      .Rectangle-5-Copy-10 {
-          height: 25px;
-      }
-
-      .url {
+    }
+    
+    .Rectangle-5-Copy-10 {
+        height: 25px;
+    }
+    
+    .url {
         width: 30px;
         height: 14px;
         font-family: Helvetica;

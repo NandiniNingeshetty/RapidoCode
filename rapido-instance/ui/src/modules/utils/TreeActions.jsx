@@ -212,6 +212,8 @@ export function loadProjectDetails (ProjectService, component, sketchId) {
           exportAPI: {},
           exportStatus: true
         })
+        console.log(component)
+        component.props.getCurrentNodeDetails(component);
         sessionStorage.setItem('vocabularyInfo',JSON.stringify(tempVocabData))
       } else {
         component.showAlert(this, (responseData.message) ? responseData.message : "Error occured");

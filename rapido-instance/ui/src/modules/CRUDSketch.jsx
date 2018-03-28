@@ -43,6 +43,7 @@ export default class extends React.Component{
       addEmptySketch(this)
     } else {
       loadProjectDetails(ProjectService, this, sketchId);
+     // this.props.getNodeDetails(component);
     }
   }
 
@@ -85,7 +86,7 @@ export default class extends React.Component{
           vocabulary: component.state.vocabulary
         }
       })
-      this.props.getNodeDetails(component);
+      this.props.getCurrentNodeDetails(component);
     } else {
       component.setState({
         treeEditDetails: {
@@ -94,7 +95,7 @@ export default class extends React.Component{
           apiExportData: component.state.apidetails
         }
       })
-      this.props.getNodeDetails(component);
+      this.props.getCurrentNodeDetails(component);
     }
   }
 

@@ -68,7 +68,7 @@ export default class extends React.Component{
         selectedSketch: JSON.parse(sessionStorage.getItem('selectedSketch'))
     });
   }
-  getNodeDetails(component){
+  getCurrentNodeDetails(component){
     thisComponent.setState({
       currentTreeDetails:component.state.treeEditDetails,
       treedata:component.state.treedata,
@@ -233,7 +233,7 @@ export default class extends React.Component{
 </div>
 
 <div className="col-md-6">
-<CRUDSketch getNodeDetails={this.getNodeDetails} />
+<CRUDSketch getCurrentNodeDetails={this.getCurrentNodeDetails} />
 </div>
 
 <div className="col-md-4">

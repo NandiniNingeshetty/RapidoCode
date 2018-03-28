@@ -166,13 +166,12 @@ export function updateAPISelection(val, component, event, showAlert) {
         titleInfo:''
       })
     }*/
-
+    if(component.state.requestValue === '' || component.state.responseValue === '') {
+      showAlert(component, "Please fill the associated API details")
+      event.stopPropagation()
+    }else{
     component.setState({
       apiStatus: val.apiType,
-      paramValue: '',
-      requestValue: '',
-      responseValue: '',
-      summaryInfo: '',
-      titleInfo:''
     })
+  }
 }

@@ -57,6 +57,12 @@ export default class extends React.Component {
 
   /* Render Method */
   render() {
+    var name = "";
+    var path = ""
+    if(this.state.rootData){
+  name=this.state.rootData.name;
+  path = this.state.rootData.rootPath
+    }
     return (
 
     <div>
@@ -66,6 +72,7 @@ export default class extends React.Component {
         <TextInput className="Rectangle-5-copy-4"
           placeholder="ROOT"
           required
+          value={name}
           onChange={(e) => this.handleChange('name', e)}
         />
       </div>
@@ -73,6 +80,7 @@ export default class extends React.Component {
         <label className="ROOT-PATH">ROOT PATH</label>
         <TextInput className="Rectangle-5-copy-4"
           placeholder="/ROOT"
+          value={path}
           onChange={(e) => this.handleChange('rootPath',e)}
           required
         />

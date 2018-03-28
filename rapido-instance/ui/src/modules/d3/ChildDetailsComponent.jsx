@@ -72,6 +72,26 @@ export default class extends React.Component{
     })
   }
 
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps)
+    this.props.childInfo.apiList.map(function (type, i) {
+      this.state.options.map(function (oType, j) {
+        if(type.apiType === oType.apiType) {
+          oType.completed = true;
+          oType.id = type.apiId;
+          oType.request = this.state.apiData[oType.id][oType.apiType].request;
+          oType.response = this.state.apiData[oType.id][oType.apiType].responses;
+          oType.summary = this.state.apiData[oType.id][oType.apiType].summary;
+          oType.title = this.state.apiData[oType.id][oType.apiType].title;
+        }
+      }, this)    
+    }, this)
+
+    this.setState({
+      childData: this.props.childInfo,
+      childUpdatedData: this.props.childInfo
+    })
+  }
   /* Method to associate node details */
   associateNode(validity) {
     this.props.setChildEditDetails(this.state.childData, validity);
@@ -221,6 +241,7 @@ export default class extends React.Component{
    
     return(
       <div>
+           <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
  <div className="form-group">
                         <label className="url">URL</label>
                         <Popover

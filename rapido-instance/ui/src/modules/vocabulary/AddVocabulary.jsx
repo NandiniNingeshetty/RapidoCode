@@ -142,6 +142,7 @@ handleDelete(name){
     }
     return (
         <div className="vocabulary-panel">
+         <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
         <div className="view-text vocabulary-text"><img src="/ui/src/images/bitmap.png" />&nbsp;&nbsp;VOCABULARY&nbsp;&nbsp;
         <Popover
             content="This is vocabulary tab"

@@ -50,12 +50,17 @@ export default class extends React.Component{
   /* Tree Click Handler */
   onClick(event, eventData) {
     if( event.name === "detail" ) {
+      //alert(event.source.pId)
+      updatePath(component, event);
       showDetails(component, event);
+      
     } else if (event.name === "add") {
       addNode(component, event)
     } else if (event.name === "delete") {
+      alert(event.source.pId)
       deleteNode(component, event);
     } else if(event.name === "updatePath") {
+      //alert(event.source.pId)
       updatePath(component, event)
     }
   }
@@ -95,7 +100,7 @@ export default class extends React.Component{
           apiExportData: component.state.apidetails
         }
       })
-      this.props.getCurrentNodeDetails(component);
+     this.props.getCurrentNodeDetails(component);
     }
   }
 
@@ -203,8 +208,8 @@ export default class extends React.Component{
      /* saveSketch = <div className="col-md-12 col-sm-12 text-right save-sketch-section">
         {createProjectOption}
       </div>   */   
-  console.log("In crud sketch");
-  console.log(this.state.treedata);
+  //console.log("In crud sketch");
+  //console.log(this.state.treedata);
  
       loadedComponent = 
         <div className={"row " + (this.state.projectDetails["access"] == "READ" ? 'sketchProjectDisabled' : '')}>

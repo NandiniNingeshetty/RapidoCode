@@ -74,7 +74,7 @@ export function updateAPIChange(field, data, component) {
 export function updateCheckedStatus(val, component) {
   let validity;
 
-  component.state.options.map(function (todo, i) {
+/*component.state.options.map(function (todo, i) {
     if(todo.label === val.apiType) {
       val.completed = true;
       val.id = component.props.childInfo.pId;
@@ -89,16 +89,22 @@ export function updateCheckedStatus(val, component) {
         checkedStatus: true
       })
       validity = component.validityCheckStatus();
-      component.associateNode(!validity)
+      component.associateNode(!validity)*/
 
-    /*if(!val.completed) {
+ if(!val.completed) {
       component.state.options.map(function (todo, i) {
         if(todo.label === val.apiType) {
           val.completed = true;
           val.id = component.props.childInfo.pId;
         }
       }, component)
-      component.state.childData.apiList.push({apiType: val.apiType, apiId: component.props.childInfo.pId})
+      component.state.childData.apiList.forEach((item, index) => {
+        if (val.apiType != item.apiType) {
+          component.state.childData.apiList.push({apiType: val.apiType, apiId: component.props.childInfo.pId})
+          return
+        }
+      })
+      //component.state.childData.apiList.push({apiType: val.apiType, apiId: component.props.childInfo.pId})
       component.setState({
         childData: {
           apiList : component.state.childData.apiList,
@@ -108,7 +114,7 @@ export function updateCheckedStatus(val, component) {
       })
       validity = false;
     } else {
-      component.state.options.map(function (todo, i) {
+      /*component.state.options.map(function (todo, i) {
         if(todo.label === val.apiType) {
           val.completed = false
           val.request = '';
@@ -135,10 +141,10 @@ export function updateCheckedStatus(val, component) {
         titleInfo:'',
         checkedStatus: false
       })
-      validity = component.validityCheckStatus();
+      validity = component.validityCheckStatus();*/
     }
     
-    component.associateNode(!validity)*/
+    component.associateNode(!validity);
 }
 
 export function updateAPISelection(val, component, event, showAlert) {
@@ -166,12 +172,18 @@ export function updateAPISelection(val, component, event, showAlert) {
         titleInfo:''
       })
     }*/
-    if(component.state.requestValue === '' || component.state.responseValue === '') {
+   /* if(component.state.requestValue === '' || component.state.responseValue === '') {
       showAlert(component, "Please fill the associated API details")
       event.stopPropagation()
     }else{
     component.setState({
       apiStatus: val.apiType,
-    })
-  }
+    });
+    updateCheckedStatus(val,component)
+  }*/
+
+  component.setState({
+    apiStatus: val.apiType,
+  });
+  updateCheckedStatus(val,component)
 }

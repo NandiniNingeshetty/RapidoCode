@@ -274,12 +274,15 @@ export function updateSketch(component, savedVocabulary, ProjectService, browser
     "apidetails": component.state.exportAPI
   }
   let prjSrvUpdPrj = null;
+  console.log(JSON.stringify(projectData));
+
   ProjectService.updateProject(projectData)
     .then((response) => {
       prjSrvUpdPrj = response.clone();
       return response.json();
     })
     .then((responseData) => {
+
       if(prjSrvUpdPrj.ok) {
         component.setState({
           projectSaved: true,

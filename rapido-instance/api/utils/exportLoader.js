@@ -8,6 +8,7 @@ var _ = require("lodash");
 var exportJson =  function exportJson() {}
 // Create swagger file
 exportJson.prototype.createSwagger = function(obj, reqProtocol, reqHost) {
+  
     var swaggerDefinition = {
         info : {
             title : 'Rapido API',
@@ -43,7 +44,8 @@ exportJson.prototype.createSwagger = function(obj, reqProtocol, reqHost) {
             methods[method.toLowerCase()] = {
                 "tags" : ["api"],
                 "summary" : innerData.summary,
-                "description" :"",
+                "title" : innerData.title,
+                "description" :innerData.summary,
                 "consumes": [
                     "application/json",
                     "application/xml"
@@ -119,6 +121,105 @@ exportJson.prototype.createPostmanCollection = function(obj, baseUrl) {
         });
     });
     return  postmanSpec;
+}
+exportJson.prototype.createNewSwagger = function(obj, reqProtocol, reqHost) {
+  var swaggerDefinition = {
+    info : {
+        title : 'Rapido API',
+        version : '1.0.0',
+        description: 'Develop new apis',
+    },
+    schemes : [reqProtocol],
+    host : reqHost,
+    basePath : '/',
+    swagger : '2.0'
+};
+var swaggerSpec = swaggerDefinition;
+var paths= {};
+var outerDefinitions = {};
+_.each(obj, function(data, fullPath) {
+    var methods = {};
+    var definitions = {};
+    var properties = {};
+    var parameters = {};
+    var responses = {};
+    var found = [],          
+     rxp = /{([^}]+)}/g,
+    mat;
+    while( mat = rxp.exec( fullPath ) ) {
+          found.push(mat[1]);
+    }
+
+    console.log(found); 
+    var lastParm = fullPath.substr(fullPath.lastIndexOf('/') + 1);
+    _.each (obj[fullPath], function (innerData, method) {
+        console.log(JSON.stringify(innerData["responses"]));
+        console.log(JSON.stringify(method));
+
+        _.each (innerData.request, function (value, index) {
+            properties[index] = {"type": typeof value};
+        });
+     if (found!=[])
+     {
+        _.each (found,function(val,i){
+            parameters['name'] = val;
+            parameters['in'] = "path";
+            parameters['description'] = "";
+            parameters['required'] = true;
+            console.log(found[i]);
+
+        })
+        
+     }
+        /* parameters['name'] = lastParm;
+        parameters['in'] = "body";
+        parameters['description'] = "";
+        parameters['required'] = true;
+        parameters["schema"] = { "type": "array","items": {"$ref": "#/definitions/" + lastParm}}; */
+        if(method=='GET')
+        {
+
+            methods[method.toLowerCase()] = {
+                "tags" : ["api"],
+                "summary" : innerData.summary,
+                "description" :innerData.summary,
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters" : [ parameters ]
+            }
+
+        }else{
+            responses=innerData.responses;
+
+            methods[method.toLowerCase()] = {
+                "tags" : ["api"],
+                "summary" : innerData.summary,
+                "description" :innerData.summary,
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters" : [ parameters ],
+                responses
+            }
+
+        }
+        definitions["type"] = "object";
+        definitions["properties"] = properties;
+        outerDefinitions[lastParm] = definitions;
+    });
+    paths[fullPath.toLowerCase()]  = methods;
+    swaggerSpec["paths"] = paths;
+    swaggerSpec["definitions"] = outerDefinitions;
+
+});
+return swaggerSpec;
 }
 
 module.exports = exportJson;

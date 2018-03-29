@@ -145,10 +145,11 @@ export default class extends React.Component{
             text: 'Profile',
             onClick: event => { this.handleProfileClick(); }
           },
-          {
-            text: 'Teams',
-            onClick: event => { this.handleTeamsClick(); }
-          },
+          // TODO - Removing Team Changes
+          //{
+          //  text: 'Teams',
+          //  onClick: event => { this.handleTeamsClick(); }
+          //},
           {
             text: 'Logout',
             onClick: event => { this.handleLogout(); }
@@ -163,7 +164,7 @@ export default class extends React.Component{
         <div className="col-md-4 col-sm-3 pull-left">
           <Link className="header-logo-section" to="/sketches">
             {logoImg}
-            <span className="logo-text">CA Live API Design</span>
+            <span className="logo-text">CA API Design</span>
           </Link>
         </div>
         <div className="col-md-8 col-sm-9">

@@ -19,6 +19,7 @@ var logger = import_utils('logger.js').getLoggerObject(),
 var projectService = {
     'create': function(request, response, next) {
         var project = {};
+        project.title = request.body.title;
         project.name = request.body.name;
         project.description = request.body.description || '';
         project.createdby = request.user.id;
@@ -520,7 +521,45 @@ var projectService = {
                         "message": "Can not export sketch"
                     });
                 });
-        } else {
+        } else if(request.query.type && request.query.type == 'NewSwagger') 
+        {
+            var project = {};
+            var resObj = [];
+            project.id = request.params.id;
+
+            model.readAsync(project.id)
+                .then(function(project){
+                    debugger
+                    var apiData = project.apidetails;
+                    var swaggerObj = new exportJson();
+
+                    var resultData = swaggerObj.createNewSwagger(apiData, request.protocol, request.get('host'));
+                    resultData.info.title = project.name;
+                    resultData.info.description = project.description;
+
+                    if (request.query.download == 'true') {
+                        var fileName = project.name + "-Newswagger.json";
+                        response.setHeader('Content-disposition', 'attachment; filename=' + fileName);
+                        response.setHeader('Content-type', 'application/json');
+                        response.write(JSON.stringify(resultData), function(err) {
+                            response.status(200).end();
+                        });
+                    } else {
+                        response.status(200).json(resultData);
+                    }
+                })
+                .catch((err) => {
+                    logger.error(err);
+                    response.status(500).json({
+                        "code": err.code,
+                        "message": "Can not export sketch"
+                    });
+                });
+
+
+            
+        }
+        else{
             response.status(400).json({
                 "message": "export type not specified"
             });

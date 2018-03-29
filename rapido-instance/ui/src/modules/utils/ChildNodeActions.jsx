@@ -1,17 +1,29 @@
 export function updateAPIChange(field, data, component) {
-  let reqValue, resValue, summary;
+  let reqValue, resValue, summary,title;
     if(field === 'request') {
       reqValue = data;
       resValue = component.state.responseValue;
       summary = component.state.summaryInfo; 
+      title=component.state.titleInfo;
     } else if(field === 'response'){
       reqValue = component.state.requestValue;
       resValue = data;
       summary = component.state.summaryInfo;
-    } else {
+      title=component.state.titleInfo;
+
+    } else if(field === 'title'){
+      reqValue = component.state.requestValue;
+      resValue = component.state.responseValue;
+      summary = component.state.summaryInfo; 
+      title=data.target.value;
+
+    }
+ else {
       reqValue = component.state.requestValue;
       resValue = component.state.responseValue;
       summary = data.target.value; 
+      title=component.state.titleInfo; 
+
     }
     
     component.state.options.map(function (list, i) {
@@ -19,6 +31,7 @@ export function updateAPIChange(field, data, component) {
         list.request = reqValue;
         list.response = resValue;
         list.summary = summary;
+        list.title=title;
       }
     }, component)
 
@@ -27,7 +40,8 @@ export function updateAPIChange(field, data, component) {
         "fullPath": component.state.childUpdatedData.fullPath,
         "request": reqValue,
         "responses": resValue,
-        "summary": summary
+        "summary": summary,
+        "title":title
       }
     } else {
       component.state.apiData[component.state.currentNodeId] = {};
@@ -35,7 +49,8 @@ export function updateAPIChange(field, data, component) {
         "fullPath": component.state.childUpdatedData.fullPath,
         "request": reqValue,
         "responses": resValue,
-        "summary": summary
+        "summary": summary,
+        "title":title
       }
     }
 
@@ -46,7 +61,9 @@ export function updateAPIChange(field, data, component) {
       },
       requestValue: reqValue,
       responseValue: resValue,
-      summaryInfo: summary
+      summaryInfo: summary,
+      titleInfo:title
+
     })
 
     let jsonStat = component.isJson(reqValue) && component.isJson(resValue);
@@ -78,6 +95,7 @@ export function updateCheckedStatus(val, component) {
           val.request = '';
           val.response = '';
           val.summary = '';
+          val.title=''
         }
       }, component)
       component.state.childData.apiList.forEach((item, index) => {
@@ -95,6 +113,7 @@ export function updateCheckedStatus(val, component) {
         requestValue: '',
         responseValue: '',
         summaryInfo: '',
+        titleInfo:'',
         checkedStatus: false
       })
       validity = component.validityCheckStatus();
@@ -114,7 +133,8 @@ export function updateAPISelection(val, component, event, showAlert) {
         paramValue: '',
         requestValue: '',
         responseValue: '',
-        summaryInfo: ''
+        summaryInfo: '',
+        titleInfo:''
       })
       }
     } else {
@@ -123,7 +143,8 @@ export function updateAPISelection(val, component, event, showAlert) {
         paramValue: '',
         requestValue: '',
         responseValue: '',
-        summaryInfo: ''
+        summaryInfo: '',
+        titleInfo:''
       })
     }
 }

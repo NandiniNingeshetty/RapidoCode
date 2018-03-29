@@ -20,6 +20,8 @@ export default class extends React.Component{
       options : [
         { exportType: 'Swagger', label: 'Swagger 2.0'},
         { exportType: 'Postman', label: 'Postman'},
+        { exportType: 'NewSwagger', label: 'New Swagger 2.0'},
+
       ],
       oauthOptions: [
         { oauthType: 'oauthEnabled', label: 'oauth Enabled'},
@@ -73,6 +75,7 @@ export default class extends React.Component{
       console.error(error);
     });
   }
+  
 
   /* Method to get Swagger Response */
   getSwaggerResponse (download) {
@@ -96,6 +99,41 @@ export default class extends React.Component{
             a.href = 'data:attachment/json,' + encodeURI(JSON.stringify(responseData, null, 2));
             a.target = '_blank';
             a.download = 'swagger.json';
+            a.click();
+          }
+        } else {
+          showAlert(this, (responseData.message) ? responseData.message : "Error occured");
+          if(expSrvgetSwaggerRes.status == 401) {
+            sessionStorage.removeItem('user')
+            sessionStorage.removeItem('token')
+          }
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  getNewSwaggerResponse(download){
+    let expSrvgetSwaggerRes = null;
+    let sketchId = JSON.parse(sessionStorage.getItem('sketchId'));
+    ExportService.getNewSwaggerJSON(sketchId,download)
+      .then((response) => {
+        expSrvgetSwaggerRes = response.clone();
+        return response.json();
+      })
+      .then((responseData) => {
+        if(expSrvgetSwaggerRes.ok) {
+          if(!download) {
+            this.setState({
+              "apiData" : JSON.stringify(responseData, null, 2),
+              "downloadType": "NewSwagger"
+            });
+          }
+          if(download) {
+            var a = document.createElement('a');
+            a.href = 'data:attachment/json,' + encodeURI(JSON.stringify(responseData, null, 2));
+            a.target = '_blank';
+            a.download = 'New swagger.json';
             a.click();
           }
         } else {
@@ -152,8 +190,12 @@ export default class extends React.Component{
   handleDownload() {
     if(this.state.downloadType === 'postman') {
       this.getPostManResponse(true);
-    } else {
+    } else if(this.state.downloadType === 'swagger'){
       this.getSwaggerResponse(true);
+    }else{
+      this. getNewSwaggerResponse(true);
+
+
     }
   }
 
@@ -164,8 +206,13 @@ export default class extends React.Component{
     });
     if(val.exportType === 'Postman') {
       this.getPostManResponse(false);
-    } else {
+    } else if(val.exportType === 'Swagger'){
       this.getSwaggerResponse(false);
+    }else
+    {
+      this.getNewSwaggerResponse(false);
+
+
     }
   }
 

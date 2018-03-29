@@ -22,11 +22,11 @@ export default class extends React.Component{
       apiStatus: "GET",
       checkedStatus: false,
       options : [
-        { apiType: 'GET', label: 'GET' , id:'', completed: false, request: '', response: '', summary: '' },
-        { apiType: 'POST', label: 'POST', id:'', completed: false, request: '', response: '', summary: '' },
-        { apiType: 'PUT', label: 'PUT' , id:'', completed: false, request: '', response: '', summary: '' },
-        { apiType: 'PATCH', label: 'PATCH', id:'', completed: false, request: '', response: '', summary: '' },
-        { apiType: 'DELETE', label: 'DELETE', id:'', completed: false, request: '', response: '', summary: '' }
+        { apiType: 'GET', label: 'GET' , id:'', completed: false, request: '', response: '', summary: '' ,title:''},
+        { apiType: 'POST', label: 'POST', id:'', completed: false, request: '', response: '', summary: '' ,title:''},
+        { apiType: 'PUT', label: 'PUT' , id:'', completed: false, request: '', response: '', summary: '',title:'' },
+        { apiType: 'PATCH', label: 'PATCH', id:'', completed: false, request: '', response: '', summary: '' ,title:''},
+        { apiType: 'DELETE', label: 'DELETE', id:'', completed: false, request: '', response: '', summary: '',title:'' }
       ],
       apiData: this.props.apiData,
       paramValue: '',
@@ -34,6 +34,7 @@ export default class extends React.Component{
       responseValue: '',
       summaryInfo: '',
       currentNodeId: '',
+      titleInfo:'',
       defaultValue: JSON.stringify({"200/500":{}}, null, 2)
     };
     this.alertOptions = AlertOptions;
@@ -56,6 +57,8 @@ export default class extends React.Component{
           oType.request = this.state.apiData[oType.id][oType.apiType].request;
           oType.response = this.state.apiData[oType.id][oType.apiType].responses;
           oType.summary = this.state.apiData[oType.id][oType.apiType].summary;
+          oType.title = this.state.apiData[oType.id][oType.apiType].title;
+
         }
       }, this)    
     }, this)
@@ -144,6 +147,13 @@ export default class extends React.Component{
           if(!this.state.summaryInfo && todo.summary) {
             this.state.summaryInfo = todo.summary;
           }
+          /* if(!this.state.titleInfo && todo.title) {
+            this.state.titleInfo = todo.title;
+          } */
+          if(!this.state.titleInfo && todo.title) {
+            this.state.titleInfo = todo.title;
+          }
+
           if(todo.id) {
             this.state.currentNodeId = todo.id;
           }
@@ -153,13 +163,21 @@ export default class extends React.Component{
             requestLabel = <h6 className="col-md-12 param-label">Request : Application/JSON</h6>
           }
           apiPayloadSection = <div className="col-md-12 payload-type-section">
+           <div className="row">
+              <div className="col-md-12"><h6>Title :</h6></div>
+              <div className="col-md-6 title-section">
+                <input type="text" value={this.state.titleInfo}  onChange={(evt) => this.handleAPIChange("title",evt)}/>
+              </div>
+              
+            </div>
             <div className="row">
-              <div className="col-md-12"><h6>Summary:</h6></div>
+              <div className="col-md-12"><h6>Description :</h6></div>
               <div className="col-md-6 summary-section">
                 <textarea rows="3" value={this.state.summaryInfo} onChange={(evt) => this.handleAPIChange("summary",evt)}></textarea>
               </div>
               
             </div>
+           
             {requestLabel}
             <div className="col-md-6 ace-editor-wrapper">
               <AceEditor

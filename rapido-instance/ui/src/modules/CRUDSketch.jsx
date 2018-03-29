@@ -211,8 +211,7 @@ export default class extends React.Component{
         {createProjectOption}
       </div>      
 
-      loadedComponent = 
-        <div className={"row " + (this.state.projectDetails["access"] == "READ" ? 'sketchProjectDisabled' : '')}>
+      loadedComponent = <div className={"row " + (this.state.projectDetails["access"] == "READ" ? 'sketchProjectDisabled' : '')}>
           <div className="col-xs-12">
             {saveSketch}
             <CRUDTree
@@ -240,7 +239,7 @@ export default class extends React.Component{
           <div>
             {this.props.children}
           </div>
-        </div>
+        </div> 
     } else {
       loadedComponent =  <div className="text-center loading-project-details">Loading...</div>
     }
@@ -255,7 +254,6 @@ export default class extends React.Component{
         <ul className="tabs">
           <li className={this.props.location.pathname === '/vocabulary' ? 'tab active-tab': 'tab'}><Link to="/vocabulary">VOCABULARY</Link></li>
           <li className={this.props.location.pathname === '/nodes/edit' ? 'tab active-tab': 'tab'}><Link to="/nodes/edit">SKETCH</Link></li>
-          <li className={this.props.location.pathname === '/share' ? 'tab active-tab': 'tab'}><Link to="/share">TEAMS</Link></li>
           <li className={this.props.location.pathname === '/export' ? 'tab active-tab': 'tab'}><Link to="/export">EXPORT</Link></li>
         </ul>
       </div>

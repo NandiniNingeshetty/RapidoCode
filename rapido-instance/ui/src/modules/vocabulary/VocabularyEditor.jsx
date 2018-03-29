@@ -113,6 +113,7 @@ export default class extends React.Component{
       console.error(error);
     });
   }
+  
 
   onRow(row, { rowIndex, rowKey }) {
     return {
@@ -246,6 +247,7 @@ export default class extends React.Component{
           <div className="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 vocabulary-list">
             {vocabTable}
           </div>
+          
         </form>
       </div>
     } else {

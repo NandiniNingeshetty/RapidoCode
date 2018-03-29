@@ -476,8 +476,8 @@
     .search-textbox {
         width: 250px;
         height: 30px;
-        border-radius: 5px;
-        /* background-color: #ffffff; */
+        border-radius: 3px;
+        background-color: #ffffff;
         font-family: Helvetica;
         font-size: 14px;
         font-weight: normal;
@@ -486,6 +486,7 @@
         letter-spacing: normal;
         text-align: left;
         color: #9b9b9b;
+        border: solid 1px #d6d6d6;
     }
     
     .search-shape {
@@ -581,8 +582,8 @@
     .card-title+div+div {
         background-color: white;
         border-top: none;
-        border-left: none;
-        border-right: none;
+        border-left: inherit;
+        border-right: inherit;
         padding-bottom: 5px;
         box-shadow: none;
     }
@@ -683,6 +684,7 @@
         letter-spacing: normal;
         text-align: left;
         color: #4a4a4a;
+        margin-left: 6px;
     }
     
     .custom-select {
@@ -750,6 +752,8 @@
         text-align: left;
         color: #ffffff;
         cursor: pointer;
+        height: 26px;
+        width: 52px;
     }
     
     .inactiveButton {
@@ -766,6 +770,8 @@
         text-align: left;
         color: #4a4a4a;
         cursor: pointer;
+        height: 26px;
+        width: 52px;
     }
     
     .xs-pl-15 {
@@ -1260,8 +1266,8 @@
         margin-left: 0px;
     }
     
-    .shared-list {
-        padding-bottom: 20px;
+    .shared-sketch {
+        padding-bottom: 50px;
         margin-left: 0px;
     }
     
@@ -1382,7 +1388,7 @@
         color: #9b9b9b;
       }
 
-      .edit-sketch-info {
+    .edit-sketch-info {
         margin-left: 9%;
         border-left: 1px solid #d8d8d8;
         height: 35px;
@@ -1398,6 +1404,31 @@
         color: #4a90e2;
       }
 
-      .sketch-desc-view {
+    .sketch-desc-view {
         margin-top: -0.8%;
       }
+
+    .card-block {        
+        border-radius: 5px;
+        background-color: #ffffff;
+        border: solid 1px #d6d6d6;
+        box-shadow: none;
+        width:275px;
+        height: 100px;
+    }
+
+    .wrapper-info {
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        margin-left: 2.2%;
+    }
+
+    .filter-icon {
+        cursor: pointer;
+    }

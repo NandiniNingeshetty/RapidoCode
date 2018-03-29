@@ -177,7 +177,7 @@ export default class extends React.Component{
         <div className="col-md-4 col-sm-9">
           <div className="col-md-12 col-sm-12">
             <Dropdown placement="bottom-end" className="profileDropdown" data={profileDropdownItems}>
-              <profileDropdownBtn>{this.props.userInfo.email} ▾</profileDropdownBtn>
+              <profileDropdownBtn>{this.props.userInfo.firstname}&nbsp;{this.props.userInfo.lastname} ▾</profileDropdownBtn>
             </Dropdown>
           </div>
         </div>

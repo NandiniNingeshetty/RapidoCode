@@ -172,7 +172,8 @@ export class SketchesComponent extends React.Component {
                 </div>
 
 
-                <div className="row shared-list">
+                
+                <div className="row shared-sketch">
                     <div className="col-md-12">
                         <div className="col-md-3">
 

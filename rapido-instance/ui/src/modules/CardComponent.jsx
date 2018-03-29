@@ -31,7 +31,7 @@ export class CardComponent extends React.Component {
     return (
       <div>
 
-        <Card>
+        <Card className="card-block">
           <CardTitle className="card-title" avatar={avatar} secondaryText={this.props.secondaryText} subtitle={this.props.subtitle}>{this.props.title}</CardTitle>
           <CardBlock>{this.props.block}</CardBlock>
           {cardFooter}

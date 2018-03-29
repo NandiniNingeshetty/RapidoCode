@@ -123,10 +123,16 @@ a.header-logo-section {
 .profileDropdown {
     position: absolute;
     top: 22px;
-    right: 10Px;
-    color: #09AEEF;
+    right: 10Px;   
+    height: 17px;
+    font-family: Helvetica;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
 }
 
 .cardLayout {

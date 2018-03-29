@@ -20,7 +20,7 @@ export default class extends React.Component{
     super(props);
     this.state = {
       childData: {
-        apiList: [],
+        apiList: [{apiType:"GET", apiId: this.props.childInfo.pId}],
         url: ''
       },
       apiStatus: "GET",
@@ -38,7 +38,7 @@ export default class extends React.Component{
       responseValue: '',
       summaryInfo: '',
       titleInfo: '',
-      currentNodeId: '',
+      currentNodeId: this.props.childInfo.pId,
       defaultValue: JSON.stringify({"200/500":{}}, null, 2)
     };
     this.alertOptions = AlertOptions;
@@ -53,6 +53,8 @@ export default class extends React.Component{
 
   /* Component Initialisation */
   componentWillMount() {
+    
+    console.log(this.props.childInfo.apiList)
     this.props.childInfo.apiList.map(function (type, i) {
       this.state.options.map(function (oType, j) {
         if(type.apiType === oType.apiType) {
@@ -69,11 +71,18 @@ export default class extends React.Component{
     this.setState({
       childData: this.props.childInfo,
       childUpdatedData: this.props.childInfo
-    })
+    });
+    if(this.props.childInfo.apiList.length == 0)
+    updateCheckedStatus( { apiType: 'GET', label: 'GET' , id:this.props.childInfo.pId, completed: false, request: '', response: '', summary: '' },this);
+    else{
+      this.setState({
+        apiStatus:this.props.childInfo.apiList[0].apiType
+      })
+    }
   }
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
+    
     this.props.childInfo.apiList.map(function (type, i) {
       this.state.options.map(function (oType, j) {
         if(type.apiType === oType.apiType) {
@@ -90,7 +99,15 @@ export default class extends React.Component{
     this.setState({
       childData: this.props.childInfo,
       childUpdatedData: this.props.childInfo
-    })
+    });
+    if(this.props.childInfo.apiList.length == 0)
+    updateCheckedStatus( { apiType: 'GET', label: 'GET' , id:this.props.childInfo.pId, completed: false, request: '', response: '', summary: '' },this);
+    else{
+      this.setState({
+        apiStatus:this.props.childInfo.apiList[0].apiType
+      })
+    }
+  
   }
   /* Method to associate node details */
   associateNode(validity) {
@@ -100,7 +117,7 @@ export default class extends React.Component{
   /* Method to select API from dropdown */
   selectAPI(val) {
     updateAPISelection(val, this, event, showAlert)
-    updateCheckedStatus(val,this)
+   
   }
 
   /* Method to check/uncheck node association */
@@ -149,12 +166,14 @@ export default class extends React.Component{
   /* Render Method */
   render() {
     let checkBoxSection, apiPayloadSection, requestLabel;
-
+    console.log(this.state.options);
+    console.log(this.state.childData.url)
      this.state.options.map(function (todo, i) {
+      console.log(this.state.apiStatus) 
       if(todo.label === this.state.apiStatus) {
-       
+       console.log(this.state.summaryInfo)
         //if(todo.completed) {
-          if(!this.state.requestValue && todo.request) {
+          /*if(!this.state.requestValue && todo.request) {
             this.state.requestValue = todo.request;
           }
           if(typeof (this.state.requestValue) === "object") {
@@ -171,9 +190,25 @@ export default class extends React.Component{
           }
           if(!this.state.titleInfo && todo.title) {
             this.state.titleInfo = todo.title;
+          }*/
+
+          this.state.requestValue = todo.request;
+          if(typeof (this.state.requestValue) === "object") {
+            this.state.requestValue = JSON.stringify(this.state.requestValue, null, 2)
           }
+
+          this.state.responseValue = todo.response;
+          if(typeof (this.state.responseValue) === "object") {
+            this.state.responseValue = JSON.stringify(this.state.responseValue, null, 2)
+          }
+          this.state.summaryInfo = todo.summary;
+          this.state.titleInfo = todo.title;
+
+
           if(todo.id) {
             this.state.currentNodeId = todo.id;
+          }else{
+            todo.id = this.state.currentNodeId;
           }
           if(this.state.apiStatus === 'GET') {
             requestLabel = <label className="Request-Params">Request Params</label>
@@ -252,7 +287,7 @@ export default class extends React.Component{
                         <div className="url-text-wrapper">
                             <div className="url-text"><TextInput size="small" className="url-text"
                                 defaultValue="/"
-                                
+                                value={this.state.childData.url}
                                 onChange={(evt) => this.handleURLChange(evt.target.value,'url')}
                                 required
                             /></div>

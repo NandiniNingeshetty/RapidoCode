@@ -129,7 +129,6 @@ export class SketchesComponent extends React.Component {
                     </div>);
                 }, this)
             } else {
-                sortComponent = null;
                 content = <div>
                     {sketchesNotFound}
                 </div>

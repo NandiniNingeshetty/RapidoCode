@@ -57,6 +57,7 @@ export function deleteNode(component, event) {
 }
 
 export function updatePath(component, event) {
+ // alert(event.source.pId)
   if(component.state.apidetails) {
     for (var key in component.state.apidetails[event.source.pId]) {
        component.state.apidetails[event.source.pId][key].fullPath = event.path
@@ -175,7 +176,11 @@ export function loadProjectDetails (ProjectService, component, sketchId) {
     })
     .then((responseData) => {
       if(prjSrvGetPrjDetRes.ok) {
-        let updatedAPI = component.importSketchInfo(responseData.apidetails)
+        console.log(responseData)
+        console.log(responseData.apidetails)
+        let updatedAPI = component.importSketchInfo(responseData.apidetails);
+        console.log("Load API details")
+        console.log(updatedAPI)
         let tempVocabData = [];
         responseData.vocabulary.map(function (vocab) {
           tempVocabData.push({"name":vocab});

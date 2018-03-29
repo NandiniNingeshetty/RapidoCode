@@ -142,15 +142,21 @@ export default class extends React.Component{
   /* Method to submit project Details */
   handleSubmit(event) {
     event.preventDefault();
-    if (this.showFormErrors()) {
-      var projectInfo = this.state.projectInfo;
-      addEmptySketch(this, []);
-      component.setActiveStatus(component.state.treedata);
-      component.state.projectDetails.projectName = projectInfo.projectName;
-      component.state.projectDetails.projectDesc = projectInfo.projectDesc;
-      /* TODO Promise */
-      createSketch(component, [], ProjectService, browserHistory)
-    }
+    let updateMode = sessionStorage.getItem("updateMode")
+    /*if(updateMode){
+      browserHistory.push('/vocabulary');
+    }else {*/
+      if (this.showFormErrors()) {
+        var projectInfo = this.state.projectInfo;
+        addEmptySketch(this, []);
+        component.setActiveStatus(component.state.treedata);
+        component.state.projectDetails.projectName = projectInfo.projectName;
+        component.state.projectDetails.projectDesc = projectInfo.projectDesc;
+        /* TODO Promise */
+        createSketch(component, [], ProjectService, browserHistory)
+      }
+   // }
+
   }
 
 

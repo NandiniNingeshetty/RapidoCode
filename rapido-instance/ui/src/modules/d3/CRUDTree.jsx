@@ -1,10 +1,10 @@
-const resourceBoxWidth = 250;
-const resourceBoxHeight = 90;
+const resourceBoxWidth = 220;
+const resourceBoxHeight = 85;
 const halfBoxWidth = resourceBoxWidth / 2;
 const halfBoxHeight = resourceBoxHeight / 2;
 const urlLeftMargin = 10;
-const urlFontSize = 18;
-const fullPathFontSize = 8;
+const urlFontSize = 12;
+const fullPathFontSize = 10;
 
 /* Method to translate the rectangle selection for API Types */
 export const setRectTranslation = (childCount) => {
@@ -58,7 +58,16 @@ export default class {
           (d.children ? " node--internal" : " node--leaf"); })
       .attr("id", function(d) { return d.data.id })
       .attr("transform", function(d) {
+        console.log("root")
+         console.log(d.Node)
+       
+        if(d.data.rootNode)
         return "translate(" + d.y + "," + d.x + ")"; 
+        else{
+        //  var y = d.y-40;
+          return "translate(" + d.y + "," + d.x + ")"; 
+        }
+        
       });
 
     // inbound connector
@@ -73,8 +82,8 @@ export default class {
     node.append("rect")
       .attr("width", resourceBoxWidth)
       .attr("height", resourceBoxHeight)
-      .attr("rx", 10)
-      .attr("ry", 10)
+      .attr("rx", 8)
+      .attr("ry", 8)
       .attr("class", function(d) {
         if(d.data.active) {
           return "node-uri-activated"
@@ -95,6 +104,7 @@ export default class {
         return !d.data.rootNode
        })
       .attr("font-size", urlFontSize)
+      .attr("class","node-path-text")
       .attr("transform", function(d) {
         return "translate(" + urlLeftMargin + "," + ((resourceBoxHeight / 2)+ urlFontSize/2) + ")"
       })
@@ -122,11 +132,11 @@ export default class {
       });
 
     // bottom separator
-    node.append("path")
+   /* node.append("path")
       .attr("class", "node-internal-border")
       .attr("d", function(d) {
           return "M0," + (resourceBoxHeight - 20) + "," + resourceBoxWidth + "," + (resourceBoxHeight - 20);
-    });
+    });*/
 
     // outbound node
     node.append("circle")
@@ -155,8 +165,11 @@ export default class {
       });
 
     node.append("text")
-      .attr("font-size", "18")
+      .attr("font-size", "25")
       .text("+")
+      .attr("fill","white")
+      .attr("x","-2")
+      .attr("y","3")
       .attr("transform", function() {
         return "translate(" + (resourceBoxWidth - 5) + "," + (resourceBoxHeight / 2  + 5)+ ")";
       })
@@ -165,6 +178,7 @@ export default class {
     // Full URI path
     node.append("text")
       .attr("font-size", fullPathFontSize)
+      .attr("class","node-full-path-text")
       .text(function(d) {
         if(d.data.rootNode) {
           return d.data.rootPath;
@@ -189,7 +203,7 @@ export default class {
         }
         
       })
-      .attr("transform", "translate(10," + (resourceBoxHeight-7) + ")")
+      .attr("transform", "translate(10," + (resourceBoxHeight-20) + ")")
       .style("pointer-events",  "none")
 
 
@@ -451,11 +465,12 @@ export default class {
         return !d.data.rootNode;
        })
       .append("rect")
-      .attr("width", 20)
-      .attr("height", 12)
+      .attr("width", 14)
+      .attr("height", 14)
       .attr("rx", 3)
       .attr("ry", 2)
-      .attr("transform", "translate(220,5)")
+      .attr("transform", "translate(200,2)")
+      .attr("fill","#f3aa4b")
       .style("cursor","pointer")
       .on("click", function(d) {
         handler({
@@ -474,7 +489,7 @@ export default class {
       })
       .attr("width", 20)
       .attr("height", 8)
-      .attr("transform", "translate(228,14)")
+      .attr("transform", "translate(204,12)")
       .style("cursor","pointer")
       .on("click", function(d) {
         handler({

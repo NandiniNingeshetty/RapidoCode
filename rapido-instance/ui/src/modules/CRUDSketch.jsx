@@ -213,7 +213,7 @@ export default class extends React.Component{
  
       loadedComponent = 
         <div className={"row " + (this.state.projectDetails["access"] == "READ" ? 'sketchProjectDisabled' : '')}>
-          <div className="col-xs-12">
+          <div className="col-xs-12 sketches-tree">
             {saveSketch}
             <CRUDTree
               data={

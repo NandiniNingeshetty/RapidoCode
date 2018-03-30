@@ -232,11 +232,11 @@ export default class extends React.Component{
 <AddVocabulary selectedSketch={this.state.selectedSketch} />
 </div>
 
-<div className="col-md-6">
+<div className="col-md-7">
 <CRUDSketch getCurrentNodeDetails={this.getCurrentNodeDetails} />
 </div>
 
-<div className="col-md-4">
+<div className="col-md-3">
 <NodeProperties nodeData={this.state.currentTreeDetails} treedata={this.state.treedata} component={this.state.crudComponent}/>
 </div>
 </div>

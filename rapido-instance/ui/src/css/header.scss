@@ -122,7 +122,7 @@ a.header-logo-section {
 
 .profileDropdown {
     position: absolute;
-    top: 22px;
+    top: 15px;
     right: 10Px;   
     height: 17px;
     font-family: Helvetica;
@@ -380,4 +380,9 @@ a.header-logo-section {
 
 .border-right {
     border-right: 1px solid #9b9b9b;
+}
+
+.user-img {
+  top: 14px;
+  right: 5px;
 }

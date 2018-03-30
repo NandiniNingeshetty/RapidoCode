@@ -240,7 +240,14 @@ export default class extends React.Component{
   render() {
     return(
       <div>
-      <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
+      <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />      
+      <div className="row sketch-border">
+        <div className="col-md-12 sketch-header">
+          <div className="col-md-2 sketches-text">
+            New Sketch
+          </div>
+        </div>
+      </div>
       <div className="col-md-8 create-project-section" id="projectDetailsNode">
         <form className="col-md-8" noValidate onSubmit={this.handleSubmit}>
           <div className="col-md-12">

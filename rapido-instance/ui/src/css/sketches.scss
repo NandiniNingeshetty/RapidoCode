@@ -689,7 +689,7 @@
     
     .custom-select {
         width: 92px;
-        height: 22px;
+        height: 26px;
         border-radius: 3px;
         background-color: #ffffff;
         border: solid 1px #d6d6d6;
@@ -829,13 +829,21 @@
     .border-bottom {
         border-bottom: 1px solid #d4d4d4;
         padding-top: 30px;
-        padding-bottom: 10px;
-        /*margin-left: 10px;
-        margin-right: 10px;*/
-    }
+        padding-bottom: 10px;        
+    }   
     
     .xs-pr-15 {
         padding-right: 15px;
+    }
+
+    .sketch-border {
+        border-bottom: 1px solid #d4d4d4;
+    }
+
+    .sketch-header {
+        padding-top: 30px;
+        padding-bottom: 10px;  
+        margin-left: 4.3%;      
     }
     
     .Sketch-Name {
@@ -910,7 +918,9 @@
         line-height: normal;
         letter-spacing: normal;
         text-align: left;
-        color: #4a4a4a
+        color: #4a4a4a;
+        margin-left: -1%;
+        margin-right: -2%
     }
     
     .Rectangle-4-Copy-6 {
@@ -1431,4 +1441,17 @@
 
     .filter-icon {
         cursor: pointer;
+    }
+
+    .Hello {
+        width: 26px;
+        height: 12px;
+        font-family: Helvetica;
+        font-size: 10px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
     }

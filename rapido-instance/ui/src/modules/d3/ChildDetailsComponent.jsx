@@ -55,6 +55,7 @@ export default class extends React.Component{
   componentWillMount() {
     
     console.log(this.props.childInfo.apiList)
+    
     this.props.childInfo.apiList.map(function (type, i) {
       this.state.options.map(function (oType, j) {
         if(type.apiType === oType.apiType) {
@@ -82,7 +83,10 @@ export default class extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    
+    console.log("will receive props")
+    console.log(nextProps)
+    console.log(this.props)
+    this.props = nextProps;
     this.props.childInfo.apiList.map(function (type, i) {
       this.state.options.map(function (oType, j) {
         if(type.apiType === oType.apiType) {
@@ -95,7 +99,6 @@ export default class extends React.Component{
         }
       }, this)    
     }, this)
-
     this.setState({
       childData: this.props.childInfo,
       childUpdatedData: this.props.childInfo
@@ -166,12 +169,12 @@ export default class extends React.Component{
   /* Render Method */
   render() {
     let checkBoxSection, apiPayloadSection, requestLabel;
-    console.log(this.state.options);
-    console.log(this.state.childData.url)
+   // console.log(this.state.options);
+   // console.log(this.state.childData.url)
      this.state.options.map(function (todo, i) {
-      console.log(this.state.apiStatus) 
+     // console.log(this.state.apiStatus) 
       if(todo.label === this.state.apiStatus) {
-       console.log(this.state.summaryInfo)
+      // console.log(this.state.summaryInfo)
         //if(todo.completed) {
           /*if(!this.state.requestValue && todo.request) {
             this.state.requestValue = todo.request;

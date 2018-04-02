@@ -21,7 +21,7 @@ export default class extends React.Component{
     this.state = {
       childData: {
         apiList: [{apiType:"GET", apiId: this.props.childInfo.pId}],
-        url: ''
+        url: '/'
       },
       apiStatus: "GET",
       checkedStatus: true,

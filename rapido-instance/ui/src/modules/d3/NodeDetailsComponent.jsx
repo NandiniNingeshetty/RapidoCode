@@ -61,7 +61,7 @@ export default class extends React.Component{
 
   /* Render Method */
   render() {
-    var list;
+    var list  = null;
     console.log("In node properties")
     console.log(this.props.nodeData)
     if (this.props.nodeData) {
@@ -82,8 +82,9 @@ export default class extends React.Component{
                         <label className="Node-Properties">Node Properties</label>
                     </div> 
         {list}
-        <Button className="UPDATE pull-right"  variant="regular" primary onClick={this.updateSketchDetails.bind(this)}>UPDATE</Button>
-                    <Button className="Cancel pull-right">Cancel</Button>
+        {list == null ? "":<div><Button className="UPDATE pull-right"  variant="regular" primary onClick={this.updateSketchDetails.bind(this)}>UPDATE</Button>
+                    <Button className="Cancel pull-right">Cancel</Button></div>}
+        
       </div>
       
     )

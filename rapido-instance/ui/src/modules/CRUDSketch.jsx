@@ -57,7 +57,7 @@ export default class extends React.Component{
     } else if (event.name === "add") {
       addNode(component, event)
     } else if (event.name === "delete") {
-      alert(event.source.pId)
+     // alert(event.source.pId)
       deleteNode(component, event);
     } else if(event.name === "updatePath") {
       //alert(event.source.pId)
@@ -213,7 +213,7 @@ export default class extends React.Component{
  
       loadedComponent = 
         <div className={"row " + (this.state.projectDetails["access"] == "READ" ? 'sketchProjectDisabled' : '')}>
-          <div className="col-xs-12">
+          <div className="col-xs-12 sketches-tree">
             {saveSketch}
             <CRUDTree
               data={

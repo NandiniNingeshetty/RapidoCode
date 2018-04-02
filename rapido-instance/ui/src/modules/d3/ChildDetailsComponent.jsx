@@ -20,7 +20,7 @@ export default class extends React.Component{
     super(props);
     this.state = {
       childData: {
-        apiList: [{apiType:"GET", apiId: this.props.childInfo.pId}],
+        apiList: [],
         url: '/'
       },
       apiStatus: "GET",
@@ -73,13 +73,10 @@ export default class extends React.Component{
       childData: this.props.childInfo,
       childUpdatedData: this.props.childInfo
     });
-    if(this.props.childInfo.apiList.length == 0)
-    updateCheckedStatus( { apiType: 'GET', label: 'GET' , id:this.props.childInfo.pId, completed: false, request: '', response: '', summary: '' },this);
-    else{
-      this.setState({
-        apiStatus:this.props.childInfo.apiList[0].apiType
-      })
-    }
+    if(this.props.childInfo.apiList.length > 0)
+    this.setState({
+      apiStatus:this.props.childInfo.apiList[0].apiType
+    })
   }
 
   componentWillReceiveProps(nextProps){
@@ -103,13 +100,10 @@ export default class extends React.Component{
       childData: this.props.childInfo,
       childUpdatedData: this.props.childInfo
     });
-    if(this.props.childInfo.apiList.length == 0)
-    updateCheckedStatus( { apiType: 'GET', label: 'GET' , id:this.props.childInfo.pId, completed: false, request: '', response: '', summary: '' },this);
-    else{
-      this.setState({
-        apiStatus:this.props.childInfo.apiList[0].apiType
-      })
-    }
+    if(this.props.childInfo.apiList.length > 0)
+    this.setState({
+      apiStatus:this.props.childInfo.apiList[0].apiType
+    })
   
   }
   /* Method to associate node details */
@@ -117,6 +111,9 @@ export default class extends React.Component{
     this.props.setChildEditDetails(this.state.childData, validity);
   }
 
+  getAlert() {
+    updateCheckedStatus( { apiType: this.state.apiStatus, label: this.state.apiStatus , id:this.props.childInfo.pId, completed: false, request: this.state.requestValue, response:  this.state.responseValue, summary: this.state.summaryInfo ,active:true},this);
+ }
   /* Method to select API from dropdown */
   selectAPI(val) {
     updateAPISelection(val, this, event, showAlert)

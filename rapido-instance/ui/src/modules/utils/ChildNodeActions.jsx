@@ -73,24 +73,6 @@ export function updateAPIChange(field, data, component) {
 
 export function updateCheckedStatus(val, component) {
   let validity;
-
-/*component.state.options.map(function (todo, i) {
-    if(todo.label === val.apiType) {
-      val.completed = true;
-      val.id = component.props.childInfo.pId;
-    }
-  }, component);
-  component.state.childData.apiList.push({apiType: val.apiType, apiId: component.props.childInfo.pId})
-      component.setState({
-        childData: {
-          apiList : component.state.childData.apiList,
-          url: component.state.childData.url
-        },
-        checkedStatus: true
-      })
-      validity = component.validityCheckStatus();
-      component.associateNode(!validity)*/
-
  if(!val.completed) {
       component.state.options.map(function (todo, i) {
         if(todo.label === val.apiType) {
@@ -98,13 +80,13 @@ export function updateCheckedStatus(val, component) {
           val.id = component.props.childInfo.pId;
         }
       }, component)
-      component.state.childData.apiList.forEach((item, index) => {
+    /*component.state.childData.apiList.forEach((item, index) => {
         if (val.apiType != item.apiType) {
-          component.state.childData.apiList.push({apiType: val.apiType, apiId: component.props.childInfo.pId})
+          component.state.childData.apiList.push({apiType: val.apiType, apiId: component.props.childInfo.pId,active:val.active})
           return
         }
-      })
-      //component.state.childData.apiList.push({apiType: val.apiType, apiId: component.props.childInfo.pId})
+      })*/
+      component.state.childData.apiList.push({apiType: val.apiType, apiId: component.props.childInfo.pId,active:val.active})
       component.setState({
         childData: {
           apiList : component.state.childData.apiList,
@@ -114,64 +96,11 @@ export function updateCheckedStatus(val, component) {
       })
       validity = false;
     } else {
-      /*component.state.options.map(function (todo, i) {
-        if(todo.label === val.apiType) {
-          val.completed = false
-          val.request = '';
-          val.response = '';
-          val.summary = '';
-          val.title=''
-        }
-      }, component)
-      component.state.childData.apiList.forEach((item, index) => {
-        if (val.apiType == item.apiType) {
-          component.state.childData.apiList.splice(index,1);
-          return
-        }
-      })
-      delete component.state.apiData[val.id][val.apiType];
-      component.setState({
-        childData: {
-          apiList : component.state.childData.apiList,
-          url: component.state.childData.url
-        },
-        requestValue: '',
-        responseValue: '',
-        summaryInfo: '',
-        titleInfo:'',
-        checkedStatus: false
-      })
-      validity = component.validityCheckStatus();*/
-    }
-    
-    component.associateNode(!validity);
+ 
+}
 }
 
 export function updateAPISelection(val, component, event, showAlert) {
- /* if(component.state.requestValue === '' || component.state.responseValue === '') {
-      if(component.state.checkedStatus) {
-        showAlert(component, "Please fill the associated API details")
-        event.stopPropagation()
-      } else{
-        component.setState({
-        apiStatus: val.apiType,
-        paramValue: '',
-        requestValue: '',
-        responseValue: '',
-        summaryInfo: '',
-        titleInfo:''
-      })
-      }
-    } else {
-      component.setState({
-        apiStatus: val.apiType,
-        paramValue: '',
-        requestValue: '',
-        responseValue: '',
-        summaryInfo: '',
-        titleInfo:''
-      })
-    }*/
    /* if(component.state.requestValue === '' || component.state.responseValue === '') {
       showAlert(component, "Please fill the associated API details")
       event.stopPropagation()
@@ -182,8 +111,32 @@ export function updateAPISelection(val, component, event, showAlert) {
     updateCheckedStatus(val,component)
   }*/
 
-  component.setState({
-    apiStatus: val.apiType,
-  });
-  updateCheckedStatus(val,component)
+ 
+  var apiList =  component.state.childData.apiList;
+  apiList.forEach((item, index) => {
+         var apiType = apiList[index].apiType;
+         var apiId = apiList[index].apiId;
+         
+         if (val.apiType == item.apiType) {
+           //apiList[index].active=true;
+           apiList.splice(index,1);
+          apiList.push({apiType: apiType, apiId:apiId,active:true}) 
+         }else{
+           //if(apiList.includes(val.apiType))
+           // apiList[index].active=false;
+       apiList.splice(index,1);
+        apiList.push({apiType: apiType, apiId:apiId,active:false}) 
+         }
+       })
+      
+       component.setState({
+         childData: {
+           apiList : apiList,
+         },
+         
+       })
+       component.setState({
+        apiStatus: val.apiType,
+      });
+
 }

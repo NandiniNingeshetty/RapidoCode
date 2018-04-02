@@ -46,6 +46,7 @@ export default class extends React.Component{
   }
  /* Method to Update Sketch Details */
  updateSketchDetails() {
+  this.refs.child.getAlert();
   this.props.component.setActiveStatus(this.props.component.state.treedata);
   let savedVocabulary;
   let userDetails = JSON.parse(sessionStorage.getItem('userInfo'));
@@ -68,7 +69,7 @@ export default class extends React.Component{
       if(this.props.nodeData.rootNodeData && this.props.nodeData.rootNodeData.active) {
         list = <RootDetails rootInfo={this.props.nodeData.rootNodeData} setEditDetails={(val)=>this.updateRootData(val)}/>
       } else if (this.props.nodeData.childNodeData && this.props.nodeData.childNodeData.name){
-        list = <ChildDetails apiData={this.props.nodeData.apiExportData} childInfo={this.props.nodeData.childNodeData} setChildEditDetails={(val,status)=>this.updateChildData(val,status)}/>
+        list = <ChildDetails ref="child" apiData={this.props.nodeData.apiExportData} childInfo={this.props.nodeData.childNodeData} setChildEditDetails={(val,status)=>this.updateChildData(val,status)}/>
       }/*else{
         alert("cmg")
         list = <RootDetails  rootInfo={this.props.nodeData.rootNodeData} setEditDetails={(val)=>this.updateRootData(val)} />

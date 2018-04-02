@@ -1,4 +1,4 @@
-const resourceBoxWidth = 220;
+const resourceBoxWidth = 225;
 const resourceBoxHeight = 85;
 const halfBoxWidth = resourceBoxWidth / 2;
 const halfBoxHeight = resourceBoxHeight / 2;
@@ -58,8 +58,8 @@ export default class {
           (d.children ? " node--internal" : " node--leaf"); })
       .attr("id", function(d) { return d.data.id })
       .attr("transform", function(d) {
-        console.log("root")
-         console.log(d.Node)
+        //console.log("root")
+        // console.log(d.Node)
        
         if(d.data.rootNode)
         return "translate(" + d.y + "," + d.x + ")"; 
@@ -233,15 +233,27 @@ export default class {
           var translateX = setRectTranslation(this.parentElement.childElementCount);
           return "translate("+ translateX+ ",5)";
         })
-        .attr("class", "get");
+        .attr("class",function(d){
+          if(d.data.apiList) {
+            var className="inactive";
+            d.data.apiList.forEach((item, index) => {
+              if (item.apiType == 'GET') {
+               if(item.active)className="active";
+              }
+            })
+            return className;
+          }
+        });
 
       badges
         .filter(function(d) {
           if(d.data.apiList) {
             var getValue;
+         
             d.data.apiList.forEach((item, index) => {
               if (item.apiType == 'GET') {
                 getValue = true;
+               
                 return getValue;
               }
             })
@@ -283,7 +295,18 @@ export default class {
           var translateX = setRectTranslation(this.parentElement.childElementCount);
           return "translate("+ translateX+ ",5)";
         })
-        .attr("class", "put");
+       // .attr("class", "put");
+        .attr("class",function(d){
+          if(d.data.apiList) {
+            var className="inactive";
+            d.data.apiList.forEach((item, index) => {
+              if (item.apiType == 'PUT') {
+               if(item.active)className="active";
+              }
+            })
+            return className;
+          }
+        });
 
       badges
         .filter(function(d) {
@@ -333,7 +356,18 @@ export default class {
           var translateX = setRectTranslation(this.parentElement.childElementCount);
           return "translate("+ translateX+ ",5)";
         })
-        .attr("class", "post");
+//.attr("class", "post");
+.attr("class",function(d){
+  if(d.data.apiList) {
+    var className="inactive";
+    d.data.apiList.forEach((item, index) => {
+      if (item.apiType == 'POST') {
+       if(item.active)className="active";
+      }
+    })
+    return className;
+  }
+});
 
       badges
         .filter(function(d) {
@@ -383,7 +417,18 @@ export default class {
           var translateX = setRectTranslation(this.parentElement.childElementCount);
           return "translate("+ translateX+ ",5)";
         })
-        .attr("class", "patch");
+        //.attr("class", "patch");
+        .attr("class",function(d){
+          if(d.data.apiList) {
+            var className="inactive";
+            d.data.apiList.forEach((item, index) => {
+              if (item.apiType == 'PATCH') {
+               if(item.active)className="active";
+              }
+            })
+            return className;
+          }
+        });
 
       badges
         .filter(function(d) {
@@ -433,7 +478,18 @@ export default class {
           var translateX = setRectTranslation(this.parentElement.childElementCount);
           return "translate("+ translateX+ ",5)";
         })
-        .attr("class", "delete");
+       // .attr("class", "delete");
+       .attr("class",function(d){
+        if(d.data.apiList) {
+          var className="inactive";
+          d.data.apiList.forEach((item, index) => {
+            if (item.apiType == 'DELETE') {
+             if(item.active)className="active";
+            }
+          })
+          return className;
+        }
+      });
 
       badges
         .filter(function(d) {

@@ -5,12 +5,12 @@ import ProjectService from './d3/ProjectServices'
 import EditObserver from './EditObserver'
 import { browserHistory, Link } from 'react-router'
 import AlertContainer from 'react-alert'
-import {AlertOptions, showAlert} from './utils/AlertActions'
-import {showDetails, addNode, deleteNode, updateTreeData, updateProjectHeaders, addEmptySketch, loadProjectDetails, createSketch, updateSketch, updatePath, exportDesign, importDesign} from './utils/TreeActions';
+import { AlertOptions, showAlert } from './utils/AlertActions'
+import { showDetails, addNode, deleteNode, updateTreeData, updateProjectHeaders, addEmptySketch, loadProjectDetails, createSketch, updateSketch, updatePath, exportDesign, importDesign } from './utils/TreeActions';
 
 var component;
 
-export default class extends React.Component{
+export default class extends React.Component {
 
   constructor(props) {
     super(props);
@@ -20,13 +20,13 @@ export default class extends React.Component{
     let observer = new EditObserver();
     observer.nullifyObserver();
 
-    let addObserver = function(event) {
-      if(event.id === "export") {
-        if(component.state && component.state.projectSaved) {
+    let addObserver = function (event) {
+      if (event.id === "export") {
+        if (component.state && component.state.projectSaved) {
           browserHistory.push('/export');
         } else {
           component.showAlertMessage("Please save the sketch details to Export ")
-          setTimeout(function(){
+          setTimeout(function () {
             this.msg.removeAll()
           }.bind(component), 3000);
         }
@@ -39,27 +39,27 @@ export default class extends React.Component{
   componentWillMount() {
 
     let sketchId = sessionStorage.getItem('sketchId');
-    if(sketchId === 'null') {
+    if (sketchId === 'null') {
       addEmptySketch(this)
     } else {
       loadProjectDetails(ProjectService, this, sketchId);
-     // this.props.getNodeDetails(component);
+      // this.props.getNodeDetails(component);
     }
   }
 
   /* Tree Click Handler */
   onClick(event, eventData) {
-    if( event.name === "detail" ) {
+    if (event.name === "detail") {
       //alert(event.source.pId)
       updatePath(component, event);
       showDetails(component, event);
-      
+
     } else if (event.name === "add") {
       addNode(component, event)
     } else if (event.name === "delete") {
-     // alert(event.source.pId)
+      // alert(event.source.pId)
       deleteNode(component, event);
-    } else if(event.name === "updatePath") {
+    } else if (event.name === "updatePath") {
       //alert(event.source.pId)
       updatePath(component, event)
     }
@@ -67,24 +67,24 @@ export default class extends React.Component{
 
   /* Method to update Active state for Tree */
   setActiveStatus(activeObj) {
-    component.fetchChild(activeObj, function(d) {
+    component.fetchChild(activeObj, function (d) {
       d.active = false;
       if (d.children) {
         d.children.forEach((item, index) => {
-          item.pId = d.pId + (index+1);
+          item.pId = d.pId + (index + 1);
           item.active = false;
         })
       }
     },
-    function(d) {
-       return d.children && d.children.length > 0 ? d.children : null;
-    });
+      function (d) {
+        return d.children && d.children.length > 0 ? d.children : null;
+      });
   }
 
   /* Method to show selected node
    details */
   showDetailsSection(nodeData) {
-    if(nodeData.rootNode) {
+    if (nodeData.rootNode) {
       component.setState({
         treeEditDetails: {
           rootNodeData: nodeData,
@@ -100,7 +100,7 @@ export default class extends React.Component{
           apiExportData: component.state.apidetails
         }
       })
-     this.props.getCurrentNodeDetails(component);
+      this.props.getCurrentNodeDetails(component);
     }
   }
 
@@ -123,7 +123,7 @@ export default class extends React.Component{
     let savedVocabulary;
     let userDetails = JSON.parse(sessionStorage.getItem('userInfo'));
     let VocabularyStored = sessionStorage.getItem('vocabularyInfo')
-    if(VocabularyStored) {
+    if (VocabularyStored) {
       savedVocabulary = JSON.parse(VocabularyStored);
     } else {
       savedVocabulary = []
@@ -131,7 +131,7 @@ export default class extends React.Component{
     createSketch(component, savedVocabulary, ProjectService, browserHistory)
   }
 
-  
+
 
   /* Method to Export Sketch Data */
   exportSketchInfo() {
@@ -144,9 +144,9 @@ export default class extends React.Component{
   }
 
   /* Method to Show Alert Message */
-  showAlertMessage(message){
+  showAlertMessage(message) {
     showAlert(this, message)
-    setTimeout(function(){
+    setTimeout(function () {
       this.msg.removeAll()
     }.bind(this), 3000);
   }
@@ -154,32 +154,32 @@ export default class extends React.Component{
   /* Method to navigate to tree Node details */
   getNodeDetails() {
     let sketchId = sessionStorage.getItem('sketchId')
-    if(sketchId !== 'null') {
+    if (sketchId !== 'null') {
       browserHistory.push('/nodes/edit');
     } else {
       let sketchMode = JSON.parse(sessionStorage.getItem('updateMode'));
-      if(sketchMode) {
+      if (sketchMode) {
         browserHistory.push('/nodes/edit');
       } else {
         browserHistory.push('/nodes/add');
       }
     }
   }
-
+  
   /* Render Method */
   render() {
-
+    
     var selectedSketch = JSON.parse(sessionStorage.getItem('selectedSketch'));
 
     /* Project Details Section */
     var projectHeader = (selectedSketch) ? <div>
       <h2>{selectedSketch["name"]}</h2>
       <h3>{selectedSketch["description"]}</h3>
-      </div> : null;
+    </div> : null;
 
     var projectNodeDetails, saveSketch, createProjectOption, loadedComponent
-    if(this.state) {
-      
+    if (this.state) {
+
       /*projectNodeDetails = <div className="col-xs-12 node-details-section">
           <NodeDetails nodeData={this.state.treeEditDetails} updatedData={(val,mode,data)=>updateTreeData(val, mode, this)}/>
         </div>*/
@@ -204,14 +204,14 @@ export default class extends React.Component{
           createProjectOption = <button className="btn btn-default pull-right disabled" > Create Project </button> 
         }
       }*/
-      
-     /* saveSketch = <div className="col-md-12 col-sm-12 text-right save-sketch-section">
-        {createProjectOption}
-      </div>   */   
-  //console.log("In crud sketch");
-  //console.log(this.state.treedata);
- 
-      loadedComponent = 
+
+      /* saveSketch = <div className="col-md-12 col-sm-12 text-right save-sketch-section">
+         {createProjectOption}
+       </div>   */
+      //console.log("In crud sketch");
+      //console.log(this.state.treedata);
+
+      loadedComponent =
         <div className={"row " + (this.state.projectDetails["access"] == "READ" ? 'sketchProjectDisabled' : '')}>
           <div className="col-xs-12 sketches-tree">
             {saveSketch}
@@ -225,23 +225,24 @@ export default class extends React.Component{
                     y: this.state.offsetY
                   }
                 ]}
-              width = {400} height = {500}
-              options={ {
+              width={400} height={500}
+              options={{
                 border: "2px solid black",
                 margin: {
-                    top: 0,
-                    bottom: 0,
-                    left: 50,
-                    right: 0
-                } }
-              }/>
+                  top: 0,
+                  bottom: 0,
+                  left: 50,
+                  right: 0
+                }
+              }
+              } />
           </div>
           <div>
             {this.props.children}
           </div>
         </div>
     } else {
-      loadedComponent =  <div className="text-center loading-project-details">Loading...</div>
+      loadedComponent = <div className="text-center loading-project-details">Loading...</div>
     }
 
 
@@ -250,6 +251,6 @@ export default class extends React.Component{
       <div className="col-md-12 sketch-list-wrapper">
         {loadedComponent}
       </div>
-      </div>)
+    </div>)
   }
 }

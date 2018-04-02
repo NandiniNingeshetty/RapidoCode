@@ -299,7 +299,8 @@ export function updateSketch(component, savedVocabulary, ProjectService, browser
             apiExportData: {}
           }
         })
-        component.showAlertMessage("Sketch details are updated")
+        component.showAlertMessage("Sketch details are updated");
+       loadProjectDetails (ProjectService, component, sessionStorage.getItem('sketchId'))
       } else {
         showAlert(this, (responseData.message) ? responseData.message : "Error occured");
         if(prjSrvUpdPrj.status == 401) {

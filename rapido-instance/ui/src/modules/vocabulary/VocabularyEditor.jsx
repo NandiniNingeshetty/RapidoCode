@@ -193,57 +193,56 @@ export default class extends React.Component{
      
     return (
       <div className="vocabulary-main-content">
-           <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
-           <div className="vocabulary-header">
-      <div className="row">
-      <div className="col-md-12">
-  
-        <div className=" col-md-6 pull-left ">
-        <span className="vocabulary-header-title">{sketchName}</span>
-        <span className="vocabulary-header-shared xs-pl-15">Shared with</span>
-         <span className="xs-pl-10"><span className="green-status">Apps Team</span>
-         &nbsp;&nbsp;<span className="red-status">Dev Team</span>
-         </span>
+        <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
+        <div className="vocabulary-header">
+          <div className="row">
+            <div className="col-md-12 edit-sketch-header">
+              <div className=" col-md-6 pull-left ">
+                <span className="vocabulary-header-title">{sketchName}</span>
+                <span className="vocabulary-header-shared xs-pl-15">Shared with</span>
+                <span className="xs-pl-10"><span className="green-status">Apps Team</span>
+                  &nbsp;&nbsp;<span className="red-status">Dev Team</span>
+                </span>
+              </div>
+              <div className="col-md-offset-3 pull-right xs-pr-15">
+                <Button className="vocabulary-button-version" variant="regular" primary>Versions</Button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <ThemeProvider theme={{ direction: 'rtl' }}>
+                  <Dropdown data={data} placement="bottom-start">
+                    <Button className="vocabulary-button-preview" variant="regular" primary>Preview</Button>
+                  </Dropdown>
+                </ThemeProvider>
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-12">
+              <div className="col-md-6 pull-left view-text">
+                {sketchDesc}
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="col-md-offset-3 pull-right xs-pr-15">
-        <Button className="vocabulary-button-version"  variant="regular" primary>Versions</Button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <ThemeProvider theme={{ direction: 'rtl' }}>
-         <Dropdown data={data}   placement="bottom-start">
-      <Button className="vocabulary-button-preview"  variant="regular" primary>Preview</Button>
-    </Dropdown>
-    </ThemeProvider>  
+        <div className="row white-bg">
+          <div className="">
+
+            <div className="col-md-2">
+              <AddVocabulary selectedSketch={this.state.selectedSketch} />
+            </div>
+
+            <div className="col-md-6">
+              <CRUDSketch getCurrentNodeDetails={this.getCurrentNodeDetails} />
+            </div>
+
+            <div className="col-md-4">
+              <NodeProperties nodeData={this.state.currentTreeDetails} treedata={this.state.treedata} component={this.state.crudComponent} />
+            </div>
+          </div>
         </div>
-        </div>
-        </div>
-   
-      <div className="row">
-      <div className="col-md-12">
-     <div className="col-md-6 pull-left view-text">
-      {sketchDesc}
-     </div>
-     </div>
-      </div>
-      </div>
-<div className="row white-bg">
-<div className="">
-
-<div className="col-md-2">
-<AddVocabulary selectedSketch={this.state.selectedSketch} />
-</div>
-
-<div className="col-md-6">
-<CRUDSketch getCurrentNodeDetails={this.getCurrentNodeDetails} />
-</div>
-
-<div className="col-md-4">
-<NodeProperties nodeData={this.state.currentTreeDetails} treedata={this.state.treedata} component={this.state.crudComponent}/>
-</div>
-</div>
-</div>
 
 
-      
+
       </div>
     );
   }

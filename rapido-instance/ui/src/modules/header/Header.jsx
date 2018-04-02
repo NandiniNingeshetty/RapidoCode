@@ -168,12 +168,12 @@ export default class extends React.Component{
             <span className="logo-text header-text">CA API Design</span>
           </Link>
         </div>
-        <div className="col-md-3">
-        <ul className="top-header-tabs">
-          <Link to="/sketches"><li className="active-tab">Sketches</li></Link>
+        {/* <div className="col-md-3">
+          <ul className="top-header-tabs">
+            <Link to="/sketches"><li className="active-tab">Sketches</li></Link>
             <li className="border-right inactive-tab">Team</li>
           </ul>
-          </div>
+        </div> */}
         <div className="col-md-2 col-sm-9 pull-right">          
           <div className="col-md-12 col-sm-12">
             <div className="col-md-2 col-sm-2 user-img">

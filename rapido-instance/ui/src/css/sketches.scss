@@ -675,6 +675,7 @@
     }
     
     .view-text {
+        margin-left: -10px;
         font-family: Helvetica;
         font-size: 12px;
         font-weight: normal;
@@ -684,7 +685,6 @@
         letter-spacing: normal;
         text-align: left;
         color: #4a4a4a;
-        margin-left: 6px;
     }
     
     .custom-select {
@@ -834,6 +834,18 @@
     
     .xs-pr-15 {
         padding-right: 15px;
+    }
+
+    .temp {
+        background-color: #4a90e2;
+        margin-top: 15px;
+        margin-left: 0.5%;
+        margin-bottom: -17px;
+    }
+
+    .button-section {
+        margin-right: -3.2%;
+        margin-top: 10px;
     }
 
     .sketch-border {
@@ -1042,6 +1054,7 @@
     }
     
     .vocabulary-header-title {
+        margin-left: -10px;
         font-family: Helvetica;
         font-size: 14px;
         font-weight: bold;
@@ -1050,7 +1063,7 @@
         line-height: normal;
         letter-spacing: normal;
         text-align: left;
-        color: #4a4a4a;
+        color: #4a4a4a;        
     }
     
     .vocabulary-header-shared {
@@ -1103,7 +1116,7 @@
     }
     
     .vocabulary-header {
-        height: 48px;
+        height: 60px;
         border-bottom: 1px solid #cfcfcf;
     }
     
@@ -1454,4 +1467,8 @@
         line-height: normal;
         letter-spacing: normal;
         text-align: left;
+    }
+
+    .edit-sketch-header {
+        margin-top: 12px;
     }

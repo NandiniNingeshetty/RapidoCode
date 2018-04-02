@@ -18,6 +18,11 @@ export class HeaderComponent extends React.Component {
     return (
 
       <div className="row xs-pl-35">
+        <div>
+          <Button primary className="temp">
+            Sketches
+          </Button>
+        </div>
         <div className="col-md-12 border-bottom">
           <div className="col-md-2 sketches-text">
             Sketches

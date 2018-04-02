@@ -299,7 +299,7 @@ export default class extends React.Component{
               </div>
           </div>
          
-          <div className="col-md-8 pull-right next-section">
+          <div className="col-md-8 pull-right button-section">
 
           <Button className="new-sketch-text pull-right"  variant="regular"  onClick={this.handleSubmit} primary>Proceed</Button>
           <Link to="/sketches"><Button className="pull-right Rectangle-4-Copy-6">Cancel</Button></Link>

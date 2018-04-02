@@ -204,7 +204,13 @@ export default class extends React.Component{
                   &nbsp;&nbsp;<span className="red-status">Dev Team</span>
                 </span>
               </div>
-              <div className="col-md-offset-3 pull-right xs-pr-15">
+              <div className="col-md-2 edit-sketch-info-wrapper">
+                <div>
+                  <i className="pull-left"><img src="/ui/src/images/shape-edit.png" alt="edit sketch image"/></i>
+                  <div className="edit-sketch-info">Edit Sketch Info</div>
+                </div>
+              </div>
+              <div className="col-md-offset-2 pull-right xs-pr-15 xs-pt-5">
                 <Button className="vocabulary-button-version" variant="regular" primary>Versions</Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <ThemeProvider theme={{ direction: 'rtl' }}>

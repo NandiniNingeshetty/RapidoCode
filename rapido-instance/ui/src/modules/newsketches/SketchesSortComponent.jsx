@@ -61,7 +61,7 @@ export class SketchesSortComponent extends React.Component {
               placeholder="Search" /></li>
           </ul>
         </div>
-        <div className=" pull-right">
+        <div className="col-md-6 pull-right xs-pr-0">
           <label className="view-text">View&nbsp;&nbsp;:&nbsp;&nbsp;</label>
           <select
             name="form-field-name"
@@ -74,12 +74,12 @@ export class SketchesSortComponent extends React.Component {
             <span><i className="filter-icon" onClick={this.showFilterOptions.bind(this)}><img src="/ui/src/images/filter.png"/></i></span>
             {this.state.showFilter && filterOptions}
           </span>
-          <span className="xs-pl-10 xs-pr-15">
+          <span className="xs-pl-10 xs-pr-15 sort pull-right">
             <label className="view-text">Sort By&nbsp;:&nbsp;</label>
             <span className="xs-pl-5"><Button className="activeButton" size="small" primary>Created</Button></span>
             <span className="xs-pl-5"><Button size="small" className="inactiveButton" disabled>Updated</Button></span>
             <span className="xs-pl-5"><Button size="small" className="inactiveButton" disabled>Name</Button></span>
-          </span>
+          </span>          
         </div>
 
       </div>

@@ -1115,6 +1115,23 @@
         border-color: #cfcfcf;
     }
     
+    .vocabulary-button-version:hover {
+        cursor: pointer;
+        height: 24px;
+        border-radius: 5px;
+        background-color: #fff;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 2;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4a4a4a;
+        border-color: #cfcfcf;
+    }
+    
     .vocabulary-header {
         height: 60px;
         border-bottom: 1px solid #cfcfcf;
@@ -1122,7 +1139,8 @@
     
     .vocabulary-panel {
         background-color: #ffffff;
-        min-height: 500px;
+        min-height: 800px;
+        height: 100%;
         border-right: 1px solid #cfcfcf;
         height: 100%;
     }
@@ -1396,6 +1414,11 @@
     .Rectangle-5-Copy-10 {
         height: 25px;
     }
+
+    .sort {
+        padding-right: 0px;
+        margin-right: -1.2%;
+    }
     
     .url {
         width: 30px;
@@ -1411,10 +1434,18 @@
         color: #9b9b9b;
       }
 
-    .edit-sketch-info {
-        margin-left: 9%;
+    .edit-sketch-info-wrapper {
+        height: 30px;
         border-left: 1px solid #d8d8d8;
-        height: 35px;
+    }
+
+    .edit-sketch-info-wrapper div {
+        margin-top: 7px;
+    }
+
+    .edit-sketch-info {      
+        height: 20px;
+        margin-left: 20px;
         padding-top: 0.95%;
         font-family: Helvetica;
         font-size: 10px;
@@ -1452,8 +1483,13 @@
         margin-left: 2.2%;
     }
 
+    .xs-pr-0 {
+        padding-right: 0px;
+    }
+
     .filter-icon {
         cursor: pointer;
+        margin-right: 15px;
     }
 
     .Hello {

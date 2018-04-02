@@ -69,7 +69,8 @@
 }
 
 .badges {
-    font-weight: bold;
+    font-weight: normal;
+    font-size: 8px;
     text-shadow: 2px -1px 2 gray;
     .get {
         fill: green;
@@ -86,7 +87,22 @@
     .patch {
         fill: brown;
     }
+    .active {
+        fill: #4a90e2;
+    }
+    .inactive {
+        fill: #d6d6d6;
+    }
+    .inactive>text {
+        font: black !important;
+        font-size: 8px;
+    }
+    .active>text {
+        fill: white !important;
+        font-size: 8px;
+    }
     text {
         fill: white;
+        font-size: 8px;
     }
 }

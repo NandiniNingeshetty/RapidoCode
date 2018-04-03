@@ -95,6 +95,7 @@ export function updateCheckedStatus(val, component) {
         checkedStatus: true
       })
       validity = false;
+      component.associateNode(!validity)
     } else {
  
 }
@@ -118,14 +119,14 @@ export function updateAPISelection(val, component, event, showAlert) {
          var apiId = apiList[index].apiId;
          
          if (val.apiType == item.apiType) {
-           //apiList[index].active=true;
-           apiList.splice(index,1);
-          apiList.push({apiType: apiType, apiId:apiId,active:true}) 
+          apiList[index].active=true;
+           //apiList.splice(index,1);
+          //apiList.push({apiType: apiType, apiId:apiId,active:true}) 
          }else{
            //if(apiList.includes(val.apiType))
-           // apiList[index].active=false;
-       apiList.splice(index,1);
-        apiList.push({apiType: apiType, apiId:apiId,active:false}) 
+           apiList[index].active=false;
+      // apiList.splice(index,1);
+        //apiList.push({apiType: apiType, apiId:apiId,active:false}) 
          }
        })
       
@@ -138,5 +139,5 @@ export function updateAPISelection(val, component, event, showAlert) {
        component.setState({
         apiStatus: val.apiType,
       });
-
+      component.props.setChildEditDetails(component.state.childData, true);
 }

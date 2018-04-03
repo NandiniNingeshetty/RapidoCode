@@ -8,17 +8,19 @@ import ProjectDetails from '../d3/ProjectDetailsComponent'
 import ProjectService from '../d3/ProjectServices'
 import { loadProjectDetails } from '../utils/TreeActions';
 import Button from 'mineral-ui/Button';
-import {showAlert, AlertOptions} from '../utils/AlertActions'
+import { showAlert, AlertOptions } from '../utils/AlertActions'
 import AlertContainer from 'react-alert'
 import { ThemeProvider } from 'mineral-ui/themes';
 import Dropdown from 'mineral-ui/Dropdown';
-import  Popover from 'mineral-ui/Popover';
-import  AddVocabulary from './AddVocabulary';
+import Popover from 'mineral-ui/Popover';
+import AddVocabulary from './AddVocabulary';
 import NodeProperties from '../d3/NodeDetailsComponent';
 import CRUDSketch from '../CRUDSketch';
+import ExportService from '../export/ExportServices'
+
 var thisComponent;
-export default class extends React.Component{
-  
+export default class extends React.Component {
+
   constructor(props) {
     super(props);
     thisComponent = this;
@@ -46,7 +48,7 @@ export default class extends React.Component{
                   className="remove fa fa-times"
                   style={{ cursor: 'pointer' }}
                 >
-                  
+
                 </span>
               )
             ]
@@ -55,28 +57,72 @@ export default class extends React.Component{
         }
       ],
       vocabularyData: [],
-      currentTreeDetails:{},
-      treedata:{},
-      crudComponent:{}
+      currentTreeDetails: {},
+      treedata: {},
+      crudComponent: {}
     };
+    this.handleDownload = this.handleDownload.bind(this);
 
   }
 
   /* Component Initialisation */
   componentWillMount() {
     this.setState({
-        selectedSketch: JSON.parse(sessionStorage.getItem('selectedSketch'))
+      selectedSketch: JSON.parse(sessionStorage.getItem('selectedSketch'))
     });
   }
-  getCurrentNodeDetails(component){
+  /* Method to get Swagger Response */
+  getSwaggerResponse(download) {
+    debugger
+    let expSrvgetSwaggerRes = null;
+    let sketchId = JSON.parse(sessionStorage.getItem('sketchId'));
+    ExportService.getSwaggerJSON(sketchId, download)
+      .then((response) => {
+        expSrvgetSwaggerRes = response.clone();
+        return response.json();
+      })
+      .then((responseData) => {
+        if (expSrvgetSwaggerRes.ok) {
+          if (!download) {
+            this.setState({
+              "apiData": JSON.stringify(responseData, null, 2),
+              "downloadType": "swagger"
+            });
+          }
+          if (download) {
+            var a = document.createElement('a');
+            a.href = 'data:attachment/json,' + encodeURI(JSON.stringify(responseData, null, 2));
+            a.target = '_blank';
+            a.download = 'swagger.json';
+            a.click();
+          }
+        } else {
+          showAlert(this, (responseData.message) ? responseData.message : "Error occured");
+          if (expSrvgetSwaggerRes.status == 401) {
+            sessionStorage.removeItem('user')
+            sessionStorage.removeItem('token')
+          }
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  handleDownload() {
+    console.log("clicked");
+    debugger;
+    this.getSwaggerResponse(true);
+  }
+  getCurrentNodeDetails(component) {
     thisComponent.setState({
-      currentTreeDetails:component.state.treeEditDetails,
-      treedata:component.state.treedata,
-      crudComponent:component,
+      currentTreeDetails: component.state.treeEditDetails,
+      treedata: component.state.treedata,
+      crudComponent: component,
     })
-    }
- 
- 
+  }
+
+
   /* Render method */
   render() {
     let addOption, loadedComponent;
@@ -87,7 +133,7 @@ export default class extends React.Component{
           {
             text: 'Swagger 2.0',
           },
-          
+
           {
             text: 'Swagger 3.0',
           },
@@ -97,35 +143,35 @@ export default class extends React.Component{
         ]
       }
     ]
-   console.log(this.state.selectedSketch)
-    if(this.state && this.state.selectedSketch) {
+    console.log(this.state.selectedSketch)
+    if (this.state && this.state.selectedSketch) {
 
       const { searchColumn, columns, vocabularyData, query } = this.state;
       const resolvedColumns = resolve.columnChildren({ columns });
 
       /* Project Details Section */
-     /* var projectHeader = (this.state.selectedSketch) ? <div>
-        <h2>{this.state.selectedSketch["name"]}</h2>
-        <h3>{this.state.selectedSketch["description"]}</h3>
-        </div> : null;*/
-        var sketchName = "";
-        var sketchDesc = "";
-        if(this.state.selectedSketch){
-          sketchName = this.state.selectedSketch["name"];
-          sketchDesc = this.state.selectedSketch["description"];
-        }      
+      /* var projectHeader = (this.state.selectedSketch) ? <div>
+         <h2>{this.state.selectedSketch["name"]}</h2>
+         <h3>{this.state.selectedSketch["description"]}</h3>
+         </div> : null;*/
+      var sketchName = "";
+      var sketchDesc = "";
+      if (this.state.selectedSketch) {
+        sketchName = this.state.selectedSketch["name"];
+        sketchDesc = this.state.selectedSketch["description"];
+      }
       const resolvedRows = resolve.resolve({
         columns: resolvedColumns,
         method: resolve.nested
       })(vocabularyData);
-      const searchedRows = 
+      const searchedRows =
         search.multipleColumns({
           columns: resolvedColumns,
           query
         })(resolvedRows);
-      
-      var vocabTable,tableList;
-      if(searchedRows.length>0) {
+
+      var vocabTable, tableList;
+      if (searchedRows.length > 0) {
         tableList = <Table.Body
           ref={body => {
             this.bodyRef = body && body.getRef();
@@ -134,10 +180,10 @@ export default class extends React.Component{
           rowKey="name"
           onRow={this.onRow}
         />
-      } else{
+      } else {
         tableList = <tbody><tr><td>No Results Found</td><td></td></tr></tbody>
       }
-      vocabTable =  
+      vocabTable =
         <div>
           <div className="project-list-wrapper">
             <div className="col-md-12 col-sm-12">
@@ -147,12 +193,12 @@ export default class extends React.Component{
                 </Table.Header>
                 {tableList}
               </Table.Provider>
-            </div>  
+            </div>
           </div>
         </div>
 
-      if(query.all) {
-        addOption = <input className="btn btn-default" value="Add" type="submit"/>
+      if (query.all) {
+        addOption = <input className="btn btn-default" value="Add" type="submit" />
       } else {
         addOption = <input className="btn btn-default disabled" value="Add" type="button" />
       }
@@ -188,9 +234,9 @@ export default class extends React.Component{
         </form>
       </div>
     } else {
-      loadedComponent =  <div className="text-center loading-project-details">Loading...</div>
+      loadedComponent = <div className="text-center loading-project-details">Loading...</div>
     }
-     
+
     return (
       <div className="vocabulary-main-content">
         <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
@@ -206,18 +252,20 @@ export default class extends React.Component{
               </div>
               <div className="col-md-2 edit-sketch-info-wrapper">
                 <div>
-                  <i className="pull-left"><img src="/ui/src/images/shape-edit.png" alt="edit sketch image"/></i>
+                  <i className="pull-left"><img src="/ui/src/images/shape-edit.png" alt="edit sketch image" /></i>
                   <div className="edit-sketch-info">Edit Sketch Info</div>
                 </div>
               </div>
               <div className="col-md-offset-2 pull-right xs-pr-15 xs-pt-5">
                 <Button className="vocabulary-button-version" variant="regular" primary>Versions</Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <ThemeProvider theme={{ direction: 'rtl' }}>
+                               {/*  <ThemeProvider theme={{ direction: 'rtl' }}>
                   <Dropdown data={data} placement="bottom-start">
                     <Button className="vocabulary-button-preview" variant="regular" primary>Preview</Button>
                   </Dropdown>
-                </ThemeProvider>
+                </ThemeProvider> */}
+                <Button className="vocabulary-button-preview" variant="regular" onClick={this.handleDownload} primary>Preview</Button>
+
               </div>
             </div>
           </div>
@@ -237,15 +285,15 @@ export default class extends React.Component{
               <AddVocabulary selectedSketch={this.state.selectedSketch} />
             </div>
 
-<div className="col-md-7">
-<CRUDSketch getCurrentNodeDetails={this.getCurrentNodeDetails} />
-</div>
+            <div className="col-md-7">
+              <CRUDSketch getCurrentNodeDetails={this.getCurrentNodeDetails} />
+            </div>
 
-<div className="col-md-3">
-<NodeProperties nodeData={this.state.currentTreeDetails} treedata={this.state.treedata} component={this.state.crudComponent}/>
-</div>
-</div>
-</div>
+            <div className="col-md-3">
+              <NodeProperties nodeData={this.state.currentTreeDetails} treedata={this.state.treedata} component={this.state.crudComponent} />
+            </div>
+          </div>
+        </div>
 
 
       </div>

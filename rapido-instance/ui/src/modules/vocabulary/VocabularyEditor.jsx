@@ -17,7 +17,6 @@ import AddVocabulary from './AddVocabulary';
 import NodeProperties from '../d3/NodeDetailsComponent';
 import CRUDSketch from '../CRUDSketch';
 import ExportGithubModal from '../export/ExportGithub';
-import ExportService from '../export/ExportServices'
 
 var thisComponent;
 export default class extends React.Component {
@@ -145,6 +144,10 @@ export default class extends React.Component {
     let addOption, loadedComponent;
     let editSketchInfo;
 
+    const myScrollbar = {
+      width: "63%",
+      height: "600px",
+    };
     const data = [
       {
         items: [
@@ -312,19 +315,21 @@ export default class extends React.Component {
         <div className="row white-bg">
           <div className="">
 
-            <div className="col-md-2">
-              <AddVocabulary selectedSketch={this.state.selectedSketch} />
-            </div>
+<div className="vocabulary-div">
+<AddVocabulary selectedSketch={this.state.selectedSketch} />
+</div>
+<div className="" id="sidebar">
+<CRUDSketch getCurrentNodeDetails={this.getCurrentNodeDetails} />
+</div>
 
-            <div className="col-md-7">
-              <CRUDSketch getCurrentNodeDetails={this.getCurrentNodeDetails} />
-            </div>
 
-            <div className="col-md-3">
-              <NodeProperties nodeData={this.state.currentTreeDetails} treedata={this.state.treedata} component={this.state.crudComponent} />
-            </div>
-          </div>
-        </div>
+<div className="cursor-drag">
+  </div>
+<div className="" id="nodeContainer">
+<NodeProperties nodeData={this.state.currentTreeDetails} treedata={this.state.treedata} component={this.state.crudComponent}/>
+</div>
+</div>
+</div>
 
 
       </div>

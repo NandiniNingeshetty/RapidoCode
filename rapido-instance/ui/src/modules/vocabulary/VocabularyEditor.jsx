@@ -16,6 +16,7 @@ import  Popover from 'mineral-ui/Popover';
 import  AddVocabulary from './AddVocabulary';
 import NodeProperties from '../d3/NodeDetailsComponent';
 import CRUDSketch from '../CRUDSketch';
+import ExportGithubModal from '../export/ExportGithub';
 var thisComponent;
 export default class extends React.Component{
   
@@ -66,6 +67,13 @@ export default class extends React.Component{
   componentWillMount() {
     this.setState({
         selectedSketch: JSON.parse(sessionStorage.getItem('selectedSketch'))
+    });
+  }
+
+  
+  ExportGithubToggleModal(type) {
+    this.setState({
+      ExportGithubModalIsOpen: !this.state.ExportGithubModalIsOpen
     });
   }
   getCurrentNodeDetails(component){
@@ -215,13 +223,16 @@ export default class extends React.Component{
                 &nbsp;&nbsp;&nbsp;&nbsp; */}
                 <Button className="vocabulary-button-version" variant="regular" primary>Publishto CA PORTAL </Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <Button className="vocabulary-button-version" variant="regular" primary>Push to Github </Button>
+                <Button className="vocabulary-button-version" variant="regular" primary onClick={this.ExportGithubToggleModal.bind(this)}>Push to Github </Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <ThemeProvider theme={{ direction: 'rtl' }}>
                   <Dropdown data={data} placement="bottom-start">
                     <Button className="vocabulary-button-preview" variant="regular" primary>Preview</Button>
                   </Dropdown>
                 </ThemeProvider>
+                  <ExportGithubModal show={this.state.ExportGithubModalIsOpen}
+                    onClose={this.ExportGithubToggleModal.bind(this)}>
+                </ExportGithubModal>
               </div>
             </div>
           </div>

@@ -16,6 +16,8 @@ import  Popover from 'mineral-ui/Popover';
 import  AddVocabulary from './AddVocabulary';
 import NodeProperties from '../d3/NodeDetailsComponent';
 import CRUDSketch from '../CRUDSketch';
+
+
 var thisComponent;
 export default class extends React.Component{
   
@@ -80,7 +82,10 @@ export default class extends React.Component{
   /* Render method */
   render() {
     let addOption, loadedComponent;
-
+    const myScrollbar = {
+      width: "63%",
+      height: "600px",
+    };
     const data = [
       {
         items: [
@@ -228,15 +233,17 @@ export default class extends React.Component{
 <div className="row white-bg">
 <div className="">
 
-<div className="col-md-2">
+<div className="vocabulary-div">
 <AddVocabulary selectedSketch={this.state.selectedSketch} />
 </div>
-
-<div className="col-md-7">
+<div className="" id="sidebar">
 <CRUDSketch getCurrentNodeDetails={this.getCurrentNodeDetails} />
 </div>
 
-<div className="col-md-3">
+
+<div className="cursor-drag">
+  </div>
+<div className="" id="nodeContainer">
 <NodeProperties nodeData={this.state.currentTreeDetails} treedata={this.state.treedata} component={this.state.crudComponent}/>
 </div>
 </div>

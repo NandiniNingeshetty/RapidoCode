@@ -213,7 +213,7 @@ export default class extends React.Component {
 
       loadedComponent =
         <div className={"row " + (this.state.projectDetails["access"] == "READ" ? 'sketchProjectDisabled' : '')}>
-          <div className="col-xs-12 sketches-tree">
+          <div className="sketches-tree">
             {saveSketch}
             <CRUDTree
               data={
@@ -248,7 +248,7 @@ export default class extends React.Component {
 
     return (<div>
       <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
-      <div className="col-md-12 sketch-list-wrapper">
+      <div className="sketch-list-wrapper">
         {loadedComponent}
       </div>
     </div>)

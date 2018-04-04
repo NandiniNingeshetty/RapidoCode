@@ -1013,12 +1013,14 @@
     }
     
     .Rectangle-8-Copy {
-        width: 282px;
+        width: 274px;
         min-height: 800px;
         background-color: #ffffff;
         border-left: 3px solid #d8d8d8;
         height: 100%;
         overflow: hidden;
+        /*cursor: col-resize;*/
+        padding-left: 20px;
     }
     
     shared-section {
@@ -1050,7 +1052,7 @@
     }
     
     .vocabulary-main-content {
-        min-height: 500px
+        min-height: 600px
     }
     
     .vocabulary-button-preview {

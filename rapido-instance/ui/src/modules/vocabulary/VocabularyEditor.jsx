@@ -210,8 +210,12 @@ export default class extends React.Component{
                   <div className="edit-sketch-info">Edit Sketch Info</div>
                 </div>
               </div>
-              <div className="col-md-offset-2 pull-right xs-pr-15 xs-pt-5">
-                <Button className="vocabulary-button-version" variant="regular" primary>Versions</Button>
+              <div className="pull-right xs-pr-15 xs-pt-5">
+                {/* <Button className="vocabulary-button-version" variant="regular" primary>Versions</Button>
+                &nbsp;&nbsp;&nbsp;&nbsp; */}
+                <Button className="vocabulary-button-version" variant="regular" primary>Publishto CA PORTAL </Button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Button className="vocabulary-button-version" variant="regular" primary>Push to Github </Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <ThemeProvider theme={{ direction: 'rtl' }}>
                   <Dropdown data={data} placement="bottom-start">

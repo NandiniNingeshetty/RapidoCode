@@ -25,7 +25,7 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     thisComponent = this;
-    this.state = {
+    this.state = {      
       searchColumn: 'all',
       selectedSketch: {},
       query: {},
@@ -130,10 +130,20 @@ export default class extends React.Component {
     })
   }
 
+  /* Method to handle edit sketch info click */
+  navigateToDetails() {
+    sessionStorage.setItem('sketchId', this.state.selectedSketch.projectid);
+    sessionStorage.setItem('selectedSketch', JSON.stringify(this.state.selectedSketch));
+    sessionStorage.setItem('sketchName', this.state.selectedSketch.name);
+    sessionStorage.removeItem('vocabularyInfo');
+    sessionStorage.setItem('updateMode',true)
+    browserHistory.push('/nodes/add');
+ }
 
   /* Render method */
   render() {
     let addOption, loadedComponent;
+    let editSketchInfo;
 
     const data = [
       {
@@ -244,6 +254,10 @@ export default class extends React.Component {
     } else {
       loadedComponent = <div className="text-center loading-project-details">Loading...</div>
     }
+    
+    if (this.state.selectedSketch) {    
+          editSketchInfo=<div className="edit-sketch-info" onClick={this.navigateToDetails.bind(this)}>Edit Sketch Info</div>
+    }
 
     return (
       <div className="vocabulary-main-content">
@@ -261,7 +275,8 @@ export default class extends React.Component {
               <div className="col-md-2 edit-sketch-info-wrapper">
                 <div>
                   <i className="pull-left"><img src="/ui/src/images/shape-edit.png" alt="edit sketch image" /></i>
-                  <div className="edit-sketch-info">Edit Sketch Info</div>
+                  {/* <div className="edit-sketch-info">Edit Sketch Info</div> */}
+                  {editSketchInfo}
                 </div>
               </div>
               <div className="pull-right xs-pr-15 xs-pt-5">

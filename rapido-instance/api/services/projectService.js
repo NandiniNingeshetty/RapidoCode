@@ -609,8 +609,9 @@ var projectService = {
 
         if(!request.user.githubToken) {
             logger.error("User is not github user");
+            var httpCode = 500;
             var err = {
-                "code": 500,
+                "code": httpCode,
                 "message": "User is not logged into github"
             };
             response.status(httpCode).json(err);

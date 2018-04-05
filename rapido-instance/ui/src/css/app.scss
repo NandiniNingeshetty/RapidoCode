@@ -112,7 +112,12 @@
     width: 63%;
     float: left;
     padding-left: 55px;
-    overflow: scroll;
+    overflow: hidden;
+}
+
+#sidebar:hover {
+    overflow-x: scroll;
+    overflow-y: scroll
 }
 
 .vocabulary-div {

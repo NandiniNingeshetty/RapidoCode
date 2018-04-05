@@ -30,7 +30,7 @@ export function addNode(component, event) {
   component.showDetailsSection(event.source);
 }
 
-export function deleteNode(component, event) {
+export function deleteNode(component, ProjectService,browserHistory,event) {
   component.fetchChild(component.state.treedata, function(d) {
       if (d.children) {
         d.children.forEach((item, index) => {
@@ -54,6 +54,17 @@ export function deleteNode(component, event) {
         apiExportData: {}
       }
     });
+
+    let savedVocabulary;
+    let userDetails = JSON.parse(sessionStorage.getItem('userInfo'));
+    let VocabularyStored = sessionStorage.getItem('vocabularyInfo')
+    if (VocabularyStored) {
+      savedVocabulary = JSON.parse(VocabularyStored);
+    } else {
+      savedVocabulary = []
+    }
+
+    updateSketch(component, savedVocabulary, ProjectService, browserHistory)
 }
 
 export function updatePath(component, event) {

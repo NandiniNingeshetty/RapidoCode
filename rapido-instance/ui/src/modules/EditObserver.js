@@ -5,43 +5,43 @@ let handlers = [];
 
 export default class {
 
-  constructor() {
-    if (!instance) {
-      instance = this;
-    }
-    return instance;
-  }
-
-  addObserver(fn) {
-    handlers.push(fn);
-  }
-
-  removeObserver(fn) {
-    handlers = handlers.filter(
-      function(item) {
-        if (item !== fn) {
-          return item;
+    constructor() {
+        if (!instance) {
+            instance = this;
         }
-      }
-    );
-  }
+        return instance;
+    }
 
-  nullifyObserver(){
-    handlers = [];
-  }
+    addObserver(fn) {
+        handlers.push(fn);
+    }
+
+    removeObserver(fn) {
+        handlers = handlers.filter(
+            function(item) {
+                if (item !== fn) {
+                    return item;
+                }
+            }
+        );
+    }
+
+    nullifyObserver(){
+        handlers = [];
+    }
   
-  count() {
-    return handlers.length;
-  }
+    count() {
+        return handlers.length;
+    }
 
-  getObservers() {
-    return handlers;
-  }
+    getObservers() {
+        return handlers;
+    }
 
-  notify(event) {
-    handlers.forEach(function(handler) {
-      handler(event);
-    })
+    notify(event) {
+        handlers.forEach(function(handler) {
+            handler(event);
+        });
 
-  }
+    }
 }

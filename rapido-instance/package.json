@@ -20,7 +20,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "lint":"eslint --fix ui/src/**/*.js",
+    "lint": "eslint --fix ui/src/**/*.js",
+    "precommit": "lint-staged",
     "postinstall": "",
     "postupdate": "",
     "ui-test:local": "karma start",
@@ -30,6 +31,12 @@
     "build": "webpack -p --config ui/webpack.prod.config.js",
     "build:dev": "webpack --config ui/webpack.config.js",
     "dev": " npm run lint && webpack-dev-server --config ui/webpack.config.js --display-error-details --watch --watch-polling --progress --colors --host=0.0.0.0 --port 8090 --history-api-fallback"
+  },
+  "lint-staged": {
+    "ui/**/*.{js,json,scss,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "engines": {
     "node": ">=0.10"
@@ -53,9 +60,11 @@
     "github-api": "^3.0.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.10.0",
+    "husky": "^0.14.3",
     "jquery": "^2.2.3",
     "jsonwebtoken": "^8.0.1",
     "knex": "^0.13.0",
+    "lint-staged": "^7.0.4",
     "loadash": "^1.0.0",
     "mineral-ui": "^0.17.0",
     "mineral-ui-icons": "^0.3.0",
@@ -118,6 +127,7 @@
     "mocha": "*",
     "node-sass": "^4.5.0",
     "phantomjs-polyfill-object-assign": "0.0.2",
+    "prettier": "1.11.1",
     "react-addons-test-utils": "~15.4.2",
     "sass-loader": "^6.0.2",
     "style-loader": "~0.13.1",

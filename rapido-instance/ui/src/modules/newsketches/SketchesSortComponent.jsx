@@ -8,13 +8,15 @@ import { ThemeProvider } from 'mineral-ui/themes';
 import Select from 'react-select';
 import TextInput from 'mineral-ui/TextInput';
 import Icon from 'mineral-ui/Icon';
-import {IconSearch} from 'mineral-ui-icons';
+import { IconSearch } from 'mineral-ui-icons';
 
 export class SketchesSortComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showFilter: false
+    };
     this.alertOptions = AlertOptions;
   }
   openCloseSearch() {
@@ -26,24 +28,40 @@ export class SketchesSortComponent extends React.Component {
   addNewSketch() {
     sessionStorage.setItem('sketchId', 'null');
     sessionStorage.setItem('sketchName', 'null');
-    sessionStorage.setItem('updateMode',false)
+    sessionStorage.setItem('updateMode', false)
     sessionStorage.removeItem('vocabularyInfo');
     browserHistory.push('/nodes/add');
   }
 
+  showFilterOptions(e){
+    e.preventDefault();
+    this.setState({showFilter: !this.state.showFilter})
+  }
+
   render() {
     const icon = <IconSearch />;
+    const filterOptions = <span>
+      <label className="view-text">Filter&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+      <select
+        name="form-field-name"
+        className="custom-select">
+        <option className="custom-select-option">Apps Team</option>
+        <option className="custom-select-option">Dev Team</option>
+        <option className="custom-select-option">API Experts</option>
+      </select>
+      <span className="anchor-tag"><a>&nbsp;&nbsp;Clear</a></span>
+    </span>
     return (
       <div className="col-md-12">
 
-        <div className="col-md-6 pull-left">
+        <div className="col-md-5 pull-left">
           <ul className="button-inline">
-          <li  onClick={this.addNewSketch.bind(this)}><Button className="new-sketch-text"  variant="regular" primary>New Sketch</Button></li>
+            <li onClick={this.addNewSketch.bind(this)}><Button className="new-sketch-text" variant="regular" primary>New Sketch</Button></li>
             <li className="xs-pl-10"><TextInput iconEnd={icon} type="text" className=" visible search-textbox" onChange={this.props.onChange} size="small"
-             placeholder="Search Sketches..." /></li>
+              placeholder="Search" /></li>
           </ul>
         </div>
-        <div className=" pull-right">
+        <div className="col-md-6 pull-right xs-pr-0">
           <label className="view-text">View&nbsp;&nbsp;:&nbsp;&nbsp;</label>
           <select
             name="form-field-name"
@@ -52,25 +70,18 @@ export class SketchesSortComponent extends React.Component {
             <option className="custom-select-option">Personal</option>
             <option className="custom-select-option">Shared</option>
           </select>
-        <span className="xs-pl-10">
-          <label className="view-text">Filter&nbsp;&nbsp;:&nbsp;&nbsp;</label>
-          <select
-            name="form-field-name"
-            className="custom-select">
-            <option className="custom-select-option">Apps Team</option>
-            <option className="custom-select-option">Dev Team</option>
-            <option className="custom-select-option">API Experts</option>
-          </select>
-          <span className="anchor-tag"><a>&nbsp;&nbsp;Clear</a></span>
-    </span> 
-      <span className="xs-pl-10 xs-pr-15">
-          <label className="view-text">Sort By&nbsp;:&nbsp;</label>
-          <span className="xs-pl-5"><Button className="activeButton" size="small" primary>Created</Button></span>
-          <span className="xs-pl-5"><Button size="small" className="inactiveButton" disabled>Updated</Button></span>
-          <span className="xs-pl-5"><Button size="small" className="inactiveButton" disabled>Name</Button></span>
+          <span className="xs-pl-10">
+            <span><i className="filter-icon" onClick={this.showFilterOptions.bind(this)}><img src="/ui/src/images/filter.png"/></i></span>
+            {this.state.showFilter && filterOptions}
           </span>
+          <span className="xs-pl-10 xs-pr-15 sort pull-right">
+            <label className="view-text">Sort By&nbsp;:&nbsp;</label>
+            <span className="xs-pl-5"><Button className="activeButton" size="small" primary>Created</Button></span>
+            <span className="xs-pl-5"><Button size="small" className="inactiveButton" disabled>Updated</Button></span>
+            <span className="xs-pl-5"><Button size="small" className="inactiveButton" disabled>Name</Button></span>
+          </span>          
         </div>
-    
+
       </div>
 
     )

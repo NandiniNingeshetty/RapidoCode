@@ -168,16 +168,19 @@ export default class extends React.Component{
             <span className="logo-text header-text">CA API Design</span>
           </Link>
         </div>
-        <div className="col-md-3">
-        <ul className="top-header-tabs">
-          <Link to="/sketches"><li className="active-tab">Sketches</li></Link>
+        {/* <div className="col-md-3">
+          <ul className="top-header-tabs">
+            <Link to="/sketches"><li className="active-tab">Sketches</li></Link>
             <li className="border-right inactive-tab">Team</li>
           </ul>
-          </div>
-        <div className="col-md-4 col-sm-9">
+        </div> */}
+        <div className="col-md-2 col-sm-9 pull-right">          
           <div className="col-md-12 col-sm-12">
+            <div className="col-md-2 col-sm-2 user-img">
+              <i><img src="/ui/src/images/user.png"/></i>
+            </div>
             <Dropdown placement="bottom-end" className="profileDropdown" data={profileDropdownItems}>
-              <profileDropdownBtn>{this.props.userInfo.email} ▾</profileDropdownBtn>
+              <profileDropdownBtn><div className="col-md-12 col-sm-12"><div className="row Hello">Hello!</div><div className="row">{this.props.userInfo.firstname}&nbsp;{this.props.userInfo.lastname} ▾</div></div></profileDropdownBtn>
             </Dropdown>
           </div>
         </div>

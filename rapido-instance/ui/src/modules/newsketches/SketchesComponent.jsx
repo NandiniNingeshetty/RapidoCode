@@ -51,7 +51,7 @@ export class SketchesComponent extends React.Component {
         sessionStorage.setItem('sketchName', row.row.name);
         sessionStorage.removeItem('vocabularyInfo');
         sessionStorage.setItem('updateMode',true)
-        browserHistory.push('/nodes/add');
+        browserHistory.push('/vocabulary');
     }
     /* Method to toggle modal */
     toggleModal(row) {
@@ -171,7 +171,8 @@ export class SketchesComponent extends React.Component {
                 </div>
 
 
-                <div className="row shared-list">
+                
+                <div className="row shared-sketch">
                     <div className="col-md-12">
                         <div className="col-md-3">
 

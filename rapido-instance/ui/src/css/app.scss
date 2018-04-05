@@ -12,7 +12,7 @@
 .main-content {
     overflow: auto;
     margin: 0;
-    margin-left: 0.7%;
+    /*margin-left: 0.7%;*/
     padding: 0;
     input.active:invalid {
         box-shadow: 0 0 5px 1px red;
@@ -112,12 +112,14 @@
     width: 63%;
     float: left;
     padding-left: 55px;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 700px;
 }
 
 #sidebar:hover {
-    overflow-x: scroll;
-    overflow-y: scroll
+    overflow-x: auto;
+    overflow-y: auto
 }
 
 .vocabulary-div {
@@ -138,4 +140,8 @@
     cursor: col-resize;
     float: left;
     min-height: 800px;
+}
+
+.xs-pl-25 {
+    padding-left: 25px;
 }

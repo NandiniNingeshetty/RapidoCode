@@ -100,11 +100,22 @@ export default class extends React.Component{
       childData: this.props.childInfo,
       childUpdatedData: this.props.childInfo
     });
-    if(this.props.childInfo.apiList.length > 0)
+    if(this.props.childInfo.apiList.length > 0){
+      this.setState({
+        apiStatus:this.props.childInfo.apiList[0].apiType
+      })
+    } 
+  else{
     this.setState({
-      apiStatus:this.props.childInfo.apiList[0].apiType
+      options : [
+        { apiType: 'GET', label: 'GET' , id:'', completed: false, request: '', response: '', summary: '' },
+        { apiType: 'POST', label: 'POST', id:'', completed: false, request: '', response: '', summary: '' },
+        { apiType: 'PUT', label: 'PUT' , id:'', completed: false, request: '', response: '', summary: '' },
+        { apiType: 'PATCH', label: 'PATCH', id:'', completed: false, request: '', response: '', summary: '' },
+        { apiType: 'DELETE', label: 'DELETE', id:'', completed: false, request: '', response: '', summary: '' }
+      ],
     })
-  
+  }
   }
   /* Method to associate node details */
   associateNode(validity) {

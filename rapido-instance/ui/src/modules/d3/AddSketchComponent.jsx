@@ -145,22 +145,22 @@ export default class extends React.Component{
     event.preventDefault();
     let updateMode = sessionStorage.getItem("updateMode")
     console.log("editmode",updateMode)
-    if(updateMode){
-      var projectInfo = this.state.projectInfo;
-      component.setActiveStatus(component.state.treedata);
-      component.state.projectInfo.projectName = projectInfo.projectName;
-      component.state.projectInfo.projectDesc = projectInfo.projectDesc;
-      console.log(component)
-      console.log(this)
-      this.setState({
-        projectInfo:{
-          projectName:projectInfo.projectName,
-          projectDesc:projectInfo.projectDesc
-        }
-      })
+    // if(updateMode){
+    //   var projectInfo = this.state.projectInfo;
+    //   component.setActiveStatus(component.state.treedata);
+    //   component.state.projectInfo.projectName = projectInfo.projectName;
+    //   component.state.projectInfo.projectDesc = projectInfo.projectDesc;
+    //   console.log(component)
+    //   console.log(this)
+    //   this.setState({
+    //     projectInfo:{
+    //       projectName:projectInfo.projectName,
+    //       projectDesc:projectInfo.projectDesc
+    //     }
+    //   })
       
-      browserHistory.push('/vocabulary');
-    }else 
+    //   browserHistory.push('/vocabulary');
+    // }else 
       if (this.showFormErrors()) {
         var projectInfo = this.state.projectInfo;
         addEmptySketch(this, []);

@@ -675,7 +675,6 @@
     }
     
     .view-text {
-        margin-left: -10px;
         font-family: Helvetica;
         font-size: 12px;
         font-weight: normal;
@@ -1458,6 +1457,7 @@
         letter-spacing: normal;
         text-align: left;
         color: #4a90e2;
+        cursor: pointer;
       }
 
     .sketch-desc-view {

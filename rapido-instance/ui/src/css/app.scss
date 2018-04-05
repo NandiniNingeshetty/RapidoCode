@@ -101,3 +101,36 @@
 .sketches-tree {
     margin-left: -6%;
 }
+
+#nodeContainer {
+    /*width: 300px;*/
+    width: 20%;
+    display: inline-block;
+}
+
+#sidebar {
+    width: 63%;
+    float: left;
+    padding-left: 55px;
+    overflow: scroll;
+}
+
+.vocabulary-div {
+    width: 13%;
+    float: left;
+}
+
+.node-button {
+    float: right;
+    padding-right: 5px;
+}
+
+.cursor-drag {
+    background-color: #d8d8d8;
+    width: 5px;
+    height: 100%;
+    display: inline-block;
+    cursor: col-resize;
+    float: left;
+    min-height: 800px;
+}

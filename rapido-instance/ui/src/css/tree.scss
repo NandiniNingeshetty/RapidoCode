@@ -89,17 +89,17 @@
     }
     .active {
         fill: #4a90e2;
-        text {
-            fill: white !important;
-            font-size: 8px;
-        }
+    }
+    .activeText {
+        fill: white !important;
+        font-size: 8px;
     }
     .inactive {
         fill: #d6d6d6;
-        text {
-            font: black !important;
-            font-size: 8px;
-        }
+    }
+    .inactiveText {
+        fill: black !important;
+        font-size: 8px;
     }
     text {
         fill: white;

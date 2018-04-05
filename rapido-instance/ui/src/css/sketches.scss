@@ -675,6 +675,7 @@
     }
     
     .view-text {
+        margin-left: -10px;
         font-family: Helvetica;
         font-size: 12px;
         font-weight: normal;
@@ -828,33 +829,33 @@
     .border-bottom {
         border-bottom: 1px solid #d4d4d4;
         padding-top: 30px;
-        padding-bottom: 10px;        
-    }   
+        padding-bottom: 10px;
+    }
     
     .xs-pr-15 {
         padding-right: 15px;
     }
-
+    
     .temp {
         background-color: #4a90e2;
         margin-top: 15px;
         margin-left: 0.5%;
         margin-bottom: -17px;
     }
-
+    
     .button-section {
         margin-right: -3.2%;
         margin-top: 10px;
     }
-
+    
     .sketch-border {
         border-bottom: 1px solid #d4d4d4;
     }
-
+    
     .sketch-header {
         padding-top: 30px;
-        padding-bottom: 10px;  
-        margin-left: 4.3%;      
+        padding-bottom: 10px;
+        margin-left: 4.3%;
     }
     
     .Sketch-Name {
@@ -1064,7 +1065,7 @@
         line-height: normal;
         letter-spacing: normal;
         text-align: left;
-        color: #4a4a4a;        
+        color: #4a4a4a;
     }
     
     .vocabulary-header-shared {
@@ -1149,7 +1150,7 @@
     .vocabulary-text {
         height: 30px;
         padding: 6px;
-        padding-left: 14px;
+        padding-left: 36px;
         border-bottom: 1px solid #cfcfcf;
         padding-top: 7px
     }
@@ -1415,7 +1416,7 @@
     .Rectangle-5-Copy-10 {
         height: 25px;
     }
-
+    
     .sort {
         padding-right: 0px;
         margin-right: -1.2%;
@@ -1433,18 +1434,18 @@
         letter-spacing: normal;
         text-align: left;
         color: #9b9b9b;
-      }
-
+    }
+    
     .edit-sketch-info-wrapper {
         height: 30px;
         border-left: 1px solid #d8d8d8;
     }
-
+    
     .edit-sketch-info-wrapper div {
         margin-top: 7px;
     }
-
-    .edit-sketch-info {      
+    
+    .edit-sketch-info {
         height: 20px;
         margin-left: 20px;
         padding-top: 0.95%;
@@ -1462,17 +1463,17 @@
 
     .sketch-desc-view {
         margin-top: -0.8%;
-      }
-
-    .card-block {        
+    }
+    
+    .card-block {
         border-radius: 5px;
         background-color: #ffffff;
         border: solid 1px #d6d6d6;
         box-shadow: none;
-        width:275px;
+        width: 275px;
         height: 100px;
     }
-
+    
     .wrapper-info {
         font-family: Helvetica;
         font-size: 12px;
@@ -1484,16 +1485,16 @@
         text-align: left;
         margin-left: 2.2%;
     }
-
+    
     .xs-pr-0 {
         padding-right: 0px;
     }
-
+    
     .filter-icon {
         cursor: pointer;
         margin-right: 15px;
     }
-
+    
     .Hello {
         width: 26px;
         height: 12px;
@@ -1506,7 +1507,7 @@
         letter-spacing: normal;
         text-align: left;
     }
-
+    
     .edit-sketch-header {
         margin-top: 12px;
     }

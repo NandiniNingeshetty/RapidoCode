@@ -58,7 +58,7 @@ export default class extends React.Component {
       addNode(component, event)
     } else if (event.name === "delete") {
       // alert(event.source.pId)
-      deleteNode(component, event);
+      deleteNode(component, ProjectService,browserHistory,event);
     } else if (event.name === "updatePath") {
       //alert(event.source.pId)
       updatePath(component, event)

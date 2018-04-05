@@ -17,6 +17,8 @@ import AddVocabulary from './AddVocabulary';
 import NodeProperties from '../d3/NodeDetailsComponent';
 import CRUDSketch from '../CRUDSketch';
 import ExportGithubModal from '../export/ExportGithub';
+import ExportService from '../export/ExportServices'
+
 
 var thisComponent;
 export default class extends React.Component {
@@ -80,7 +82,7 @@ export default class extends React.Component {
   }  
   /* Method to get Swagger Response */
   getSwaggerResponse(download) {
-    debugger
+
     let expSrvgetSwaggerRes = null;
     let sketchId = JSON.parse(sessionStorage.getItem('sketchId'));
     ExportService.getSwaggerJSON(sketchId, download)
@@ -266,7 +268,7 @@ export default class extends React.Component {
       <div className="vocabulary-main-content">
         <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
         <div className="vocabulary-header">
-          <div className="row">
+          <div className="row xs-pl-10">
             <div className="col-md-12 edit-sketch-header">
               <div className=" col-md-6 pull-left ">
                 <span className="vocabulary-header-title">{sketchName}</span>
@@ -304,7 +306,7 @@ export default class extends React.Component {
             </div>
           </div>
 
-          <div className="row">
+          <div className="row xs-pl-10">
             <div className="col-md-12">
               <div className="col-md-6 pull-left view-text">
                 {sketchDesc}
@@ -313,7 +315,7 @@ export default class extends React.Component {
           </div>
         </div>
         <div className="row white-bg">
-          <div className="">
+<div className="">
 
 <div className="vocabulary-div">
 <AddVocabulary selectedSketch={this.state.selectedSketch} />

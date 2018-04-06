@@ -145,22 +145,34 @@ export default class extends React.Component{
     event.preventDefault();
     let updateMode = sessionStorage.getItem("updateMode")
     console.log("editmode",updateMode)
-    // if(updateMode){
-    //   var projectInfo = this.state.projectInfo;
-    //   component.setActiveStatus(component.state.treedata);
-    //   component.state.projectInfo.projectName = projectInfo.projectName;
-    //   component.state.projectInfo.projectDesc = projectInfo.projectDesc;
-    //   console.log(component)
-    //   console.log(this)
-    //   this.setState({
-    //     projectInfo:{
-    //       projectName:projectInfo.projectName,
-    //       projectDesc:projectInfo.projectDesc
-    //     }
-    //   })
+    let sketchId = sessionStorage.getItem('sketchId');
+    console.log("sketchId", sketchId);
+    let updatedSketchInfo = JSON.parse(sessionStorage.getItem('selectedSketch'));
+    
+    if(sketchId !="null"){
+      debugger;
+      var projectInfo = this.state.projectInfo;      
+      this.state.projectInfo.projectName = projectInfo.projectName;
+      this.state.projectInfo.projectDesc = projectInfo.projectDesc;      
+     
+      this.setState({
+        projectInfo:{
+          projectName:projectInfo.projectName,
+          projectDesc:projectInfo.projectDesc
+        }
+      })
+
+      for (var key in updatedSketchInfo) {
+        if( key==="name"){  updatedSketchInfo[key]=this.state.projectInfo.projectName; console.log(key, updatedSketchInfo[key])}
+        if( key==="description"){  updatedSketchInfo[key]=this.state.projectInfo.projectDesc; console.log(key, updatedSketchInfo[key])}
+      }
+      sessionStorage.setItem('selectedSketch',JSON.stringify(updatedSketchInfo))
+      sessionStorage.setItem('projectInfo',JSON.stringify(this.state.projectInfo))
       
-    //   browserHistory.push('/vocabulary');
-    // }else 
+      
+      browserHistory.push('/vocabulary');
+    }else {
+      debugger;
       if (this.showFormErrors()) {
         var projectInfo = this.state.projectInfo;
         addEmptySketch(this, []);
@@ -171,7 +183,7 @@ export default class extends React.Component{
         createSketch(component, [], ProjectService, browserHistory)
 
       }
- 
+    }
 
    // }
 
@@ -325,7 +337,7 @@ export default class extends React.Component{
            {/* <button type="submit" className="btn btn-default pull-right Rectangle-4-Copy-7">
               <label className="Proceed">Proceed</label>
             </button>
-            <button className="btn btn-default pull-right Rectangle-4-Copy-6">
+            <button className="btn btn-default pull-right Rectangle-4-Copy-6">  
               <label className="Cancel">Cancel</label>
             </button> */} 
           </div>

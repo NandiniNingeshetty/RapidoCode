@@ -89,9 +89,7 @@ export class SketchesComponent extends React.Component {
             });
     }
     render() {
-        console.log("Sketches List")
-        console.log(this.props.sketches)
-
+    
         let { filteredData } = this.state;
         if (filteredData == undefined) {
             filteredData = this.props.sketches;
@@ -105,6 +103,8 @@ export class SketchesComponent extends React.Component {
             <h3>Looks like you are getting started. Go ahead and start off with creating a new sketch or team below.</h3>
         </div>
 
+        const sketchesResultNotFound = <div className="titleContainer firstTime noResultsFound">
+                <h2>No Results found</h2></div>
 
         if (this.state && this.props.sketches) {
             if (this.props.sketches && this.props.sketches.length > 0) {
@@ -128,6 +128,11 @@ export class SketchesComponent extends React.Component {
                         <CardComponent title={row.name} block={cardBlock} />
                     </div>);
                 }, this)
+                if(filteredData.length==0){
+                    content = <div>
+                        {sketchesResultNotFound}
+                    </div>
+                }
             } else {
                 content = <div>
                     {sketchesNotFound}

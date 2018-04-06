@@ -98,7 +98,8 @@ export default class extends React.Component{
     }, this)
     this.setState({
       childData: this.props.childInfo,
-      childUpdatedData: this.props.childInfo
+      childUpdatedData: this.props.childInfo,
+      currentNodeId: this.props.childInfo.pId,
     });
     if(this.props.childInfo.apiList.length > 0){
       this.setState({
@@ -299,7 +300,7 @@ export default class extends React.Component{
                         <div className="url-text-wrapper">
                             <div className="url-text">
      
-            <AutoSuggest queryInput={this.state.childData.url} updateSuggestedDetails={(val, mode)=>this.handleURLChange(val, 'url')}/>
+            <AutoSuggest key={this.state.currentNodeId} queryInput={this.state.childData.url} updateSuggestedDetails={(val, mode)=>this.handleURLChange(val, 'url')}/>
           
     </div>
                             <div className="bitmap-img"><img src="/ui/src/images/bitmap.png" /> </div>

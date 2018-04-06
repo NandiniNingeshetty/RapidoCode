@@ -297,12 +297,11 @@ export default class extends React.Component{
                             <i className="fa fa-question-circle vocabulary-icon"></i>
                         </Popover>
                         <div className="url-text-wrapper">
-                            <div className="url-text"><TextInput size="small" className="url-text"
-                                defaultValue="/"
-                                value={this.state.childData.url}
-                                onChange={(evt) => this.handleURLChange(evt.target.value,'url')}
-                                required
-                            /></div>
+                            <div className="url-text">
+     
+            <AutoSuggest queryInput={this.state.childData.url} updateSuggestedDetails={(val, mode)=>this.handleURLChange(val, 'url')}/>
+          
+    </div>
                             <div className="bitmap-img"><img src="/ui/src/images/bitmap.png" /> </div>
                         </div>                 
                     </div>

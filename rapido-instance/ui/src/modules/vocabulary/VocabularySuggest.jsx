@@ -143,7 +143,7 @@ export default class extends React.Component{
     };
     
     return (
-      <div className="col-md-12 vocabulary-suggest">
+      <div className=" vocabulary-suggest">
          <Autosuggest
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}

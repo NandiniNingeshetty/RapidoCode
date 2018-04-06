@@ -180,7 +180,15 @@ exportJson.prototype.createSwagger = function (obj, reqProtocol, reqHost) {
 
             definition1["type"] = (_.isArray(innerData["responses"])) ? "array" : typeof innerData["responses"];
             var prop = (definition1["type"] == "array" ? "items" : "properties");
-            definition1[prop] = propertyObj;
+            if(prop == "items") {
+                var newPropObj = {};
+                newPropObj.type = "object";
+                newPropObj.properties = propertyObj;
+                definition1[prop] = newPropObj;    
+            } else {
+                definition1[prop] = propertyObj;
+            }
+            
             definitions[firstParam] = definition1;
         });
     

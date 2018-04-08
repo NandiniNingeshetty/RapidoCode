@@ -82,7 +82,7 @@ export default class extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    alert("will receive props")
+    
   this.props = nextProps;
     let VocabStored = sessionStorage.getItem('vocabularyInfo');
     if(VocabStored) {

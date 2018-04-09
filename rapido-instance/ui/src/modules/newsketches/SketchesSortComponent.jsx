@@ -37,7 +37,9 @@ export class SketchesSortComponent extends React.Component {
     e.preventDefault();
     this.setState({showFilter: !this.state.showFilter})
   }
-
+  handleViewBy(event){
+    console.log(event);
+  }
   render() {
     const icon = <IconSearch />;
     const filterOptions = <span>
@@ -65,7 +67,7 @@ export class SketchesSortComponent extends React.Component {
           <label className="view-text">View&nbsp;&nbsp;:&nbsp;&nbsp;</label>
           <select
             name="form-field-name"
-            className="custom-select">
+            className="custom-select" onChange={this.handleViewBy.bind(this)}>
             <option className="custom-select-option">All</option>
             <option className="custom-select-option">Personal</option>
             <option className="custom-select-option">Shared</option>

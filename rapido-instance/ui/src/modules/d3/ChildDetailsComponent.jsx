@@ -98,13 +98,25 @@ export default class extends React.Component{
     }, this)
     this.setState({
       childData: this.props.childInfo,
-      childUpdatedData: this.props.childInfo
+      childUpdatedData: this.props.childInfo,
+      currentNodeId: this.props.childInfo.pId,
     });
-    if(this.props.childInfo.apiList.length > 0)
+    if(this.props.childInfo.apiList.length > 0){
+      this.setState({
+        apiStatus:this.props.childInfo.apiList[0].apiType
+      })
+    } 
+  else{
     this.setState({
-      apiStatus:this.props.childInfo.apiList[0].apiType
+      options : [
+        { apiType: 'GET', label: 'GET' , id:'', completed: false, request: '', response: '', summary: '' },
+        { apiType: 'POST', label: 'POST', id:'', completed: false, request: '', response: '', summary: '' },
+        { apiType: 'PUT', label: 'PUT' , id:'', completed: false, request: '', response: '', summary: '' },
+        { apiType: 'PATCH', label: 'PATCH', id:'', completed: false, request: '', response: '', summary: '' },
+        { apiType: 'DELETE', label: 'DELETE', id:'', completed: false, request: '', response: '', summary: '' }
+      ],
     })
-  
+  }
   }
   /* Method to associate node details */
   associateNode(validity) {
@@ -165,6 +177,7 @@ export default class extends React.Component{
 
   /* Render Method */
   render() {
+   
     let checkBoxSection, apiPayloadSection, requestLabel;
    // console.log(this.state.options);
    // console.log(this.state.childData.url)
@@ -285,12 +298,11 @@ export default class extends React.Component{
                             <i className="fa fa-question-circle vocabulary-icon"></i>
                         </Popover>
                         <div className="url-text-wrapper">
-                            <div className="url-text"><TextInput size="small" className="url-text"
-                                defaultValue="/"
-                                value={this.state.childData.url}
-                                onChange={(evt) => this.handleURLChange(evt.target.value,'url')}
-                                required
-                            /></div>
+                            <div className="url-text">
+     
+            <AutoSuggest key={this.state.currentNodeId} queryInput={this.state.childData.url} updateSuggestedDetails={(val, mode)=>this.handleURLChange(val, 'url')}/>
+          
+    </div>
                             <div className="bitmap-img"><img src="/ui/src/images/bitmap.png" /> </div>
                         </div>                 
                     </div>

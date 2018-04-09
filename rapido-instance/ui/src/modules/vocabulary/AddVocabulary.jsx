@@ -42,7 +42,10 @@ export default class extends React.Component{
       if(prjSrvGetPrjDetRes.ok) {
         let tempVocabData = [];
         responseData.vocabulary.map(function (vocab) {
+          if(typeof vocab === "string")
           tempVocabData.push({"name":vocab});
+          else
+          tempVocabData.push({"name":vocab.name});
         }, this);
         this.setState({
           vocabularyData: tempVocabData,
@@ -81,11 +84,12 @@ export default class extends React.Component{
     if(prjSrvAddVocabRes.ok) {
       let tempVocabArr = this.state.vocabularyData;
       document.getElementById("addVocabulayText").value = "";
-      tempVocabArr.push({"name":newVocabulary,"id":responseData.id});
+      tempVocabArr.push({"name":newVocabulary});
       this.setState({
         query: {},
         vocabularyData: tempVocabArr
-      })
+      });
+      sessionStorage.setItem('vocabularyInfo',JSON.stringify(this.state.vocabularyData))
     } else {
       showAlert(this, (responseData.message) ? responseData.message : "Error occured");
       if(prjSrvAddVocabRes.status == 401) {
@@ -134,7 +138,7 @@ handleDelete(name){
       let vocabularyData = this.state.vocabularyData;
       vocabularyList = vocabularyData.map((row,i) => {
         if(row.name != ""){
- let list  = <div className="vocabulary-div"><div className="vocabulary-text-div">&nbsp;&nbsp;-&nbsp;&nbsp;{row.name}</div><span className="vocabulary-hidden" ><i className="fa fa-times" onClick={this.handleDelete.bind(this,row.name)}></i></span></div>
+ let list  = <div className=""><div className="vocabulary-text-div">&nbsp;&nbsp;-&nbsp;&nbsp;{row.name}</div><span className="vocabulary-hidden" ><i className="fa fa-times" onClick={this.handleDelete.bind(this,row.name)}></i></span></div>
        return( <li key={row.name}>{list}</li>);
         }
        
@@ -156,7 +160,7 @@ handleDelete(name){
 
         </div>
         
-        <div className="xs-pt-10 col-md-12">
+        <div className="xs-pt-10 xs-pl-28">
         <div className="vocabulary-text-div"><TextInput size="medium" placeholder="Add New" id="addVocabulayText" className="vocabulary-textbox" /></div>
         <span><i className="fa fa-plus vocabulary-plus-icon" onClick={(e) => this.addVocabulary(e)}/></span>
         </div>

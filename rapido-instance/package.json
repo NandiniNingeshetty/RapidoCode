@@ -49,6 +49,7 @@
     "ejs": "^2.5.7",
     "express": "*",
     "express-mailer": "^0.3.1",
+    "forever": "^0.15.3",
     "github-api": "^3.0.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.10.0",

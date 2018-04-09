@@ -262,6 +262,17 @@ export default class {
          })
         .append("text")
         .attr("font-size", fullPathFontSize)
+        .attr("class",function(d){
+          if(d.data.apiList) {
+            var className="inactiveText";
+            d.data.apiList.forEach((item, index) => {
+              if (item.apiType == 'GET') {
+               if(item.active)className="activeText";
+              }
+            })
+            return className;
+          }
+        })
         .text(function(d) {
           return "GET";
         })
@@ -323,6 +334,17 @@ export default class {
         })
         .append("text")
         .attr("font-size", fullPathFontSize)
+        .attr("class",function(d){
+          if(d.data.apiList) {
+            var className="inactiveText";
+            d.data.apiList.forEach((item, index) => {
+              if (item.apiType == 'PUT') {
+               if(item.active)className="activeText";
+              }
+            })
+            return className;
+          }
+        })
         .text(function(d) {
           return "PUT";
         })
@@ -384,6 +406,17 @@ export default class {
         })
         .append("text")
         .attr("font-size", fullPathFontSize)
+        .attr("class",function(d){
+          if(d.data.apiList) {
+            var className="inactiveText";
+            d.data.apiList.forEach((item, index) => {
+              if (item.apiType == 'POST') {
+               if(item.active)className="activeText";
+              }
+            })
+            return className;
+          }
+        })
         .text(function(d) {
           return "POST";
         })
@@ -445,6 +478,17 @@ export default class {
         })
         .append("text")
         .attr("font-size", fullPathFontSize)
+        .attr("class",function(d){
+          if(d.data.apiList) {
+            var className="inactiveText";
+            d.data.apiList.forEach((item, index) => {
+              if (item.apiType == 'PATCH') {
+               if(item.active)className="activeText";
+              }
+            })
+            return className;
+          }
+        })
         .text(function(d) {
           return "PATCH";
         })
@@ -506,6 +550,17 @@ export default class {
         })
         .append("text")
         .attr("font-size", fullPathFontSize)
+        .attr("class",function(d){
+          if(d.data.apiList) {
+            var className="inactiveText";
+            d.data.apiList.forEach((item, index) => {
+              if (item.apiType == 'DELETE') {
+               if(item.active)className="activeText";
+              }
+            })
+            return className;
+          }
+        })
         .text(function(d) {
           return "DELETE";
         })

@@ -254,6 +254,18 @@ export default class extends React.Component{
     return true;
   }
 
+  handleSketchType(event){
+    alert(event.target.value)
+  if(event.target.value === "shared"){
+    document.getElementById("sharedDiv").style.display = "block";
+    document.getElementById("personalDiv").style.display = "none";
+  }
+  else{
+    document.getElementById("sharedDiv").style.display = "none";
+    document.getElementById("personalDiv").style.display = "block";
+  }
+  }
+
   /* Render Method */
   render() {
     return(
@@ -270,25 +282,16 @@ export default class extends React.Component{
         <form className="col-md-8" noValidate onSubmit={this.handleSubmit}>
           <div className="col-md-12">
           <label className="Sketch-Name" htmlFor="InputprojectName" id="projectNameLabel">Sketch Type</label>
-                <div>
-                  <button className="btn btn-default Rectangle-5-Copy-3">
-                    <label className="Personal">Personal</label>
-                  </button>
-                  <button className="btn btn-default Rectangle-5-Copy-2">
-                    <label className="Shared">Shared</label>
-                  </button>
-                  {/* <label>
-                  <input type="checkbox">
-                    <span>
-                    <span>Off</span>
-                    <span>On</span>
-                    <a></a>
-                    </span>
-                  </input>
-                  </label> */}
-              </div> 
+
+<div className="switch">
+      <input type="radio" className="switch-input" name="view" value="personal" id="personal" checked={this.state.sketchType} onChange={this.handleSketchType.bind(this)}/>
+      <label htmlFor="personal" className="switch-label">Personal</label>
+      <input type="radio" className="switch-input" name="view" value="shared" id="shared"  checked={!this.state.sketchType} onChange={this.handleSketchType.bind(this)}/>
+      <label htmlFor="shared" className="switch-label">Shared</label>
+      
+    </div>
             </div>
-            <div id="personalDIV" className="col-md-12 next-section">
+            <div id="personalDiv" className="col-md-12 next-section">
               <div className="form-group">                        
                 <label className="Sketch-Name" htmlFor="InputprojectName" id="projectNameLabel">Sketch Name</label>
               <input
@@ -316,18 +319,13 @@ export default class extends React.Component{
                   />
               </div>
           </div>
-         
+         <div id="sharedDiv" className="col-md-12 next-section displayNone">
+         Shared Div Form
+         </div>
           <div className="col-md-8 pull-right button-section">
 
           <Button className="new-sketch-text pull-right"  variant="regular"  onClick={this.handleSubmit} primary>Proceed</Button>
           <Link to="/sketches"><Button className="pull-right Rectangle-4-Copy-6">Cancel</Button></Link>
-
-           {/* <button type="submit" className="btn btn-default pull-right Rectangle-4-Copy-7">
-              <label className="Proceed">Proceed</label>
-            </button>
-            <button className="btn btn-default pull-right Rectangle-4-Copy-6">
-              <label className="Cancel">Cancel</label>
-            </button> */} 
           </div>
         </form>
       </div>

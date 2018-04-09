@@ -81,6 +81,21 @@ export default class extends React.Component{
     })
   }
 
+  componentWillReceiveProps(nextProps){
+    
+  this.props = nextProps;
+    let VocabStored = sessionStorage.getItem('vocabularyInfo');
+    if(VocabStored) {
+      vocabularyData = JSON.parse(sessionStorage.getItem('vocabularyInfo'));
+    } else {
+      vocabularyData = []
+    }
+
+    this.setState({
+      value: this.props.queryInput,
+      suggestions: vocabularyData
+    })
+  }
   /* Method to handle change */
   onChange (event, { newValue }) {
     let updateValue;
@@ -130,8 +145,9 @@ export default class extends React.Component{
   render() {
     const getSuggestionValue = suggestion => suggestion.name;
     const renderSuggestion = suggestion => (
+       
     <div className="suggestion-section">
-      {suggestion.name}
+      { suggestion.name}
     </div>
     );
 
@@ -143,7 +159,7 @@ export default class extends React.Component{
     };
     
     return (
-      <div className="col-md-12 vocabulary-suggest">
+      <div className=" vocabulary-suggest">
          <Autosuggest
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}

@@ -194,7 +194,10 @@ export function loadProjectDetails (ProjectService, component, sketchId) {
         console.log(updatedAPI)
         let tempVocabData = [];
         responseData.vocabulary.map(function (vocab) {
+          if(typeof vocab === 'string')
           tempVocabData.push({"name":vocab});
+          else
+          tempVocabData.push({"name":vocab.name});
         }, this);
         console.log(tempVocabData);
         component.setState({

@@ -158,10 +158,10 @@ export class SketchesComponent extends React.Component {
                     {sortComponent}
                 </div>
                 <br />
-                <div className="row main-content xs-pl-15">
+                <div className="row main-content xs-pl-15 Personal_div">
                     <label className="bold-font">Personal</label>
                 </div>
-                <div className="row sketch-content">
+                <div className="row sketch-content Personal_div">
                     <div className="col-md-12">
                         {content}
                     </div>
@@ -171,13 +171,13 @@ export class SketchesComponent extends React.Component {
 
 
 
-                <div className="row main-content xs-pl-15">
+                <div className="row main-content xs-pl-15 Shared_div">
                     <label className="bold-font">Shared</label>
                 </div>
 
 
                 
-                <div className="row shared-sketch">
+                <div className="row shared-sketch Shared_div">
                     <div className="col-md-12">
                         <div className="col-md-3">
 

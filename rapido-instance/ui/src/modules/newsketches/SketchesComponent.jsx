@@ -113,16 +113,16 @@ export class SketchesComponent extends React.Component {
                     let cardBlock = <div className="wrapper"><div className="wrapper-info">{row.description}</div>
                         <div className="wrapper-icon make-height-invisible">
                             {row.ownership != 'READ' ? (
-                                <i className="wrapper-oval" onClick={this.navigateToDetails.bind(this, { row })}><img src="/ui/src/images/edit.png" alt="Alt text" /></i>
+                                <i className="edit-wrapper-oval" onClick={this.navigateToDetails.bind(this, { row })}><img src="/ui/src/images/edit.png" alt="Alt text" /></i>
                             ) : (
                                     null
                                 )}
                             {row.ownership != 'READ' ? (
-                                <i className="wrapper-oval" onClick={this.toggleModal.bind(this, { row })}><img src="/ui/src/images/delete.png" alt="Alt text" /></i>
+                                <i className="delete-wrapper-oval" onClick={this.toggleModal.bind(this, { row })}><img src="/ui/src/images/delete.png" alt="Alt text" /></i>
                             ) : (
                                     null
                                 )}
-                            <i className="wrapper-oval"><img src="/ui/src/images/share.png" alt="Alt text" /></i>
+                            <i className="forward-wrapper-oval"><img src="/ui/src/images/share.png" alt="Alt text" /></i>
                         </div></div>;
                     return (<div className="col-md-3 card-layout" key={row.projectid} >
                         <CardComponent title={row.name} block={cardBlock} />

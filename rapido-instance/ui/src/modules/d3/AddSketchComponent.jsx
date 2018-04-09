@@ -33,6 +33,7 @@ export default class extends React.Component{
 
   componentDidMount() {
    let projectInfo = JSON.parse(sessionStorage.getItem('selectedSketch'));
+   console.log(projectInfo);
    let teamId = JSON.parse(sessionStorage.getItem('teamId'));
    let updateMode = sessionStorage.getItem("updateMode")
     if(teamId) {
@@ -143,9 +144,23 @@ export default class extends React.Component{
   handleSubmit(event) {
     event.preventDefault();
     let updateMode = sessionStorage.getItem("updateMode")
-    /*if(updateMode){
-      browserHistory.push('/vocabulary');
-    }else {*/
+    console.log("editmode",updateMode)
+    // if(updateMode){
+    //   var projectInfo = this.state.projectInfo;
+    //   component.setActiveStatus(component.state.treedata);
+    //   component.state.projectInfo.projectName = projectInfo.projectName;
+    //   component.state.projectInfo.projectDesc = projectInfo.projectDesc;
+    //   console.log(component)
+    //   console.log(this)
+    //   this.setState({
+    //     projectInfo:{
+    //       projectName:projectInfo.projectName,
+    //       projectDesc:projectInfo.projectDesc
+    //     }
+    //   })
+      
+    //   browserHistory.push('/vocabulary');
+    // }else 
       if (this.showFormErrors()) {
         var projectInfo = this.state.projectInfo;
         addEmptySketch(this, []);
@@ -154,7 +169,10 @@ export default class extends React.Component{
         component.state.projectDetails.projectDesc = projectInfo.projectDesc;
         /* TODO Promise */
         createSketch(component, [], ProjectService, browserHistory)
+
       }
+ 
+
    // }
 
   }

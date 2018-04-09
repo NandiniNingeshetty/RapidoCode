@@ -160,7 +160,7 @@ handleDelete(name){
 
         </div>
         
-        <div className="xs-pt-10 xs-pl-25">
+        <div className="xs-pt-10 xs-pl-28">
         <div className="vocabulary-text-div"><TextInput size="medium" placeholder="Add New" id="addVocabulayText" className="vocabulary-textbox" /></div>
         <span><i className="fa fa-plus vocabulary-plus-icon" onClick={(e) => this.addVocabulary(e)}/></span>
         </div>

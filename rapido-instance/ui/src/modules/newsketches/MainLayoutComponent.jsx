@@ -26,7 +26,9 @@ export default class extends React.Component {
             .then((responseData) => {
                 if (sktGetPrjSrvRes.ok) {
                     this.setState({
-                        "sketchesData": responseData.personal
+                        "sketchesData": responseData.personal,
+                        "sketchesDataLength":responseData.personal.length,
+                        "teamLength":Object.keys(responseData.team).length
                     });
                 } else {
                     showAlert(this, (responseData.message) ? responseData.message : "Error occured");
@@ -46,7 +48,7 @@ export default class extends React.Component {
             <div className="col-md-12 main-content main-content-padding">
                 <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
                 <div className="col-md-12">
-                    <SketchesComponent sketches={this.state.sketchesData} />
+                <SketchesComponent sketches={this.state.sketchesData} sketchesLength={this.state.sketchesDataLength} teamCount={this.state.teamLength}/>
                 </div>
                {/* <div className="col-md-3">
                     <TeamComponent />

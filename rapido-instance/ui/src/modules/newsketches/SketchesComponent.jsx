@@ -55,10 +55,12 @@ export class SketchesComponent extends React.Component {
     /* Method to sort by Name/Updated */
     sortSketchCardBy(event) {
         let activeNow = null;
+        let activeUpdate = null;
         let activeSort = null;
         // if(document.querySelector(".sortByBtn.active"))
         //   activeNow = document.querySelector(".sortByBtn.active").id;
         activeNow = document.getElementById("sortByNameBtn").id; 
+        activeUpdate = document.getElementById("sortByUpdatedBtn").id; 
     
         var queryResult=[];
     
@@ -76,19 +78,24 @@ export class SketchesComponent extends React.Component {
           })  
         }    
        
-        if(activeNow == "sortByModifiedBtn") {
+        if(activeUpdate == "sortByUpdatedBtn") {
           activeSort = 'updated';
-          queryResult = this.state.sketches.sort(function(a, b){
-            if(a.modifiedat < b.modifiedat) return -1;
-            if(a.modifiedat > b.modifiedat) return 1;
+          queryResult = this.props.sketches.sort(function(a, b){
+            if(a.modifiedat > b.modifiedat) return -1;
+            if(a.modifiedat < b.modifiedat) return 1;
             return 0;
           });
+
+          this.setState({   
+            // sortType: (activeSort !== null) ? activeSort : '',    
+            filteredData: (activeSort !== null) ? queryResult : this.state.sketches   
+          })  
+        //   console.log("filteredData",this.state.filteredData);
         }
       }    
 
     /* Method to handle search */
     handleChange(event) {
-        debugger;
         var queryResult = [];
         this.props.sketches.forEach(function (sketch) {
             if (sketch.name.toLowerCase().indexOf(event.target.value.toLowerCase()) != -1)
@@ -214,7 +221,8 @@ export class SketchesComponent extends React.Component {
 
         return (
             <div>
-               
+                    {this.props.sketchesLength}
+                    {this.props.teamCount}
                     {headerComponent}
                 
                 <br />

@@ -22,10 +22,73 @@ export class SketchesComponent extends React.Component {
         };
         this.alertOptions = AlertOptions;
         this.handleChange = this.handleChange.bind(this);
+        this.sortSketchCardBy = this.sortSketchCardBy.bind(this);
     }
+
+    /* Component Initialisation */
+  /* componentDidMount() {
+    let userDetails = JSON.parse(sessionStorage.getItem('user'));
+    let sktGetPrjSrvRes = null;
+    SketchService.getProjects(userDetails.id)
+        .then((response) => {
+            sktGetPrjSrvRes = response.clone();
+            return response.json();
+        })
+        .then((responseData) => {
+            if (sktGetPrjSrvRes.ok) {
+                this.setState({
+                    "sketches": responseData.personal
+                });
+            } else {
+                showAlert(this, (responseData.message) ? responseData.message : "Error occured");
+                if (sktGetPrjSrvRes.status == 401) {
+                    sessionStorage.removeItem('user')
+                    sessionStorage.removeItem('token')
+                }
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+} */
+
+    /* Method to sort by Name/Updated */
+    sortSketchCardBy(event) {
+        let activeNow = null;
+        let activeSort = null;
+        // if(document.querySelector(".sortByBtn.active"))
+        //   activeNow = document.querySelector(".sortByBtn.active").id;
+        activeNow = document.getElementById("sortByNameBtn").id; 
+    
+        var queryResult=[];
+    
+        if(activeNow == "sortByNameBtn") {
+          activeSort = 'name';
+          queryResult = this.props.sketches.sort(function(a, b){
+            if(a.name < b.name) return -1;
+            if(a.name > b.name) return 1;
+            return 0;            
+          });
+    
+          this.setState({   
+            // sortType: (activeSort !== null) ? activeSort : '',    
+            filteredData: (activeSort !== null) ? queryResult : this.state.sketches   
+          })  
+        }    
+       
+        if(activeNow == "sortByModifiedBtn") {
+          activeSort = 'updated';
+          queryResult = this.state.sketches.sort(function(a, b){
+            if(a.modifiedat < b.modifiedat) return -1;
+            if(a.modifiedat > b.modifiedat) return 1;
+            return 0;
+          });
+        }
+      }    
 
     /* Method to handle search */
     handleChange(event) {
+        debugger;
         var queryResult = [];
         this.props.sketches.forEach(function (sketch) {
             if (sketch.name.toLowerCase().indexOf(event.target.value.toLowerCase()) != -1)
@@ -96,7 +159,7 @@ export class SketchesComponent extends React.Component {
         }
         let content;
         let headerComponent = <HeaderComponent  />;
-        let sortComponent = <SketchesSortComponent onChange={this.handleChange} />
+        let sortComponent = <SketchesSortComponent onChange={this.handleChange} sortSketch={this.sortSketchCardBy}/>
         const userNotLoggedIn = <div className="text-center loading-project-details">Loading...</div>
         const sketchesNotFound = <div className="titleContainer firstTime">
             <h2>Welcome to CA API Design!</h2>
@@ -133,6 +196,7 @@ export class SketchesComponent extends React.Component {
                         {sketchesResultNotFound}
                     </div>
                 }
+                
             } else {
                 content = <div>
                     {sketchesNotFound}

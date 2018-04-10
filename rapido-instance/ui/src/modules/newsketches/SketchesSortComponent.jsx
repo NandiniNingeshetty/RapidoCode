@@ -9,14 +9,20 @@ import Select from 'react-select';
 import TextInput from 'mineral-ui/TextInput';
 import Icon from 'mineral-ui/Icon';
 import { IconSearch } from 'mineral-ui-icons';
+import SketchService from './SketchServices'
 
 export class SketchesSortComponent extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      showFilter: false
+      filteredData: this.props.sketches,
+      sketches: this.props.sketches,
+      isOpen: false,
+      sortType: '',
+      query: ''
     };
+
     this.alertOptions = AlertOptions;
   }
   openCloseSearch() {
@@ -37,6 +43,7 @@ export class SketchesSortComponent extends React.Component {
     e.preventDefault();
     this.setState({ showFilter: !this.state.showFilter })
   }
+
   handleViewBy(event) {
     var value = event.target.value;
     if (value != "All") {
@@ -55,6 +62,7 @@ export class SketchesSortComponent extends React.Component {
     }
 
   }
+   
   render() {
     const icon = <IconSearch />;
     const filterOptions = <span>
@@ -95,7 +103,7 @@ export class SketchesSortComponent extends React.Component {
             <label className="view-text">Sort By&nbsp;:&nbsp;</label>
             <span className="xs-pl-5"><Button className="activeButton" size="small" primary>Created</Button></span>
             <span className="xs-pl-5"><Button size="small" className="inactiveButton" disabled>Updated</Button></span>
-            <span className="xs-pl-5"><Button size="small" className="inactiveButton" disabled>Name</Button></span>
+            <span className="xs-pl-5"><Button id="sortByNameBtn" size="small" className="inactiveButton" onClick={this.props.sortSketch}>Name</Button></span>
           </span>
         </div>
 

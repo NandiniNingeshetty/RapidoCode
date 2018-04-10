@@ -102,7 +102,7 @@ export class SketchesSortComponent extends React.Component {
           <span className="xs-pl-10 xs-pr-15 sort pull-right">
             <label className="view-text">Sort By&nbsp;:&nbsp;</label>
             <span className="xs-pl-5"><Button className="activeButton" size="small" primary>Created</Button></span>
-            <span className="xs-pl-5"><Button size="small" className="inactiveButton" disabled>Updated</Button></span>
+            <span className="xs-pl-5"><Button id="sortByUpdatedBtn" size="small" className="inactiveButton" onClick={this.props.sortSketch}>Updated</Button></span>
             <span className="xs-pl-5"><Button id="sortByNameBtn" size="small" className="inactiveButton" onClick={this.props.sortSketch}>Name</Button></span>
           </span>
         </div>

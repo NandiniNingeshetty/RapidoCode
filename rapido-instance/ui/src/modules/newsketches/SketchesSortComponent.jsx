@@ -43,7 +43,6 @@ export class SketchesSortComponent extends React.Component {
     e.preventDefault();
     this.setState({ showFilter: !this.state.showFilter })
   }
-
   handleViewBy(event) {
     var value = event.target.value;
     if (value != "All") {
@@ -62,7 +61,6 @@ export class SketchesSortComponent extends React.Component {
     }
 
   }
-   
   render() {
     const icon = <IconSearch />;
     const filterOptions = <span>

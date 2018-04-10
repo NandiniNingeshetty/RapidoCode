@@ -150,7 +150,6 @@ export default class extends React.Component{
     let updatedSketchInfo = JSON.parse(sessionStorage.getItem('selectedSketch'));
     
     if(sketchId !="null"){
-      debugger;
       var projectInfo = this.state.projectInfo;      
       this.state.projectInfo.projectName = projectInfo.projectName;
       this.state.projectInfo.projectDesc = projectInfo.projectDesc;      
@@ -172,7 +171,6 @@ export default class extends React.Component{
       
       browserHistory.push('/vocabulary');
     }else {
-      debugger;
       if (this.showFormErrors()) {
         var projectInfo = this.state.projectInfo;
         addEmptySketch(this, []);

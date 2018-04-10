@@ -19,13 +19,19 @@ import CRUDSketch from '../CRUDSketch';
 import ExportGithubModal from '../export/ExportGithub';
 import ExportService from '../export/ExportServices'
 
+
 var thisComponent;
 export default class extends React.Component {
 
   constructor(props) {
     super(props);
     thisComponent = this;
-    this.state = {
+    this.state = {  
+      portalLoginForm : true,
+      portalConnectingSection: false,
+      portalConnectionSuccess: false,    
+      githubPushSuccess: false,
+      githubIntialization: false,
       searchColumn: 'all',
       selectedSketch: {},
       query: {},
@@ -62,7 +68,10 @@ export default class extends React.Component {
       treedata: {},
       crudComponent: {}
     };
+    this.alertOptions = AlertOptions;
     this.handleDownload = this.handleDownload.bind(this);
+    this.handlePortalPublish = this.handlePortalPublish.bind(this);
+    this.openPublishToPortal = this.openPublishToPortal.bind(this);
 
   }
 
@@ -74,6 +83,10 @@ export default class extends React.Component {
   }
 
   
+  openPublishToPortal() {
+    document.querySelector(".modalExportPage").style.display = "block";
+  }
+  
   ExportGithubToggleModal(type) {
     this.setState({
       ExportGithubModalIsOpen: !this.state.ExportGithubModalIsOpen
@@ -81,7 +94,7 @@ export default class extends React.Component {
   }  
   /* Method to get Swagger Response */
   getSwaggerResponse(download) {
-    debugger
+
     let expSrvgetSwaggerRes = null;
     let sketchId = JSON.parse(sessionStorage.getItem('sketchId'));
     ExportService.getSwaggerJSON(sketchId, download)
@@ -130,11 +143,56 @@ export default class extends React.Component {
     })
   }
 
+  /* Method to handle edit sketch info click */
+  navigateToDetails() {
+    sessionStorage.setItem('sketchId', this.state.selectedSketch.projectid);
+    sessionStorage.setItem('selectedSketch', JSON.stringify(this.state.selectedSketch));
+    sessionStorage.setItem('sketchName', this.state.selectedSketch.name);
+    sessionStorage.removeItem('vocabularyInfo');
+    sessionStorage.setItem('updateMode',true)
+    browserHistory.push('/nodes/add');
+ }
+
+ handlePortalPublish(event) {
+  // TODO remove this only for demo
+  event.preventDefault();
+  this.setState({
+    portalLoginForm : false,
+    portalConnectingSection: true,
+    portalConnectionSuccess: false,
+    githubPushSuccess: false,
+    githubIntialization: false,
+  });
+  setTimeout(() => {
+    this.setState({
+      portalLoginForm : false,
+      portalConnectingSection: false,
+      portalConnectionSuccess: true,
+      githubPushSuccess: false,
+      githubIntialization: false,
+    });
+  }, 5000);
+  setTimeout(() => {
+    this.setState({
+      portalLoginForm : true,
+      portalConnectingSection: false,
+      portalConnectionSuccess: false,
+      githubPushSuccess: false,
+      githubIntialization: false,
+    });
+    document.querySelector(".modalExportPage").style.display = "none";
+  }, 8000);
+}
 
   /* Render method */
   render() {
     let addOption, loadedComponent;
+    let editSketchInfo;
 
+    const myScrollbar = {
+      width: "63%",
+      height: "600px",
+    };
     const data = [
       {
         items: [
@@ -244,12 +302,72 @@ export default class extends React.Component {
     } else {
       loadedComponent = <div className="text-center loading-project-details">Loading...</div>
     }
+    
+    if (this.state.selectedSketch) {    
+          editSketchInfo=<div className="edit-sketch-info" onClick={this.navigateToDetails.bind(this)}>Edit Sketch Info</div>
+    }
+    let modalContent;
+    if(this.state.portalLoginForm) {
+      modalContent = <div className="portalLoginForm">
+            <h4 className="text-center">
+              Publish To CA Portal
+            </h4>
+            <form id="addTeamModal" className="col-md-12" noValidate>
+            <div className="form-group">
+              <input className="form-control"
+                type="text"
+                name="portalUserName"
+                ref="portalUserName"
+                placeholder="Portal User Name"
+              />
+            </div>
+            <div className="form-group">
+              <input className="form-control"
+                type="text"
+                name="portalPassword"
+                ref="portalPassword"
+                placeholder="Portal Password"
+              />
+            </div>
+            <div className="form-group">
+              <input className="form-control"
+                type="text"
+                name="portalURL"
+                ref="portalURL"
+                placeholder="Portal URL"
+              />
+            </div>
+            <div className="form-group pull-right">
+              <button className="btn btn-default" onClick={this.handlePortalPublish}>
+                Publish
+              </button>
+            </div>
+            </form>
+          </div>;
+    } else if(this.state.portalConnectingSection) {
+      modalContent = <div className="portalConnectionSection">
+            <h4 className="portalPublishConnetionStatus">Connecting to Portal...</h4>
+          </div>;
+    } else if(this.state.portalConnectionSuccess) {
+      modalContent = <div className="portalConnectionSuccess">
+            <h4 className="portalPublishConnetionStatus">Connection successful, Publishing to CA PORTAL.</h4>
+          </div>;
+    } else if(this.state.githubIntialization) {
+      modalContent = <div className="githubIntialization">
+            <h4 className="githubIntializationText">Connecting to GitHub, Validating..</h4>
+          </div>;
+    } else if(this.state.githubPushSuccess) {
+      modalContent = <div className="githubPushSuccess">
+            <h4 className="githubPushSuccessText">Push to GitHub, Successful.</h4>
+          </div>;
+    }
+
 
     return (
       <div className="vocabulary-main-content">
         <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
         <div className="vocabulary-header">
-          <div className="row">
+          <div className="row xs-pl-10">
             <div className="col-md-12 edit-sketch-header">
               <div className=" col-md-6 pull-left ">
                 <span className="vocabulary-header-title">{sketchName}</span>
@@ -261,13 +379,14 @@ export default class extends React.Component {
               <div className="col-md-2 edit-sketch-info-wrapper">
                 <div>
                   <i className="pull-left"><img src="/ui/src/images/shape-edit.png" alt="edit sketch image" /></i>
-                  <div className="edit-sketch-info">Edit Sketch Info</div>
+                  {/* <div className="edit-sketch-info">Edit Sketch Info</div> */}
+                  {editSketchInfo}
                 </div>
               </div>
               <div className="pull-right xs-pr-15 xs-pt-5">
                 {/* <Button className="vocabulary-button-version" variant="regular" primary>Versions</Button>
                 &nbsp;&nbsp;&nbsp;&nbsp; */}
-                <Button className="vocabulary-button-version" variant="regular" primary>Publishto CA PORTAL </Button>
+                <Button className="vocabulary-button-version" variant="regular" primary onClick={this.openPublishToPortal}>Publish to CA PORTAL </Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Button className="vocabulary-button-version" variant="regular" primary onClick={this.ExportGithubToggleModal.bind(this)}>Push to Github </Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -279,6 +398,11 @@ export default class extends React.Component {
                   <ExportGithubModal show={this.state.ExportGithubModalIsOpen}
                     onClose={this.ExportGithubToggleModal.bind(this)}>
                   </ExportGithubModal>
+                  <div className="modalBackdropStyle modalExportPage">
+                  <div className="modal col-md-12" className="modalStyle">
+                    {modalContent}
+                  </div>
+                </div>
                 
                 <Button className="vocabulary-button-preview" variant="regular" onClick={this.handleDownload} primary>Preview</Button>
 
@@ -286,7 +410,7 @@ export default class extends React.Component {
             </div>
           </div>
 
-          <div className="row">
+          <div className="row xs-pl-10">
             <div className="col-md-12">
               <div className="col-md-6 pull-left view-text">
                 {sketchDesc}
@@ -295,21 +419,23 @@ export default class extends React.Component {
           </div>
         </div>
         <div className="row white-bg">
-          <div className="">
+<div className="">
 
-            <div className="col-md-2">
-              <AddVocabulary selectedSketch={this.state.selectedSketch} />
-            </div>
+<div className="vocabulary-div">
+<AddVocabulary selectedSketch={this.state.selectedSketch} />
+</div>
+<div className="" id="sidebar">
+<CRUDSketch getCurrentNodeDetails={this.getCurrentNodeDetails} />
+</div>
 
-            <div className="col-md-7">
-              <CRUDSketch getCurrentNodeDetails={this.getCurrentNodeDetails} />
-            </div>
 
-            <div className="col-md-3">
-              <NodeProperties nodeData={this.state.currentTreeDetails} treedata={this.state.treedata} component={this.state.crudComponent} />
-            </div>
-          </div>
-        </div>
+<div className="cursor-drag">
+  </div>
+<div className="" id="nodeContainer">
+<NodeProperties nodeData={this.state.currentTreeDetails} treedata={this.state.treedata} component={this.state.crudComponent}/>
+</div>
+</div>
+</div>
 
 
       </div>

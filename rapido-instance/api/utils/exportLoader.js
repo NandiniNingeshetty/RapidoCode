@@ -15,7 +15,7 @@ exportJson.prototype.createSwagger = function(obj, reqProtocol, reqHost) {
             description: 'Develop new apis',
         },
         schemes: ["https"],
-        host: reqHost,
+        host: "rapido.dev.ca.com",
         basePath: '/',
         swagger: '2.0'
     };
@@ -92,7 +92,13 @@ exportJson.prototype.createSwagger = function(obj, reqProtocol, reqHost) {
 
             }
         }
-     
+        function isEmpty(obj) {
+            for(var key in obj) {
+                if(obj.hasOwnProperty(key))
+                    return false;
+            }
+            return true;
+        }
         _.each(obj[fullPath], function (innerData, method) {
             _.each(innerData["responses"], function (value, index) {
 
@@ -121,13 +127,7 @@ exportJson.prototype.createSwagger = function(obj, reqProtocol, reqHost) {
 
             
             });
-            function isEmpty(obj) {
-                        for(var key in obj) {
-                            if(obj.hasOwnProperty(key))
-                                return false;
-                        }
-                        return true;
-                    }
+           
             if(isEmpty(innerData.request)) {
                
             } else {
@@ -150,7 +150,6 @@ exportJson.prototype.createSwagger = function(obj, reqProtocol, reqHost) {
                         "application/json",
                         "application/xml"
                     ],
-                    "parameters": [],
                     "responses": {
                         "200": {
                             "description": "successfull",
@@ -210,9 +209,13 @@ exportJson.prototype.createSwagger = function(obj, reqProtocol, reqHost) {
             definitions["properties"] = properties;
             outerDefinitions["UsersData"] = definitions;
         });
-        methods["parameters"]=innerparameters;
+        if(!isEmpty(innerparameters)) {
+            methods["parameters"]=innerparameters;
+
+        }
+        
         fullPath = fullPath.replace("?" + fullPath.substring(fullPath.indexOf("?") + 1), '');
-        paths[fullPath.toLowerCase()] = methods;
+        paths[fullPath] = methods;
         swaggerSpec["paths"] = paths;
         swaggerSpec["definitions"] = outerDefinitions;
         swaggerSpec["externalDocs"] = {

@@ -12,7 +12,7 @@
 .main-content {
     overflow: auto;
     margin: 0;
-    margin-left: 0.7%;
+    /*margin-left: 0.7%;*/
     padding: 0;
     input.active:invalid {
         box-shadow: 0 0 5px 1px red;
@@ -39,11 +39,11 @@
 .vocabulary-list {
     list-style-type: none;
     padding-top: 10px;
-    padding-left: 20px;
+    padding-left: 30px;
 }
 
 .vocabulary-list>li {
-    width: 155px;
+    width: 143px;
     height: 25px;
     /*text-indent: -20px;*/
     font-family: Helvetica;
@@ -76,10 +76,6 @@
     cursor: pointer;
 }
 
-.vocabulary-div {
-    width: 165px;
-}
-
 .vocabulary-text-div {
     width: 130px;
     display: inline-block;
@@ -100,4 +96,52 @@
 
 .sketches-tree {
     margin-left: -6%;
+}
+
+#nodeContainer {
+    /*width: 300px;*/
+    width: 20%;
+    display: inline-block;
+}
+
+#sidebar {
+    width: 63%;
+    float: left;
+    padding-left: 55px;
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 700px;
+}
+
+#sidebar:hover {
+    overflow-x: auto;
+    overflow-y: auto
+}
+
+.vocabulary-div {
+    width: 180px;
+    float: left;
+}
+
+.node-button {
+    float: right;
+    padding-right: 5px;
+}
+
+.cursor-drag {
+    background-color: #d8d8d8;
+    width: 5px;
+    height: 100%;
+    display: inline-block;
+    cursor: col-resize;
+    float: left;
+    min-height: 800px;
+}
+
+.xs-pl-28 {
+    padding-left: 28px;
+}
+
+#react-autowhatever-1 {
+    z-index: 12!important
 }

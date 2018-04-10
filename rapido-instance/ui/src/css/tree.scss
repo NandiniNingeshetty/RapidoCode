@@ -90,15 +90,15 @@
     .active {
         fill: #4a90e2;
     }
+    .activeText {
+        fill: white !important;
+        font-size: 8px;
+    }
     .inactive {
         fill: #d6d6d6;
     }
-    .inactive>text {
-        font: black !important;
-        font-size: 8px;
-    }
-    .active>text {
-        fill: white !important;
+    .inactiveText {
+        fill: black !important;
         font-size: 8px;
     }
     text {

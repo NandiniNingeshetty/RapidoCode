@@ -33,12 +33,27 @@ export class SketchesSortComponent extends React.Component {
     browserHistory.push('/nodes/add');
   }
 
-  showFilterOptions(e){
+  showFilterOptions(e) {
     e.preventDefault();
-    this.setState({showFilter: !this.state.showFilter})
+    this.setState({ showFilter: !this.state.showFilter })
   }
-  handleViewBy(event){
-    console.log(event);
+  handleViewBy(event) {
+    var value = event.target.value;
+    if (value != "All") {
+      document.getElementsByClassName("Shared_div")[0].style.display = "none";
+      document.getElementsByClassName("Personal_div")[0].style.display = "none";
+      document.getElementsByClassName("Shared_div")[1].style.display = "none";
+      document.getElementsByClassName("Personal_div")[1].style.display = "none";
+      var divName = value + "_div";
+      document.getElementsByClassName(divName)[0].style.display = "block"
+      document.getElementsByClassName(divName)[1].style.display = "block"
+    }else{
+      document.getElementsByClassName("Shared_div")[0].style.display = "block";
+      document.getElementsByClassName("Personal_div")[0].style.display = "block";
+      document.getElementsByClassName("Shared_div")[1].style.display = "block";
+      document.getElementsByClassName("Personal_div")[1].style.display = "block";
+    }
+
   }
   render() {
     const icon = <IconSearch />;
@@ -73,7 +88,7 @@ export class SketchesSortComponent extends React.Component {
             <option className="custom-select-option">Shared</option>
           </select>
           <span className="xs-pl-10">
-            <span><i className="filter-icon" onClick={this.showFilterOptions.bind(this)}><img src="/ui/src/images/filter.png"/></i></span>
+            <span><i className="filter-icon" onClick={this.showFilterOptions.bind(this)}><img src="/ui/src/images/filter.png" /></i></span>
             {this.state.showFilter && filterOptions}
           </span>
           <span className="xs-pl-10 xs-pr-15 sort pull-right">
@@ -81,7 +96,7 @@ export class SketchesSortComponent extends React.Component {
             <span className="xs-pl-5"><Button className="activeButton" size="small" primary>Created</Button></span>
             <span className="xs-pl-5"><Button size="small" className="inactiveButton" disabled>Updated</Button></span>
             <span className="xs-pl-5"><Button size="small" className="inactiveButton" disabled>Name</Button></span>
-          </span>          
+          </span>
         </div>
 
       </div>

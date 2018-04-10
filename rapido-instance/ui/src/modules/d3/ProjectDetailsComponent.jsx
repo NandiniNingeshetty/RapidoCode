@@ -25,6 +25,7 @@ export default class extends React.Component{
 
   /* Component Initialisation */
   componentDidMount() {
+    console.log("In TreeActions");
    let projectInfo = JSON.parse(sessionStorage.getItem('projectInfo'));
     if(projectInfo) {
       this.setState({

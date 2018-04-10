@@ -89,9 +89,7 @@ export class SketchesComponent extends React.Component {
             });
     }
     render() {
-        console.log("Sketches List")
-        console.log(this.props.sketches)
-
+    
         let { filteredData } = this.state;
         if (filteredData == undefined) {
             filteredData = this.props.sketches;
@@ -105,6 +103,8 @@ export class SketchesComponent extends React.Component {
             <h3>Looks like you are getting started. Go ahead and start off with creating a new sketch or team below.</h3>
         </div>
 
+        const sketchesResultNotFound = <div className="titleContainer firstTime noResultsFound">
+                <h2>No Results found</h2></div>
 
         if (this.state && this.props.sketches) {
             if (this.props.sketches && this.props.sketches.length > 0) {
@@ -113,21 +113,26 @@ export class SketchesComponent extends React.Component {
                     let cardBlock = <div className="wrapper"><div className="wrapper-info">{row.description}</div>
                         <div className="wrapper-icon make-height-invisible">
                             {row.ownership != 'READ' ? (
-                                <i className="wrapper-oval" onClick={this.navigateToDetails.bind(this, { row })}><img src="/ui/src/images/edit.png" alt="Alt text" /></i>
+                                <i className="edit-wrapper-oval" onClick={this.navigateToDetails.bind(this, { row })}><img src="/ui/src/images/edit.png" alt="Alt text" /></i>
                             ) : (
                                     null
                                 )}
                             {row.ownership != 'READ' ? (
-                                <i className="wrapper-oval" onClick={this.toggleModal.bind(this, { row })}><img src="/ui/src/images/delete.png" alt="Alt text" /></i>
+                                <i className="delete-wrapper-oval" onClick={this.toggleModal.bind(this, { row })}><img src="/ui/src/images/delete.png" alt="Alt text" /></i>
                             ) : (
                                     null
                                 )}
-                            <i className="wrapper-oval"><img src="/ui/src/images/share.png" alt="Alt text" /></i>
+                            <i className="forward-wrapper-oval"><img src="/ui/src/images/share.png" alt="Alt text" /></i>
                         </div></div>;
                     return (<div className="col-md-3 card-layout" key={row.projectid} >
                         <CardComponent title={row.name} block={cardBlock} />
                     </div>);
                 }, this)
+                if(filteredData.length==0){
+                    content = <div>
+                        {sketchesResultNotFound}
+                    </div>
+                }
             } else {
                 content = <div>
                     {sketchesNotFound}
@@ -153,10 +158,10 @@ export class SketchesComponent extends React.Component {
                     {sortComponent}
                 </div>
                 <br />
-                <div className="row main-content xs-pl-15">
+                <div className="row main-content xs-pl-15 Personal_div">
                     <label className="bold-font">Personal</label>
                 </div>
-                <div className="row sketch-content">
+                <div className="row sketch-content Personal_div">
                     <div className="col-md-12">
                         {content}
                     </div>
@@ -166,13 +171,13 @@ export class SketchesComponent extends React.Component {
 
 
 
-                <div className="row main-content xs-pl-15">
+                <div className="row main-content xs-pl-15 Shared_div">
                     <label className="bold-font">Shared</label>
                 </div>
 
 
                 
-                <div className="row shared-sketch">
+                <div className="row shared-sketch Shared_div">
                     <div className="col-md-12">
                         <div className="col-md-3">
 

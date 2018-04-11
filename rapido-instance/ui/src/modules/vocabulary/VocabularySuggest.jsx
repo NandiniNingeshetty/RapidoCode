@@ -82,8 +82,8 @@ export default class extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    
-  this.props = nextProps;
+  if(nextProps.queryInput != undefined){
+    this.props = nextProps;
     let VocabStored = sessionStorage.getItem('vocabularyInfo');
     if(VocabStored) {
       vocabularyData = JSON.parse(sessionStorage.getItem('vocabularyInfo'));
@@ -96,6 +96,9 @@ export default class extends React.Component{
       suggestions: vocabularyData
     })
   }
+  
+  }
+
   /* Method to handle change */
   onChange (event, { newValue }) {
     let updateValue;

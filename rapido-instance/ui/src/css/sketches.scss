@@ -794,6 +794,40 @@
         height: 26px;
         width: 52px;
     }
+
+    .activeButton:hover {
+        border-radius: 3px;
+        background-color: #4a90e2;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #ffffff;
+        cursor: pointer;
+        height: 26px;
+        width: 52px;
+    }
+
+    .activeButton:active {
+        border-radius: 3px;
+        background-color: #4a90e2;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #ffffff;
+        cursor: pointer;
+        height: 26px;
+        width: 52px;
+    }
     
     .inactiveButton {
         border-radius: 3px;

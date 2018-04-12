@@ -150,8 +150,7 @@ var authService = {
                 return usermodel.addTokenAsync(user);
             })
             .then(function() {
-                console.log(   "githubToken", request.user.accessToken,
-                "githubUser",request.user.username);
+             
                 var token = jwt.sign({
                     "id": user.id,
                     "secret": user.secret,

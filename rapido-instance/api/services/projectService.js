@@ -650,8 +650,12 @@ var projectService = {
                     token: request.user.githubToken
                 });
 
-                var githubRepo = githubObj.getRepo(request.user.githubUser, request.body.repository);
-                var githubRepoAsync = promises.promisifyAll(githubRepo);
+/*                 var githubRepo = githubObj.getRepo(request.user.githubUser, request.body.repository);
+ */    
+
+        var githubRepo = githubObj.getRepo("APIM-Solutions", request.body.repository);
+        
+           var githubRepoAsync = promises.promisifyAll(githubRepo);
 
                 return githubRepoAsync.writeFileAsync("master", project.name + "-swagger.json", JSON.stringify(resultData), request.body.message || "publish from rapido", {"encode":true});
 

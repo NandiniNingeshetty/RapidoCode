@@ -5,11 +5,11 @@
  */
 
 var _ = require("lodash");
-var exportJson = function exportJson() { };
+var exportJson =  function exportJson() {}
 var propertyObj = {};
 // Create swagger file
 exportJson.prototype.createSwagger = function (obj, reqProtocol, reqHost) {
-console.log(JSON.stringify(obj));
+
     var swaggerDefinition = {
         info: {
             title: 'Rapido API',
@@ -17,7 +17,7 @@ console.log(JSON.stringify(obj));
             description: 'Develop new apis',
         },
         schemes: ["https"],
-        host: reqHost,
+        host: "jsonplaceholder.typicode.com",
         basePath: '/',
         swagger: '2.0'
     };
@@ -95,13 +95,14 @@ console.log(JSON.stringify(obj));
             }
         }
 
-
         _.each(obj[fullPath], function (innerData, method) {
 
-/*             var firstParam = definition(innerData["fullPath"], i);
- */            var firstParam = "data"+method+i;
+/*           var firstParam = definition(innerData["fullPath"], i);
+ */ 
 
-            var definition1 = {};
+        var firstParam = "data"+method+i;
+ 
+    var definition1 = {};
             if (!isEmpty(innerData["responses"])) {
                 propertyObj = definitionProperties(innerData["responses"], typeof innerData["responses"]);
             }
@@ -194,15 +195,12 @@ console.log(JSON.stringify(obj));
             definitions[firstParam] = definition1;
         });
     
-        outerDefinitions = definitions;
-        
+        outerDefinitions = definitions;          
         if(!isEmpty(innerparameters)) {
             methods["parameters"]=innerparameters;
-
         }
-        
         fullPath = fullPath.replace("?" + fullPath.substring(fullPath.indexOf("?") + 1), '');
-        paths[fullPath] = methods;
+        paths[fullPath.toLowerCase()] = methods;
         swaggerSpec["paths"] = paths;
         swaggerSpec["definitions"] = outerDefinitions;
         swaggerSpec["externalDocs"] = {
@@ -216,8 +214,11 @@ console.log(JSON.stringify(obj));
 }
 var definition = function (path, i) {
 
+
     var splitString = path.split("/");
     var str = splitString[i];
+    
+    console.log(splitString,i);
     if(str.indexOf("{") != -1) {
         var j = i+1;
         str = splitString[j];

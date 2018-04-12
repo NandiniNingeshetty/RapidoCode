@@ -27,8 +27,8 @@ export default class extends React.Component {
     super(props);
     thisComponent = this;
     this.state = { 
-      closeVocab : true, 
-      openVocab : false,
+      closeVocab : false, 
+      openVocab : true,
       portalLoginForm : true,
       portalConnectingSection: false,
       portalConnectionSuccess: false,    
@@ -190,10 +190,12 @@ export default class extends React.Component {
   showVocabulary(e) {
     e.preventDefault();
     if(this.state.closeVocab) {
+      document.querySelector(".vocabulary-div-short").className = document.querySelector(".vocabulary-div-short").className.replace("vocabulary-div-short",'vocabulary-div');
       this.setState({ closeVocab: false,
                 openVocab : true})
     }
     else {
+      document.querySelector(".vocabulary-div").className = document.querySelector(".vocabulary-div").className.replace("vocabulary-div",'vocabulary-div-short');      
       this.setState({ closeVocab: true,
         openVocab : false})
     }

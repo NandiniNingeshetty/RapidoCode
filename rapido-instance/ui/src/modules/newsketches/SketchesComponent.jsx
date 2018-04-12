@@ -205,9 +205,7 @@ export class SketchesComponent extends React.Component {
         let cardFooter1 = <div><span className="green-status">Apps Team</span></div>
 
         return (
-            <div>
-                    {this.props.sketchesLength}
-                    {this.props.teamCount}
+            <div>                    
                     {headerComponent}
                 
                 <br />
@@ -215,7 +213,7 @@ export class SketchesComponent extends React.Component {
                     {sortComponent}
                 </div>
                 <br />
-                <div className="row main-content xs-pl-15 Personal_div">
+                <div className="row main-content xs-pl-20 Personal_div">
                     <label className="bold-font">Personal</label>
                 </div>
                 <div className="row sketch-content Personal_div">

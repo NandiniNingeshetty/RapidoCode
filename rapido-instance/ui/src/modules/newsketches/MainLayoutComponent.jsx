@@ -47,8 +47,28 @@ export default class extends React.Component {
         return (
             <div className="col-md-12 main-content main-content-padding">
                 <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
-                <div className="col-md-12">
-                <SketchesComponent sketches={this.state.sketchesData} sketchesLength={this.state.sketchesDataLength} teamCount={this.state.teamLength}/>
+                <div className="col-md-12">  
+                <div className="col-md-1 main-sidebar-content xs-p-0">
+                    <div className="active-box">
+                        <span className="row active-content-text">
+                            SKETCHES
+                        </span>
+                        <span className="row active-content-count">
+                        {this.state.sketchesDataLength}
+                        </span>
+                    </div>
+                    <div className="inactive-box">
+                        <span className="row inactive-content-text">
+                            TEAMS
+                        </span>
+                        <span className="row active-content-count">
+                        {this.state.teamLength}
+                        </span>
+                    </div>
+                </div> 
+                <div className="col-md-11 xs-p-0">             
+                <SketchesComponent sketches={this.state.sketchesData}/>
+                </div>
                 </div>
                {/* <div className="col-md-3">
                     <TeamComponent />

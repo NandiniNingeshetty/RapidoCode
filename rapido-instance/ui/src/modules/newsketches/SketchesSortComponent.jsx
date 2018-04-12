@@ -79,14 +79,14 @@ export class SketchesSortComponent extends React.Component {
     return (
       <div className="col-md-12">
 
-        <div className="col-md-5 pull-left">
+        <div className="col-md-5 pull-left xs-pl-8">
           <ul className="button-inline">
             <li onClick={this.addNewSketch.bind(this)}><Button className="new-sketch-text" variant="regular" primary>New Sketch</Button></li>
             <li className="xs-pl-10"><TextInput iconEnd={icon} type="text" className=" visible search-textbox" onChange={this.props.onChange} size="small"
               placeholder="Search" /></li>
           </ul>
         </div>
-        <div className="col-md-6 pull-right xs-pr-0">
+        <div className="col-md-6 pull-right xs-pr-5">
           <label className="view-text">View&nbsp;&nbsp;:&nbsp;&nbsp;</label>
           <select
             name="form-field-name"

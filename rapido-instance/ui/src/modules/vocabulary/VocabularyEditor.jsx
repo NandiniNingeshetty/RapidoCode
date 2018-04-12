@@ -425,6 +425,7 @@ export default class extends React.Component {
 <AddVocabulary selectedSketch={this.state.selectedSketch} />
 </div>
 <div className="" id="sidebar">
+<div className="vocabulary-text view-text">SKETCH</div>
 <CRUDSketch getCurrentNodeDetails={this.getCurrentNodeDetails} />
 </div>
 

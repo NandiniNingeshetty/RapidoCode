@@ -9,14 +9,20 @@ import Select from 'react-select';
 import TextInput from 'mineral-ui/TextInput';
 import Icon from 'mineral-ui/Icon';
 import { IconSearch } from 'mineral-ui-icons';
+import SketchService from './SketchServices'
 
 export class SketchesSortComponent extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      showFilter: false
+      filteredData: this.props.sketches,
+      sketches: this.props.sketches,
+      isOpen: false,
+      sortType: '',
+      query: ''
     };
+
     this.alertOptions = AlertOptions;
   }
   openCloseSearch() {
@@ -94,8 +100,8 @@ export class SketchesSortComponent extends React.Component {
           <span className="xs-pl-10 xs-pr-15 sort pull-right">
             <label className="view-text">Sort By&nbsp;:&nbsp;</label>
             <span className="xs-pl-5"><Button className="activeButton" size="small" primary>Created</Button></span>
-            <span className="xs-pl-5"><Button size="small" className="inactiveButton" disabled>Updated</Button></span>
-            <span className="xs-pl-5"><Button size="small" className="inactiveButton" disabled>Name</Button></span>
+            <span className="xs-pl-5"><Button id="sortByUpdatedBtn" size="small" className="inactiveButton" onClick={this.props.sortSketch}>Updated</Button></span>
+            <span className="xs-pl-5"><Button id="sortByNameBtn" size="small" className="inactiveButton" onClick={this.props.sortSketch}>Name</Button></span>
           </span>
         </div>
 

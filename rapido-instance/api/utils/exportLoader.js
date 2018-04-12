@@ -8,6 +8,7 @@ var _ = require("lodash");
 var exportJson =  function exportJson() {}
 // Create swagger file
 exportJson.prototype.createSwagger = function(obj, reqProtocol, reqHost) {
+    console.log(JSON.stringify(obj));
     var swaggerDefinition = {
         info: {
             title: 'Rapido API',

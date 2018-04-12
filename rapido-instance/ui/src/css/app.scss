@@ -120,7 +120,13 @@
 
 .vocabulary-div {
     width: 180px;
-    float: left;
+    float: left;    
+}
+
+.vocabulary-div-panel {
+    width: 180px;
+    float: left;  
+    // display: none;  
 }
 
 .node-button {

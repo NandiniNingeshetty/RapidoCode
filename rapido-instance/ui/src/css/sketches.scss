@@ -1272,7 +1272,19 @@
         padding-right: 1px;
         margin-right: 10px;
     }
+
+    .vocabulary-closed-panel {
+        height: 30px;
+        padding-left: 36px;
+        border-bottom: 1px solid #cfcfcf;
+        padding-top: 7px;
+        margin-left: -10px;
+    }
     
+    .vocab-arrow {
+        cursor: pointer;
+    }
+
     .Node-Properties {
         margin-top: 5px;
         width: 109px;

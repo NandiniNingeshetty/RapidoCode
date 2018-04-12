@@ -54,9 +54,9 @@ var _init = function() {
         },
 
         "github": {
-            "clientID": "59a1193e5ae13e6f4dc2",
-            "clientSecret": "136bc60abd578438ed1fef002711de726b88dcd7",
-            "callback": "http://rapido.dev.ca.com/api/login/github/callback",
+            "clientID": "3846addb5b7c6c6d41f7",
+            "clientSecret": "61cd921de75b9b05188d075612df1acfdab13996",
+            "callback": "http://localhost:9001/api/login/github/callback",
             "scope": [ "user:email" ]
         }
     };

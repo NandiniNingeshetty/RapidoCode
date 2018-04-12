@@ -44,6 +44,7 @@
     "classnames": "^2.2.5",
     "connect-debounce": "*",
     "connect-timeout": "*",
+    "copy-webpack-plugin": "^4.5.1",
     "cors": "^2.8.4",
     "d3": "^4.2.3",
     "ejs": "^2.5.7",

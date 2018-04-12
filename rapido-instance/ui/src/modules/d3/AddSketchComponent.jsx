@@ -27,27 +27,29 @@ export default class extends React.Component {
     this.alertOptions = AlertOptions;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    
+
   }
 
   componentDidMount() {
-   let projectInfo = JSON.parse(sessionStorage.getItem('selectedSketch'));
-   console.log(projectInfo);
-   let teamId = JSON.parse(sessionStorage.getItem('teamId'));
-   let updateMode = sessionStorage.getItem("updateMode")
-    if(teamId) {
-      this.setState({
-          teamId: teamId
-      })
-    }
-    if(updateMode == "true") {
-      if(projectInfo){
+    let projectInfo = JSON.parse(sessionStorage.getItem('selectedSketch'));
+    console.log(projectInfo);
+    let teamId = JSON.parse(sessionStorage.getItem('teamId'));
+    let updateMode = sessionStorage.getItem("updateMode")
+   
+    if (teamId) {
       this.setState({
         teamId: teamId
       })
     }
-  }
     if (updateMode == "true") {
+      if (projectInfo) {
+        this.setState({
+          teamId: teamId
+        })
+      }
+    }
+    if (updateMode == "true") {
+  
       if (projectInfo) {
         this.setState({
           projectInfo: {
@@ -114,33 +116,38 @@ export default class extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     let updateMode = sessionStorage.getItem("updateMode")
-    console.log("editmode",updateMode)
-    let sketchId = sessionStorage.getItem('sketchId');
-    console.log("sketchId", sketchId);
+    console.log("editmode", updateMode)
+    let sketchId = sessionStorage.getItem('sketchId')
     let updatedSketchInfo = JSON.parse(sessionStorage.getItem('selectedSketch'));
-    
-    if(sketchId !="null"){
-      var projectInfo = this.state.projectInfo;      
-      this.state.projectInfo.projectName = projectInfo.projectName;
-      this.state.projectInfo.projectDesc = projectInfo.projectDesc;      
-     
-      this.setState({
-        projectInfo:{
-          projectName:projectInfo.projectName,
-          projectDesc:projectInfo.projectDesc
-        }
-      })
 
-      for (var key in updatedSketchInfo) {
-        if( key==="name"){  updatedSketchInfo[key]=this.state.projectInfo.projectName; console.log(key, updatedSketchInfo[key])}
-        if( key==="description"){  updatedSketchInfo[key]=this.state.projectInfo.projectDesc; console.log(key, updatedSketchInfo[key])}
+    if (sketchId != "null") {
+      var projectInfo = this.state.projectInfo;
+      if (this.showFormErrors()) {
+        var updatedSkecthDetails = {}
+        let prjSrvSketchUpdateRes= null;
+        updatedSkecthDetails.name = projectInfo.projectName;
+        updatedSkecthDetails.description = projectInfo.projectDesc;
+        updatedSkecthDetails.id =  sketchId;
+        ProjectService.updateProject(updatedSkecthDetails)
+          .then((response) => {
+            prjSrvSketchUpdateRes = response.clone();
+            return response.json();
+          })
+          .then((responseData) => {
+            if (prjSrvSketchUpdateRes.ok) {
+              for (var key in updatedSketchInfo) {
+                if (key === "name") { updatedSketchInfo[key] = this.state.projectInfo.projectName; console.log(key, updatedSketchInfo[key]) }
+                if (key === "description") { updatedSketchInfo[key] = this.state.projectInfo.projectDesc; console.log(key, updatedSketchInfo[key]) }
+              }
+              sessionStorage.setItem('selectedSketch', JSON.stringify(updatedSketchInfo))
+              sessionStorage.setItem('projectInfo', JSON.stringify(this.state.projectInfo))
+              browserHistory.push('/vocabulary');
+            } else {
+              showAlert(this, (responseData.message) ? responseData.message : "Error occured");
+            }
+          })
       }
-      sessionStorage.setItem('selectedSketch',JSON.stringify(updatedSketchInfo))
-      sessionStorage.setItem('projectInfo',JSON.stringify(this.state.projectInfo))
-      
-      
-      browserHistory.push('/vocabulary');
-    }else {
+    } else {
       if (this.showFormErrors()) {
         var projectInfo = this.state.projectInfo;
         addEmptySketch(this, []);
@@ -153,7 +160,7 @@ export default class extends React.Component {
       }
     }
 
-   // }
+    // }
 
   }
 
@@ -302,14 +309,14 @@ export default class extends React.Component {
               </div>
             </div>
             <div id="sharedDiv" className="col-md-12 next-section displayNone">
-            <div className="form-group">
+              <div className="form-group">
                 <label className="Sketch-Name" htmlFor="InputprojectName" id="projectNameLabel">Sketch Name</label>
                 <input
                   type="text"
-                  className="Rectangle-5 form-control" 
+                  className="Rectangle-5 form-control"
                   required />
-                  </div>
-         </div>
+              </div>
+            </div>
             <div className="col-md-8 pull-right button-section">
 
               <Button className="new-sketch-text pull-right" variant="regular" onClick={this.handleSubmit} primary>Proceed</Button>
@@ -320,5 +327,5 @@ export default class extends React.Component {
       </div>
     )
   }
-  }
+}
 

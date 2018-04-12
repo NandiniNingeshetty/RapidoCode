@@ -162,7 +162,7 @@ handleDelete(name){
         
         <div className="xs-pt-10 xs-pl-28">
         <div className="vocabulary-text-div"><TextInput size="medium" placeholder="Add New" id="addVocabulayText" className="vocabulary-textbox" /></div>
-        <span><i className="fa fa-plus vocabulary-plus-icon" onClick={(e) => this.addVocabulary(e)}/></span>
+        <span><i onClick={(e) => this.addVocabulary(e)}><img className="vocabulary-plus-icon" src="/ui/src/images/plus@2x.png" alt="add vocab" /></i></span>
         </div>
         
         <div className="row">

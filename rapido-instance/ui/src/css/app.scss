@@ -28,7 +28,7 @@
 /* Skecthes CSS need to mpve to skecthes file */
 
 .main-content-padding {
-    padding-left: 40px;
+    padding-left: 0px;
     padding-right: 40px
 }
 
@@ -120,7 +120,18 @@
 
 .vocabulary-div {
     width: 180px;
-    float: left;
+    float: left;    
+}
+
+.vocabulary-div-short {
+    width: 55px;
+    float: left;    
+}
+
+.vocabulary-div-panel {
+    width: 180px;
+    float: left;  
+    // display: none;  
 }
 
 .node-button {

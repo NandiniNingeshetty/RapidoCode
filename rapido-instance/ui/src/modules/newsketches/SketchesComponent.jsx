@@ -25,42 +25,27 @@ export class SketchesComponent extends React.Component {
         this.sortSketchCardBy = this.sortSketchCardBy.bind(this);
     }
 
-    /* Component Initialisation */
-  /* componentDidMount() {
-    let userDetails = JSON.parse(sessionStorage.getItem('user'));
-    let sktGetPrjSrvRes = null;
-    SketchService.getProjects(userDetails.id)
-        .then((response) => {
-            sktGetPrjSrvRes = response.clone();
-            return response.json();
-        })
-        .then((responseData) => {
-            if (sktGetPrjSrvRes.ok) {
-                this.setState({
-                    "sketches": responseData.personal
-                });
-            } else {
-                showAlert(this, (responseData.message) ? responseData.message : "Error occured");
-                if (sktGetPrjSrvRes.status == 401) {
-                    sessionStorage.removeItem('user')
-                    sessionStorage.removeItem('token')
-                }
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-} */
-
+   
     /* Method to sort by Name/Updated */
-    sortSketchCardBy(event) {
+    sortSketchCardBy(event) { 
+        debugger;
+        let lastActiveId = null;       
+        if(document.querySelector(".activeButton")) {   
+          lastActiveId = document.querySelector(".activeButton").id;    
+          document.querySelector(".activeButton").className = document.querySelector(".activeButton").className.replace("active",'inactive');   
+        }   
+        if(lastActiveId !== event.target.parentNode.parentNode.id)    
+          event.target.parentNode.parentNode.className = event.target.parentNode.parentNode.className.replace("inactiveButton","") + "activeButton";   
+
+
         let activeNow = null;
-        let activeUpdate = null;
+        // let activeUpdate = null;
         let activeSort = null;
-        // if(document.querySelector(".sortByBtn.active"))
-        //   activeNow = document.querySelector(".sortByBtn.active").id;
-        activeNow = document.getElementById("sortByNameBtn").id; 
-        activeUpdate = document.getElementById("sortByUpdatedBtn").id; 
+
+        if(document.querySelector(".activeButton"))
+          activeNow = document.querySelector(".activeButton").id;
+        // activeNow = document.getElementById("sortByNameBtn").id; 
+        // activeUpdate = document.getElementById("sortByUpdatedBtn").id; 
     
         var queryResult=[];
     
@@ -73,12 +58,12 @@ export class SketchesComponent extends React.Component {
           });
     
           this.setState({   
-            // sortType: (activeSort !== null) ? activeSort : '',    
+            sortType: (activeSort !== null) ? activeSort : '',    
             filteredData: (activeSort !== null) ? queryResult : this.state.sketches   
           })  
         }    
        
-        if(activeUpdate == "sortByUpdatedBtn") {
+        if(activeNow == "sortByUpdatedBtn") {
           activeSort = 'updated';
           queryResult = this.props.sketches.sort(function(a, b){
             if(a.modifiedat > b.modifiedat) return -1;
@@ -87,7 +72,7 @@ export class SketchesComponent extends React.Component {
           });
 
           this.setState({   
-            // sortType: (activeSort !== null) ? activeSort : '',    
+            sortType: (activeSort !== null) ? activeSort : '',    
             filteredData: (activeSort !== null) ? queryResult : this.state.sketches   
           })  
         //   console.log("filteredData",this.state.filteredData);
@@ -166,7 +151,7 @@ export class SketchesComponent extends React.Component {
         }
         let content;
         let headerComponent = <HeaderComponent  />;
-        let sortComponent = <SketchesSortComponent onChange={this.handleChange} sortSketch={this.sortSketchCardBy}/>
+        let sortComponent = <SketchesSortComponent onChange={this.handleChange} sortSketch={this.sortSketchCardBy} sortType={this.state.sortType}/>
         const userNotLoggedIn = <div className="text-center loading-project-details">Loading...</div>
         const sketchesNotFound = <div className="titleContainer firstTime">
             <h2>Welcome to CA API Design!</h2>
@@ -220,9 +205,7 @@ export class SketchesComponent extends React.Component {
         let cardFooter1 = <div><span className="green-status">Apps Team</span></div>
 
         return (
-            <div>
-                    {this.props.sketchesLength}
-                    {this.props.teamCount}
+            <div>                    
                     {headerComponent}
                 
                 <br />
@@ -230,7 +213,7 @@ export class SketchesComponent extends React.Component {
                     {sortComponent}
                 </div>
                 <br />
-                <div className="row main-content xs-pl-15 Personal_div">
+                <div className="row main-content xs-pl-20 Personal_div">
                     <label className="bold-font">Personal</label>
                 </div>
                 <div className="row sketch-content Personal_div">

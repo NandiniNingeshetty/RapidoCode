@@ -300,23 +300,22 @@ export default class extends React.Component {
                   onChange={this.handleChange.bind(this, 'projectDesc')}
                 />
               </div>
-            </div>
-            <div id="sharedDiv" className="col-md-12 next-section displayNone">
-            <div className="form-group">
-                <label className="Sketch-Name" htmlFor="InputprojectName" id="projectNameLabel">Sketch Name</label>
-                <input
-                  type="text"
-                  className="Rectangle-5 form-control" 
-                  required />
-                  </div>
-         </div>
-            <div className="col-md-8 pull-right button-section">
+          </div>
+         
+          <div className="col-md-8 pull-right button-section">
 
-              <Button className="new-sketch-text pull-right" variant="regular" onClick={this.handleSubmit} primary>Proceed</Button>
-              <Link to="/sketches"><Button className="pull-right Rectangle-4-Copy-6">Cancel</Button></Link>
-            </div>
-          </form>
-        </div>
+          <Button className="new-sketch-text pull-right"  variant="regular"  onClick={this.handleSubmit} primary>Proceed</Button>
+          <Link to="/sketches"><Button className="pull-right Rectangle-4-Copy-6">Cancel</Button></Link>
+
+           {/* <button type="submit" className="btn btn-default pull-right Rectangle-4-Copy-7">
+              <label className="Proceed">Proceed</label>
+            </button>
+            <button className="btn btn-default pull-right Rectangle-4-Copy-6">  
+              <label className="Cancel">Cancel</label>
+            </button> */} 
+          </div>
+        </form>
+      </div>
       </div>
     )
   }

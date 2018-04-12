@@ -26,7 +26,9 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     thisComponent = this;
-    this.state = {  
+    this.state = { 
+      closeVocab : false, 
+      openVocab : true,
       portalLoginForm : true,
       portalConnectingSection: false,
       portalConnectionSuccess: false,    
@@ -184,10 +186,29 @@ export default class extends React.Component {
   }, 8000);
 }
 
+  /*Show hide Vocabulary tab*/
+  showVocabulary(e) {
+    e.preventDefault();
+    if(this.state.closeVocab) {
+      document.querySelector(".vocabulary-div-short").className = document.querySelector(".vocabulary-div-short").className.replace("vocabulary-div-short",'vocabulary-div');
+      this.setState({ closeVocab: false,
+                openVocab : true})
+    }
+    else {
+      document.querySelector(".vocabulary-div").className = document.querySelector(".vocabulary-div").className.replace("vocabulary-div",'vocabulary-div-short');      
+      this.setState({ closeVocab: true,
+        openVocab : false})
+    }
+  }
+
   /* Render method */
   render() {
     let addOption, loadedComponent;
     let editSketchInfo;
+
+    const VocabularyHideContent = <div className="view-text vocabulary-text vocabulary-closed-panel"><img src="/ui/src/images/bitmap.png" /></div>
+
+    const VocabularyContent = <AddVocabulary selectedSketch={this.state.selectedSketch} />
 
     const myScrollbar = {
       width: "63%",
@@ -422,9 +443,14 @@ export default class extends React.Component {
 <div className="">
 
 <div className="vocabulary-div">
-<AddVocabulary selectedSketch={this.state.selectedSketch} />
+{this.state.closeVocab && VocabularyHideContent}
+<div className="vocabulary-div-panel">
+{/* <AddVocabulary selectedSketch={this.state.selectedSketch} /> */}
+{this.state.openVocab && VocabularyContent}
+</div>
 </div>
 <div className="" id="sidebar">
+<div className="vocabulary-text view-text"><span className="vocabulary-show-hide"><i className="vocab-arrow" onClick={this.showVocabulary.bind(this)}><img src="/ui/src/images/arrow-left.png" alt="open vocab"/></i></span>SKETCH</div>
 <CRUDSketch getCurrentNodeDetails={this.getCurrentNodeDetails} />
 </div>
 

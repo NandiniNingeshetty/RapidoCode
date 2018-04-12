@@ -43,6 +43,7 @@ export class SketchesSortComponent extends React.Component {
     e.preventDefault();
     this.setState({ showFilter: !this.state.showFilter })
   }
+
   handleViewBy(event) {
     var value = event.target.value;
     if (value != "All") {
@@ -61,6 +62,7 @@ export class SketchesSortComponent extends React.Component {
     }
 
   }
+   
   render() {
     const icon = <IconSearch />;
     const filterOptions = <span>
@@ -77,14 +79,14 @@ export class SketchesSortComponent extends React.Component {
     return (
       <div className="col-md-12">
 
-        <div className="col-md-5 pull-left">
+        <div className="col-md-5 pull-left xs-pl-8">
           <ul className="button-inline">
             <li onClick={this.addNewSketch.bind(this)}><Button className="new-sketch-text" variant="regular" primary>New Sketch</Button></li>
             <li className="xs-pl-10"><TextInput iconEnd={icon} type="text" className=" visible search-textbox" onChange={this.props.onChange} size="small"
               placeholder="Search" /></li>
           </ul>
         </div>
-        <div className="col-md-6 pull-right xs-pr-0">
+        <div className="col-md-6 pull-right xs-pr-5">
           <label className="view-text">View&nbsp;&nbsp;:&nbsp;&nbsp;</label>
           <select
             name="form-field-name"
@@ -99,9 +101,9 @@ export class SketchesSortComponent extends React.Component {
           </span>
           <span className="xs-pl-10 xs-pr-15 sort pull-right">
             <label className="view-text">Sort By&nbsp;:&nbsp;</label>
-            <span className="xs-pl-5"><Button className="activeButton" size="small" primary>Created</Button></span>
-            <span className="xs-pl-5"><Button id="sortByUpdatedBtn" size="small" className="inactiveButton" onClick={this.props.sortSketch}>Updated</Button></span>
-            <span className="xs-pl-5"><Button id="sortByNameBtn" size="small" className="inactiveButton" onClick={this.props.sortSketch}>Name</Button></span>
+            <span className="xs-pl-5"><Button className="inactiveButton" size="small" disabled>Created</Button></span>
+            <span className="xs-pl-5"><Button id="sortByUpdatedBtn" size="small" className={(this.props.sortType == 'updated') ? "activeButton" : "inactiveButton"} onClick={this.props.sortSketch}>Updated</Button></span>
+            <span className="xs-pl-5"><Button id="sortByNameBtn" size="small" className={(this.props.sortType == 'name') ? "activeButton" : "inactiveButton"} onClick={this.props.sortSketch}>Name</Button></span>
           </span>
         </div>
 

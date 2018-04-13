@@ -52,8 +52,9 @@ export class SketchesComponent extends React.Component {
         if(activeNow == "sortByNameBtn") {
           activeSort = 'name';
           queryResult = this.props.sketches.sort(function(a, b){
-            if(a.name < b.name) return -1;
-            if(a.name > b.name) return 1;
+            var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase();
+            if(nameA < nameB) return -1;
+            if(nameA > nameB) return 1;
             return 0;            
           });
     
@@ -159,7 +160,7 @@ export class SketchesComponent extends React.Component {
         </div>
 
         const sketchesResultNotFound = <div className="titleContainer firstTime noResultsFound">
-                <h2>No Results found</h2></div>
+                <h2>No Results Found</h2></div>
 
         if (this.state && this.props.sketches) {
             if (this.props.sketches && this.props.sketches.length > 0) {

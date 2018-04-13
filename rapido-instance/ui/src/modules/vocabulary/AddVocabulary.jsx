@@ -119,6 +119,7 @@ handleDelete(name){
     if(prjSrvDelVocabRes.ok) {
       vocabularyData.splice(idx, 1);
       this.setState({ vocabularyData });
+      sessionStorage.setItem('vocabularyInfo',JSON.stringify(this.state.vocabularyData))
     } else {
       showAlert(this, (responseData.message) ? responseData.message : "Error occured");
       if(prjSrvDelVocabRes.status == 401) {

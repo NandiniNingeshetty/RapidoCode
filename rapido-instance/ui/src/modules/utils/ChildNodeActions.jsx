@@ -1,5 +1,5 @@
 export function updateAPIChange(field, data, component) {
-  console.log(data)
+  
   let reqValue, resValue, summary,title;
     if(field === 'request') {
       reqValue = data;

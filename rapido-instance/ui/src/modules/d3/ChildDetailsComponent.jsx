@@ -52,9 +52,8 @@ export default class extends React.Component{
   }
 
   /* Component Initialisation */
-  componentWillMount() {
+  componentWillMount() {  
     
-    console.log(this.props.childInfo.apiList)
     
     this.props.childInfo.apiList.map(function (type, i) {
       this.state.options.map(function (oType, j) {
@@ -80,9 +79,7 @@ export default class extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("will receive props")
-    console.log(nextProps)
-    console.log(this.props)
+    
     this.props = nextProps;
     this.props.childInfo.apiList.map(function (type, i) {
       this.state.options.map(function (oType, j) {

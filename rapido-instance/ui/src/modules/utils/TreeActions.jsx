@@ -186,12 +186,9 @@ export function loadProjectDetails (ProjectService, component, sketchId) {
       return response.json();
     })
     .then((responseData) => {
-      if(prjSrvGetPrjDetRes.ok) {
-        console.log(responseData)
-        console.log(responseData.apidetails)
-        let updatedAPI = component.importSketchInfo(responseData.apidetails);
-        console.log("Load API details")
-        console.log(updatedAPI)
+      if(prjSrvGetPrjDetRes.ok) {       
+        
+        let updatedAPI = component.importSketchInfo(responseData.apidetails);        
         let tempVocabData = [];
         responseData.vocabulary.map(function (vocab) {
           if(typeof vocab === 'string')
@@ -199,7 +196,7 @@ export function loadProjectDetails (ProjectService, component, sketchId) {
           else
           tempVocabData.push({"name":vocab.name});
         }, this);
-        console.log(tempVocabData);
+
         component.setState({
           parentWidth: 0,
           width: '100%',
@@ -231,7 +228,7 @@ export function loadProjectDetails (ProjectService, component, sketchId) {
           exportAPI: {},
           exportStatus: true
         })
-        console.log(component)
+        
         component.props.getCurrentNodeDetails(component);
         sessionStorage.setItem('vocabularyInfo',JSON.stringify(tempVocabData))
       } else {
@@ -301,8 +298,7 @@ export function updateSketch(component, savedVocabulary, ProjectService, browser
       return response.json();
     })
     .then((responseData) => {
-      console.log(responseData);
-
+      
       if(prjSrvUpdPrj.ok) {
         component.setState({
           projectSaved: true,

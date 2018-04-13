@@ -40,8 +40,7 @@ var model = {
     },
     "read": (id, callback) => {
         db.executeAsync(queries.select, [id])
-            .then(function(data) {
-                console.log(data);
+            .then(function(data) {                
                 logger.debug("Project with id", id, "retrived.");
                 return callback(null, data.rows[0]);
             })

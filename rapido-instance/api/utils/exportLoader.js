@@ -216,9 +216,8 @@ var definition = function (path, i) {
 
 
     var splitString = path.split("/");
-    var str = splitString[i];
+    var str = splitString[i];    
     
-    console.log(splitString,i);
     if(str.indexOf("{") != -1) {
         var j = i+1;
         str = splitString[j];

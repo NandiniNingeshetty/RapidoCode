@@ -133,8 +133,6 @@ export default class extends React.Component {
   }
 
   handleDownload() {
-    console.log("clicked");
-    debugger;
     this.getSwaggerResponse(true);
   }
   getCurrentNodeDetails(component) {
@@ -230,7 +228,7 @@ export default class extends React.Component {
         ]
       }
     ]
-    console.log(this.state.selectedSketch)
+    
     if (this.state && this.state.selectedSketch) {
 
       const { searchColumn, columns, vocabularyData, query } = this.state;

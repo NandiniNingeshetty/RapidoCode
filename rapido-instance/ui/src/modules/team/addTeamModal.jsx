@@ -45,7 +45,7 @@ class Modal extends React.Component {
 
   /* Method to show Input Errors */
   showInputError(refName) {
-    console.log(this.refs);
+    
     const validity = this.refs[refName].validity;
 
     var label = "";

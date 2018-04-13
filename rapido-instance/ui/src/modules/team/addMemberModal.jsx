@@ -67,8 +67,7 @@ class Modal extends React.Component {
   handleSearch(event) {
     event.preventDefault();
     if (this.showFormErrors()) {
-      let teamServSrchMemRes = null;
-      console.log(event.target.value);
+      let teamServSrchMemRes = null;      
       teamService.searchMember(this.state.memberQuery)
         .then((response) => {
           teamServSrchMemRes = response.clone();

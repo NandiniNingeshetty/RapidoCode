@@ -102,7 +102,11 @@ server.use((req, res, next) => {
     ) {
         resource = req.originalUrl.substring(req.originalUrl.lastIndexOf('/'));
         res.sendFile(__dirname + '/ui/build/' + resource);
-    } else if(req.originalUrl.includes('.js')) {
+
+    } else if(req.originalUrl.includes('.png')) {
+          resource = req.originalUrl.substring(req.originalUrl.lastIndexOf('/'));
+            res.sendFile(__dirname + '/ui/src/images' + resource);
+    }else if(req.originalUrl.includes('.js')) {
         resource = req.originalUrl.substring(req.originalUrl.lastIndexOf('/'));
         resource = resource + '.gz';
         res.set('Content-Encoding', 'gzip');

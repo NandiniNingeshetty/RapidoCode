@@ -1,5 +1,6 @@
 var path = require("path");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+var CopyWebpackPlugin = require("copy-webpack-plugin");
 var webpack = require("webpack");
 var CompressionPlugin = require("compression-webpack-plugin");
 
@@ -15,6 +16,11 @@ module.exports = {
     plugins: [new HtmlWebpackPlugin({
         template: "ui/index.html"
     }),
+    new CopyWebpackPlugin([
+            {
+              from: __dirname + "src/images/*.png",
+              to:  __dirname + "/build"
+           }]),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.UglifyJsPlugin({
         sourceMap: true
@@ -22,7 +28,7 @@ module.exports = {
     new CompressionPlugin({
         asset: "[path].gz[query]",
         algorithm: "gzip",
-        test: /\.js$|\.css$|\.html$/,
+        test: /\.js$|\.css$|\.html$|\.png$/,
         threshold: 10240,
         minRatio: 0.8
     })

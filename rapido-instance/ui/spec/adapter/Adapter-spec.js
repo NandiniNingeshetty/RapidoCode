@@ -9,7 +9,7 @@ describe("Backend Adapter", function() {
 
   it("should return the stored backend implementation", function() {
     expect(Adapter.call()).not.toBe(null);
-    console.log(Adapter.call());
+    
     expect(Adapter.call().getName()).toBe("MockBackend");
   })
 

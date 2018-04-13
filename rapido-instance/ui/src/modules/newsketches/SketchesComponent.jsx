@@ -28,7 +28,6 @@ export class SketchesComponent extends React.Component {
    
     /* Method to sort by Name/Updated */
     sortSketchCardBy(event) { 
-        debugger;
         let lastActiveId = null;       
         if(document.querySelector(".activeButton")) {   
           lastActiveId = document.querySelector(".activeButton").id;    

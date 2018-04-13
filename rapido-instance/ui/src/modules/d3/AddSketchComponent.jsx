@@ -31,8 +31,7 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    let projectInfo = JSON.parse(sessionStorage.getItem('selectedSketch'));
-    console.log(projectInfo);
+    let projectInfo = JSON.parse(sessionStorage.getItem('selectedSketch'));    
     let teamId = JSON.parse(sessionStorage.getItem('teamId'));
     let updateMode = sessionStorage.getItem("updateMode")
    
@@ -115,8 +114,7 @@ export default class extends React.Component {
   /* Method to submit project Details */
   handleSubmit(event) {
     event.preventDefault();
-    let updateMode = sessionStorage.getItem("updateMode")
-    console.log("editmode", updateMode)
+    let updateMode = sessionStorage.getItem("updateMode")    
     let sketchId = sessionStorage.getItem('sketchId')
     let updatedSketchInfo = JSON.parse(sessionStorage.getItem('selectedSketch'));
 
@@ -136,8 +134,8 @@ export default class extends React.Component {
           .then((responseData) => {
             if (prjSrvSketchUpdateRes.ok) {
               for (var key in updatedSketchInfo) {
-                if (key === "name") { updatedSketchInfo[key] = this.state.projectInfo.projectName; console.log(key, updatedSketchInfo[key]) }
-                if (key === "description") { updatedSketchInfo[key] = this.state.projectInfo.projectDesc; console.log(key, updatedSketchInfo[key]) }
+                if (key === "name") { updatedSketchInfo[key] = this.state.projectInfo.projectName; }
+                if (key === "description") { updatedSketchInfo[key] = this.state.projectInfo.projectDesc; }
               }
               sessionStorage.setItem('selectedSketch', JSON.stringify(updatedSketchInfo))
               sessionStorage.setItem('projectInfo', JSON.stringify(this.state.projectInfo))

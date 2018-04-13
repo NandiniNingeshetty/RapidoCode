@@ -130,9 +130,7 @@ export default class extends React.Component{
     .then((responseData) => {
       if(teamSrvDelMemRes.ok) {
         var tempMembersList = this.state.membersList;
-        tempMembersList = tempMembersList.filter(function(member){
-          console.log(member.id);
-          console.log(responseData.id);
+        tempMembersList = tempMembersList.filter(function(member){          
           return member.id != responseData.id;
         });
         this.setState({

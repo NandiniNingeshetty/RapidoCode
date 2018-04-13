@@ -14,8 +14,7 @@ import AlertContainer from 'react-alert'
 export default class extends React.Component{
   
   constructor(props) {
-    super(props);
-    console.log(props);
+    super(props);    
     this.state = {
       vocabularySearch:[],
       selectedSketch: this.props.selectedSketch,

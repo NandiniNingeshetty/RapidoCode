@@ -26,8 +26,7 @@ export default class extends React.Component{
   }
 
   /* Component Initialisation */
-  componentDidMount() {
-    console.log(this.refs);
+  componentDidMount() {    
     let userObj = JSON.parse(sessionStorage.getItem('user'));
     if(userObj) {
       this.setState({

@@ -238,6 +238,7 @@
     
     .create-project-section {
         padding-top: 50px;
+		padding-left: 30px;
         /* height: 400px;*/
         .next-section {
             margin-top: 20px;
@@ -761,6 +762,14 @@
         color: #4a4a4a;
         outline: none;
     }
+
+    .xs-pl-20 {
+        padding-left: 20px; 
+    }
+
+    .xs-pl-8 {
+        padding-left: 8px;
+    }
     
     .xs-pl-5 {
         padding-left: 5px;
@@ -779,6 +788,40 @@
     }
     
     .activeButton {
+        border-radius: 3px;
+        background-color: #4a90e2;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #ffffff;
+        cursor: pointer;
+        height: 26px;
+        width: 52px;
+    }
+
+    .activeButton:hover {
+        border-radius: 3px;
+        background-color: #4a90e2;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #ffffff;
+        cursor: pointer;
+        height: 26px;
+        width: 52px;
+    }
+
+    .activeButton:active {
         border-radius: 3px;
         background-color: #4a90e2;
         font-family: Helvetica;
@@ -852,6 +895,7 @@
     }
     
     .sketches-text {
+        margin-left: 4px;
         font-family: Helvetica;
         font-size: 28px;
         font-weight: bold;
@@ -861,8 +905,7 @@
         letter-spacing: normal;
         text-align: left;
         color: #4a4a4a;
-        padding-left: 0px;
-        margin-left: -12px;
+        padding-left: 0px; 
     }
     
     .border-bottom {
@@ -1224,11 +1267,33 @@
     
     .vocabulary-plus-icon {
         color: #4a90e2;
-        font-size: 16px;
+        width:16px;
         padding-top: 6px;
         cursor: pointer;
     }
+
+    .vocabulary-show-hide {
+        background-color: #4a90e2;
+        margin-left: -27px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 2px;
+        padding-right: 1px;
+        margin-right: 10px;
+    }
+
+    .vocabulary-closed-panel {
+        height: 30px;
+        padding-left: 36px;
+        border-bottom: 1px solid #cfcfcf;
+        padding-top: 7px;
+        margin-left: -10px;
+    }
     
+    .vocab-arrow {
+        cursor: pointer;
+    }
+
     .Node-Properties {
         margin-top: 5px;
         width: 109px;
@@ -1336,10 +1401,98 @@
     }
     
     .main-content-padding {
-        padding-left: 40px;
-        padding-right: 40px
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .main-sidebar-content {        
+        border-right: solid 1px #d6d6d6;
+        height: 100%;
+    } 
+
+    .active-box {
+        width: 89px;
+        height: 89px;
+        border-radius: 5px;
+        background-color: #4a90e2;       
+        margin-top: 15px;
+        margin-bottom: 10px;
+        padding: 13px;
+        text-align: center;
+        color: #ffffff;
+      }
+
+    .inactive-box {
+        width: 89px;
+        height: 89px;
+        border-radius: 5px;
+        background-color: #dadada;        
+        margin-top: 15px;
+        margin-bottom: 10px;
+        padding: 13px;
+        text-align: center;
+    }
+
+    .active-content-text {
+        width: 65px;
+        height: 14px;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;        
+    }
+
+    .inactive-content-text {
+        width: 42px;
+        height: 14px;
+        font-family: Helvetica;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
     }
     
+    .active-content-count {
+        width: 45px;
+        height: 48px;
+        font-family: Helvetica;
+        font-size: 40px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;        
+    }
+
+    .inactive-content-count {
+        width: 23px;
+        height: 48px;
+        font-family: Helvetica;
+        font-size: 40px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+    }
+
+    .sketch-header-padding {
+        padding-left: 14px;
+    }
+    
+    .xs-p-0 {
+        padding: 0px;
+    }
+
     .xs-pl-35 {
         padding-left: 35px;
     }
@@ -1509,7 +1662,7 @@
         background-color: #ffffff;
         border: solid 1px #d6d6d6;
         box-shadow: none;
-        width: 275px;
+        width: 265px;
         height: 100px;
     }
     
@@ -1525,8 +1678,8 @@
         margin-left: 2.2%;
     }
     
-    .xs-pr-0 {
-        padding-right: 0px;
+    .xs-pr-5 {
+        padding-right: 5px;
     }
     
     .filter-icon {

@@ -609,8 +609,9 @@ var projectService = {
 
         if(!request.user.githubToken) {
             logger.error("User is not github user");
+            var httpCode = 500;
             var err = {
-                "code": 500,
+                "code": httpCode,
                 "message": "User is not logged into github"
             };
             response.status(httpCode).json(err);
@@ -649,8 +650,12 @@ var projectService = {
                     token: request.user.githubToken
                 });
 
-                var githubRepo = githubObj.getRepo(request.user.githubUser, request.body.repository);
-                var githubRepoAsync = promises.promisifyAll(githubRepo);
+/*                 var githubRepo = githubObj.getRepo(request.user.githubUser, request.body.repository);
+ */    
+
+        var githubRepo = githubObj.getRepo("APIM-Solutions", request.body.repository);
+        
+           var githubRepoAsync = promises.promisifyAll(githubRepo);
 
                 return githubRepoAsync.writeFileAsync("master", project.name + "-swagger.json", JSON.stringify(resultData), request.body.message || "publish from rapido", {"encode":true});
 

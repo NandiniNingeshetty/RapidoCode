@@ -150,6 +150,7 @@ var authService = {
                 return usermodel.addTokenAsync(user);
             })
             .then(function() {
+             
                 var token = jwt.sign({
                     "id": user.id,
                     "secret": user.secret,

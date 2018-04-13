@@ -147,7 +147,7 @@ export default class extends React.Component{
             </svg>
             </a>
 
-            <h3>Live API Design</h3>
+            <h3>API Design</h3>
             <div className="form-group">
               <input
                 type="email"

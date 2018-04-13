@@ -137,7 +137,7 @@ class Modal extends React.Component {
           <h4 className="text-center">
             Push To GitHub
           </h4>
-          <form id="exportGitHubModal" className="col-md-12" noValidate>
+          <form id="exportGitHubModal" className="col-md-12 pushToGithub" noValidate>
             <div className="form-group">
               <input className="form-control"
                 type="text"

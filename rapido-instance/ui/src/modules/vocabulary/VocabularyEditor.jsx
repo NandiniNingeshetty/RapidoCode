@@ -405,8 +405,7 @@ export default class extends React.Component {
               <div className="pull-right xs-pr-15 xs-pt-5">
                 {/* <Button className="vocabulary-button-version" variant="regular" primary>Versions</Button>
                 &nbsp;&nbsp;&nbsp;&nbsp; */}
-                <Button className="vocabulary-button-version" variant="regular" primary onClick={this.openPublishToPortal}>Publish to CA PORTAL </Button>
-                &nbsp;&nbsp;&nbsp;&nbsp;
+                {/* <Button className="vocabulary-button-version" variant="regular" primary onClick={this.openPublishToPortal}>Publish to CA PORTAL </Button> */}
                 <Button className="vocabulary-button-version" variant="regular" primary onClick={this.ExportGithubToggleModal.bind(this)}>Push to Github </Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                   {/*  <ThemeProvider theme={{ direction: 'rtl' }}>

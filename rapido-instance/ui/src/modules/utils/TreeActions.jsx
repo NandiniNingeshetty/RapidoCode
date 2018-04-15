@@ -285,9 +285,10 @@ export function createSketch(component, savedVocabulary, ProjectService, browser
 }
 export function updateSketch(component, savedVocabulary, ProjectService, browserHistory) {
   component.exportSketchInfo(component.state.apidetails);
+  let updatedVocabulary = formatVocabularyInfo(savedVocabulary)
   let projectData = {
     "id": component.state.id,
-    "vocabulary": savedVocabulary,
+    "vocabulary": updatedVocabulary,
     "treedata": component.state.treedata,
     "apidetails": component.state.exportAPI
   }
@@ -322,4 +323,12 @@ export function updateSketch(component, savedVocabulary, ProjectService, browser
     .catch((error) => {
       console.error(error);
     });
+}
+function formatVocabularyInfo(vocabularyInfo){
+var updatedVocab = [];
+vocabularyInfo.forEach(function(element){
+  if(element =="string")updatedVocab.push(element)
+  else updatedVocab.push(element.name)
+})
+return updatedVocab;
 }

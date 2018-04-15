@@ -875,6 +875,11 @@
         letter-spacing: normal;
         text-align: left;
         color: #4a90e2;
+
+        a:hover {
+            text-decoration: none;
+            cursor: pointer;
+        }
     }
     
     .displayNone {
@@ -1023,6 +1028,7 @@
     }
     
     .Rectangle-4-Copy-6 {
+        margin-right: 5px;
         width: 82px;
         height: 30px;
         border: none;
@@ -1712,3 +1718,5 @@
     .noResultsFound h2{
         margin-top: -30px;
     }
+
+    

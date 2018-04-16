@@ -69,15 +69,35 @@ export default class extends React.Component {
                             <i className="fa fa-question-circle vocabulary-icon"></i>
                         </Popover>
                         <div className="url-text-wrapper">
-                            <div className="url-text"><TextInput size="small" className="url-text"
+                            <div className="url-text"><TextInput size="small" className="url-text form-control"
                                 defaultValue="/"
 
                                 required
-                            /></div>
-                            <div className="bitmap-img"><img src="/ui/src/images/bitmap.png" /> </div>
-                        </div>                 
-                    </div>
-                    <div className="form-group">
+                            /></div>                            
+                        </div>
+                        <div className="add-params-div">
+                            <i><img className="add-params" src="/ui/src/images/add-params@2x.png" alt="Add params"/></i>
+                            <span className="anchor-tag-addparams"><a>Add Params</a></span> 
+                        </div>
+                        <div className="add-params-div">
+                            <i><img className="add-params" src="/ui/src/images/clear-params@2x.png" alt="Add params"/></i>
+                            <span className="anchor-tag-addparams"><a>Clear Params</a></span> 
+                        </div>  
+                        <div className="add-prams-section add-params-div">
+                            <div className="params-div">
+                                <label className="params-text">PARAMS</label>
+                            </div>
+                            <div className="params-div">
+                                <label className="params-text">KEY</label>
+                                <label className="params-value">VALUE</label>
+                            </div>
+                            <div className="params-div">
+                                <TextInput className="key-input" size="small" required/>
+                                <TextInput className="value-input" size="small" required/>
+                            </div>
+                        </div>              
+                    </div>                    
+                    <div className="form-group node-summary-div">
                         <label className="summary">Summary</label>
                         <TextArea
                             size="small"

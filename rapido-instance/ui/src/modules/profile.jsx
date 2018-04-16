@@ -184,6 +184,7 @@ export default class extends React.Component{
                 placeholder="First Name *"
                 value={ this.state.firstName }
                 onChange={ this.handleChange }
+                maxLength="6"
                 required />
               <div className="error" id="firstNameError"></div>
             </div>
@@ -195,6 +196,7 @@ export default class extends React.Component{
                 placeholder="Last Name *"
                 value={ this.state.lastName }
                 onChange={ this.handleChange }
+                maxLength="6"
                 required />
               <div className="error" id="lastNameError"></div>
             </div>

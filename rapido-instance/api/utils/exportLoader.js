@@ -5,7 +5,7 @@
  */
 
 var _ = require("lodash");
-var exportJson =  function exportJson() {}
+var exportJson = function exportJson() { }
 var propertyObj = {};
 // Create swagger file
 exportJson.prototype.createSwagger = function (obj, reqProtocol, reqHost) {
@@ -97,12 +97,10 @@ exportJson.prototype.createSwagger = function (obj, reqProtocol, reqHost) {
 
         _.each(obj[fullPath], function (innerData, method) {
 
-/*           var firstParam = definition(innerData["fullPath"], i);
- */ 
-
-        var firstParam = "data"+method+i;
- 
-    var definition1 = {};
+            var firstParam = definition(innerData["fullPath"], i);
+            //var firstParam = "data" + method + i;
+            
+            var definition1 = {};
             if (!isEmpty(innerData["responses"])) {
                 propertyObj = definitionProperties(innerData["responses"], typeof innerData["responses"]);
             }
@@ -183,21 +181,21 @@ exportJson.prototype.createSwagger = function (obj, reqProtocol, reqHost) {
 
             definition1["type"] = (_.isArray(innerData["responses"])) ? "array" : typeof innerData["responses"];
             var prop = (definition1["type"] == "array" ? "items" : "properties");
-            if(prop == "items") {
+            if (prop == "items") {
                 var newPropObj = {};
                 newPropObj.type = "object";
                 newPropObj.properties = propertyObj;
-                definition1[prop] = newPropObj;    
+                definition1[prop] = newPropObj;
             } else {
                 definition1[prop] = propertyObj;
             }
-            
+
             definitions[firstParam] = definition1;
         });
-    
-        outerDefinitions = definitions;          
-        if(!isEmpty(innerparameters)) {
-            methods["parameters"]=innerparameters;
+
+        outerDefinitions = definitions;
+        if (!isEmpty(innerparameters)) {
+            methods["parameters"] = innerparameters;
         }
         fullPath = fullPath.replace("?" + fullPath.substring(fullPath.indexOf("?") + 1), '');
         paths[fullPath.toLowerCase()] = methods;
@@ -214,17 +212,18 @@ exportJson.prototype.createSwagger = function (obj, reqProtocol, reqHost) {
 }
 var definition = function (path, i) {
 
-
     var splitString = path.split("/");
-    var str = splitString[i];    
-    
-    if(str.indexOf("{") != -1) {
-        var j = i+1;
-        str = splitString[j];
-    }
-    if(str.indexOf("?") != -1) {
-        var splitString = str.split("?");
-        var str = splitString[0];
+    var index = splitString.length - 1;
+    var str = splitString[index];
+
+    //if string is empty or parameter string then decrease index
+    for (var j = 1; j <= index; j++) {
+        if (str == '' || str.indexOf("{") != -1) {
+            index = index - 1;
+            str = splitString[index];
+        } else {
+            break;
+        }
     }
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
